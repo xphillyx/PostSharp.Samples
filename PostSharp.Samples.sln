@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.CustomLog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.CustomCaching", "PostSharp.Samples.CustomCaching\PostSharp.Samples.CustomCaching.csproj", "{20AC1E41-945E-4F53-9C00-99AFE4A01EDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.ExceptionHandling", "PostSharp.Samples.ExceptionHandling\PostSharp.Samples.ExceptionHandling.csproj", "{011B1320-BB21-4CC8-81C9-64A9CA31DD69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{20AC1E41-945E-4F53-9C00-99AFE4A01EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20AC1E41-945E-4F53-9C00-99AFE4A01EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20AC1E41-945E-4F53-9C00-99AFE4A01EDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{011B1320-BB21-4CC8-81C9-64A9CA31DD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011B1320-BB21-4CC8-81C9-64A9CA31DD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011B1320-BB21-4CC8-81C9-64A9CA31DD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011B1320-BB21-4CC8-81C9-64A9CA31DD69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
