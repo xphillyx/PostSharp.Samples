@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{011B1320-BB21-4CC8-81C9-64A9CA31DD69}</ProjectGuid>
+    <ProjectGuid>{2413A15B-6B4C-48BB-AF5E-3AAF0C1FDE7F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PostSharp.Samples.ExceptionHandling</RootNamespace>
-    <AssemblyName>PostSharp.Samples.ExceptionHandling</AssemblyName>
+    <RootNamespace>PostSharp.Samples.AutoRetry</RootNamespace>
+    <AssemblyName>PostSharp.Samples.AutoRetry</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,11 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddContextOnExceptionAttribute.cs" />
-    <Compile Include="Formatter.cs" />
+    <Compile Include="AutoRetryAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportAndSwallowExceptionAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

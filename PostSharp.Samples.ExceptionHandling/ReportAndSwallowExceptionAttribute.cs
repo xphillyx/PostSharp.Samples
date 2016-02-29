@@ -9,7 +9,7 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.ExceptionHandling
 {
     [PSerializable]
-    class ReportAndSwallowException : OnExceptionAspect
+    class ReportAndSwallowExceptionAttribute : OnExceptionAspect
     {
         public override void OnException(MethodExecutionArgs args)
         {
