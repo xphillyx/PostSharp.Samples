@@ -1,11 +1,4 @@
-﻿#region Copyright (c) 2012 by SharpCrafters s.r.o.
-
-// Copyright (c), SharpCrafters s.r.o. All rights reserved.
-
-#endregion
-
-#define  SLIM_SYNCHRONIZATION_PRIMITIVES
-using System;
+﻿using System;
 
 namespace PostSharp.Samples.WeakEvent
 {

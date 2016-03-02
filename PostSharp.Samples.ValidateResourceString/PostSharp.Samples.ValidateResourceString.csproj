@@ -7,8 +7,8 @@
     <ProjectGuid>{6ACA8A5D-2E0D-438B-898F-E73594D6D8F8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PostSharp.Samples.ValidateResourceName</RootNamespace>
-    <AssemblyName>PostSharp.Samples.ValidateResourceName</AssemblyName>
+    <RootNamespace>PostSharp.Samples.ValidateResourceString</RootNamespace>
+    <AssemblyName>PostSharp.Samples.ValidateResourceString</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -55,7 +55,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidateResourceNameAttribute.cs" />
+    <Compile Include="ValidateResourceStringAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PostSharp.Samples.ValidateResourceName {
+namespace PostSharp.Samples.ValidateResourceString {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PostSharp.Samples.ValidateResourceName {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PostSharp.Samples.ValidateResourceName.MyResource", typeof(MyResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PostSharp.Samples.ValidateResourceString.MyResource", typeof(MyResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

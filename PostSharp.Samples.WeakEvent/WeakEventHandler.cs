@@ -1,9 +1,3 @@
-#region Copyright (c) 2012 by SharpCrafters s.r.o.
-
-// Copyright (c), SharpCrafters s.r.o. All rights reserved.
-
-#endregion
-
 using System;
 using System.Collections.Immutable;
 using System.Threading;

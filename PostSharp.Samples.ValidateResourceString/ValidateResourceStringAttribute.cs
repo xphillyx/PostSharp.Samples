@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using PostSharp.Constraints;
 using PostSharp.Extensibility;
 using PostSharp.Reflection;
 using PostSharp.Reflection.Syntax;
 
-namespace PostSharp.Samples.ValidateResourceName
+namespace PostSharp.Samples.ValidateResourceString
 {
     [AttributeUsage(AttributeTargets.Parameter)]
     [MulticastAttributeUsage(MulticastTargets.Parameter)]
-    public sealed class ValidateResourceNameAttribute : ReferentialConstraint
+    public sealed class ValidateResourceStringAttribute : ReferentialConstraint
     {
-        private readonly string resourceName;
+        private readonly string resourceBaseName;
 
-        public ValidateResourceNameAttribute(string resourceName)
+        public ValidateResourceStringAttribute(string resourceBaseName)
         {
-            this.resourceName = resourceName;
+            this.resourceBaseName = resourceBaseName;
         }
 
         public override bool ValidateConstraint(object target)
@@ -32,13 +26,13 @@ namespace PostSharp.Samples.ValidateResourceName
 
             if (parameter.ParameterType != typeof (string))
             {
-                Message.Write(parameter, SeverityType.Error, "VRN01", "Cannot use [ValidateResourceName] on parameter {0} because it is not of type string.", parameter);
+                Message.Write(parameter, SeverityType.Error, "VRN01", "Cannot use [ValidateResourceString] on parameter {0} because it is not of type string.", parameter);
                 return false;
             }
 
             if (!(parameter.Member is MethodBase))
             {
-                Message.Write(parameter, SeverityType.Error, "VRN02", "Cannot use [ValidateResourceName] on parameter {0} because the attribute can only be applied to method parameters.", parameter);
+                Message.Write(parameter, SeverityType.Error, "VRN02", "Cannot use [ValidateResourceString] on parameter {0} because the attribute can only be applied to method parameters.", parameter);
                 return false;
             }
 
@@ -47,11 +41,11 @@ namespace PostSharp.Samples.ValidateResourceName
             var assembly = this.GetType().Assembly;
             try
             {
-                new ResourceManager(this.resourceName, assembly);
+                new ResourceManager(this.resourceBaseName, assembly);
             }
             catch (Exception e)
             {
-                Message.Write(parameter, SeverityType.Error, "VRN03", "Cannot load a managed resource named \"{1}\" from assembly \"{0}\": {2}", assembly.GetName().Name, this.resourceName, e.Message);
+                Message.Write(parameter, SeverityType.Error, "VRN03", "Cannot load a managed resource named \"{1}\" from assembly \"{0}\": {2}", assembly.GetName().Name, this.resourceBaseName, e.Message);
                 return false;
             }
 
@@ -61,7 +55,7 @@ namespace PostSharp.Samples.ValidateResourceName
         public override void ValidateCode(object target, Assembly assembly)
         {
             ParameterInfo parameter = (ParameterInfo)target;
-            ResourceManager resourceManager = new ResourceManager(this.resourceName, assembly);
+            ResourceManager resourceManager = new ResourceManager(this.resourceBaseName, assembly);
             Visitor visitor = new Visitor(parameter, resourceManager);
 
             ISyntaxReflectionService reflectionService =
