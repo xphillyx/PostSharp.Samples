@@ -9,3 +9,4 @@
 | PostSharp.Samples.WeakEvent               | EventInterceptionAspect, IInstanceScopedAspect, InstanceLevelAspect, IntroduceInterface  |
 | PostSharp.Samples.ValidateResourceName    | ReferentialConstraint, ReflectionSearch, SyntaxTreeVisitor                               |
 | PostSharp.Samples.SessionState            | LocationInterceptionAspect, IInstanceScopedAspect, ImportMember                          |
+| PostSharp.Samples.Xaml                    | NotifyPropertyChanged, Recordable, Code Contracts                                        |
