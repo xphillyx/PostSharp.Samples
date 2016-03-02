@@ -12,6 +12,7 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.AutoRetry
 {
     [PSerializable]
+    [LinesOfCodeAvoided(5)]
     public sealed class AutoRetryAttribute : MethodInterceptionAspect
     {
         public AutoRetryAttribute()
@@ -29,7 +30,7 @@ namespace PostSharp.Samples.AutoRetry
 
         public override void OnInvoke(MethodInterceptionArgs args)
         {
-            for (int i = 0; ; i++)
+            for (var i = 0; ; i++)
             {
                 try
                 {

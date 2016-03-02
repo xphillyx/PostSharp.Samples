@@ -19,8 +19,6 @@ namespace PostSharp.Samples.WeakEvent
         [PNonSerialized] private volatile int cleanUpCounter;
         private SpinLock spinLock;
 
-        
-
         public void Initialize()
         {
             if (!initialized)
@@ -33,7 +31,7 @@ namespace PostSharp.Samples.WeakEvent
 
         public bool AddHandler(Delegate handler, bool weak)
         {
-            bool lockTaken = false;
+            var lockTaken = false;
             
             try
             {
@@ -55,16 +53,14 @@ namespace PostSharp.Samples.WeakEvent
           
         }
 
-        public bool IsEmpty {  get { return this.handlers.IsEmpty; } }
-
         public bool RemoveHandler(Delegate handler)
         {
-            bool lockTaken = false;
+            var lockTaken = false;
             try
             {
                 this.spinLock.Enter(ref lockTaken);
 
-                this.handlers = handlers.RemoveAll(o => o == handler || (o is WeakReference) && ((WeakReference)o).Target == handler);
+                this.handlers = handlers.RemoveAll(o => ReferenceEquals( o, handler) || (o is WeakReference) && ReferenceEquals( ((WeakReference)o).Target, handler));
 
                 return this.handlers.IsEmpty;
             }
@@ -81,17 +77,17 @@ namespace PostSharp.Samples.WeakEvent
 
         public void InvokeHandler(object[] args)
         {
-            int lastCleanUpCounter = -1;
+            var lastCleanUpCounter = -1;
 
 
             // Take a snapshot of the handlers list.
             var invocationList = this.handlers;
 
-            bool needCleanUp = false;
+            var needCleanUp = false;
 
-            foreach (object obj in invocationList)
+            foreach (var obj in invocationList)
             {
-                Delegate handler = obj as Delegate;
+                var handler = obj as Delegate;
 
                 if (handler == null)
                 {
@@ -117,7 +113,7 @@ namespace PostSharp.Samples.WeakEvent
             {
                 if (lastCleanUpCounter == this.cleanUpCounter)
                 {
-                    bool lockTaken = false;
+                    var lockTaken = false;
                     try
                     {
                         this.spinLock.Enter(ref lockTaken);

@@ -19,7 +19,7 @@ namespace PostSharp.Samples.WeakEvent
 
         public void RegisterEventHandler(Delegate handler)
         {
-            bool lockTaken = false;
+            var lockTaken = false;
 
             try
             {
@@ -38,7 +38,7 @@ namespace PostSharp.Samples.WeakEvent
 
         public void UnregisterEventHandler(Delegate handler)
         {
-            bool lockTaken = false;
+            var lockTaken = false;
 
             try
             {

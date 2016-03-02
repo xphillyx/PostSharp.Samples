@@ -13,7 +13,7 @@ namespace PostSharp.Samples.WeakEvent
     {
         static void Main(string[] args)
         {
-            EventClient eventClient = new EventClient();
+            var eventClient = new EventClient();
             MyEvent += eventClient.EventHandler;
 
             // Forcing GC here to prove that we are not collecting the handler when the client is alive.
@@ -25,7 +25,7 @@ namespace PostSharp.Samples.WeakEvent
 
 
             // Cause the client to be collected.
-            WeakReference weakReference = new WeakReference(eventClient);
+            var weakReference = new WeakReference(eventClient);
             eventClient = null;
             GC.Collect();
 

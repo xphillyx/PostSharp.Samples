@@ -4,21 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PostSharp.Aspects;
+using PostSharp.Aspects.Dependencies;
 using PostSharp.Serialization;
 
 namespace PostSharp.Samples.ExceptionHandling
 {
     [PSerializable]
-    class ReportAndSwallowExceptionAttribute : OnExceptionAspect
+    [AspectTypeDependency(AspectDependencyAction.Order, AspectDependencyPosition.After, typeof(AddContextOnExceptionAttribute))]
+    public sealed class ReportAndSwallowExceptionAttribute : OnExceptionAspect
     {
-        public override void OnException(MethodExecutionArgs args)
+        public  override void OnException(MethodExecutionArgs args)
         {
             // Write the default exception information.
             Console.WriteLine("Exception information");
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine(args.Exception.ToString());
             Console.WriteLine("--------------------------------------------------------------");
-            StringBuilder additionalContext = (StringBuilder) args.Exception.Data["Context"];
+            var additionalContext = (StringBuilder) args.Exception.Data["Context"];
 
             // Write the additional information that was gathered by AddContextOnExceptionAttribute.
             if (additionalContext != null)

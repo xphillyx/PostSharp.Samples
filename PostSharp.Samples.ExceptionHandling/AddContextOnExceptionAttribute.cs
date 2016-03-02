@@ -14,7 +14,7 @@ namespace PostSharp.Samples.ExceptionHandling
         public override void OnException(MethodExecutionArgs args)
         {
             // Get or create a StringBuilder for the exception where we will add additional context data.
-            StringBuilder stringBuilder = (StringBuilder) args.Exception.Data["Context"];
+            var stringBuilder = (StringBuilder) args.Exception.Data["Context"];
             if (stringBuilder == null)
             {
                 stringBuilder = new StringBuilder();

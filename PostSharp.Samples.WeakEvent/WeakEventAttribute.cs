@@ -6,6 +6,7 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.WeakEvent
 {
     [PSerializable]
+    [LinesOfCodeAvoided(6)]
     public sealed class WeakEventAttribute : EventInterceptionAspect, IInstanceScopedAspect
     {
         [PNonSerialized]
@@ -43,9 +44,9 @@ namespace PostSharp.Samples.WeakEvent
 
         public override void OnAddHandler(EventInterceptionArgs args)
         {
-            IWeakEventClient weakEventClient = args.Handler.Target as IWeakEventClient;
+            var weakEventClient = args.Handler.Target as IWeakEventClient;
 
-            bool supportsWeakReference = weakEventClient != null;
+            var supportsWeakReference = weakEventClient != null;
 
             if (!supportsWeakReference && args.Handler.Target != null && !this.AllowStrongReferences )
             {
@@ -65,16 +66,16 @@ namespace PostSharp.Samples.WeakEvent
 
         public override void OnRemoveHandler(EventInterceptionArgs args)
         {
-            IWeakEventClient weakEventClient = args.Handler.Target as IWeakEventClient;
+            var weakEventClient = args.Handler.Target as IWeakEventClient;
 
-            bool isWeak = weakEventClient != null;
+            var supportsWeakReference = weakEventClient != null;
 
             if (this.weakEventHandler.RemoveHandler(args.Handler))
             {
                 args.RemoveHandler(null);
             }
 
-            if (isWeak)
+            if (supportsWeakReference)
             {
                 weakEventClient.UnregisterEventHandler(args.Handler);
             }

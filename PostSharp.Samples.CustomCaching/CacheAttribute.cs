@@ -10,7 +10,7 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.CustomCaching
 {
     [PSerializable]
-    public class CacheAttribute : OnMethodBoundaryAspect
+    public sealed class CacheAttribute : OnMethodBoundaryAspect
     {
         public override void OnEntry(MethodExecutionArgs args)
         {

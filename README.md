@@ -7,3 +7,4 @@
 | PostSharp.Samples.ExceptionHandling       | OnExceptionAspect including FlowBehavior.                                                |
 | PostSharp.Samples.AutoRetry               | MethodInterceptionAspect                                                                 |
 | PostSharp.Samples.WeakEvent               | EventInterceptionAspect, IInstanceScopedAspect, InstanceLevelAspect, IntroductInterface  |
+| PostSharp.Samples.ValidateResourceName    | ReferentialConstraint, ReflectionSearch, SyntaxTreeVisitor                               |
