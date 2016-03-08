@@ -15,8 +15,8 @@
 
 ## How to use these examples
 
-* To **browse online**, use the samples browser at http://samples.postsharp.net/.
-* To **download**, go to https://www.github.com/postsharp/PostSharp.Samples.
+* To **browse online**, use the samples browser at <http://samples.postsharp.net/>.
+* To **download**, go to <https://www.github.com/postsharp/PostSharp.Samples>.
 
 
 
