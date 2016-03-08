@@ -3,6 +3,8 @@ using System.Collections.Immutable;
 using System.Threading;
 using PostSharp.Serialization;
 
+#pragma warning disable 420
+
 namespace PostSharp.Samples.WeakEvent
 {
     [PSerializable]
@@ -113,9 +115,7 @@ namespace PostSharp.Samples.WeakEvent
                         this.spinLock.Enter(ref lockTaken);
                         this.handlers = this.handlers.RemoveAll(w => w is WeakReference && !((WeakReference) w).IsAlive);
 
-#pragma warning disable 420
                         Interlocked.Increment(ref this.cleanUpCounter);
-#pragma warning restore 420
 
                     }
                     finally

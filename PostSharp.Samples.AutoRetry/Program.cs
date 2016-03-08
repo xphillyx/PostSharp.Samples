@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PostSharp.Samples.AutoRetry
 {
-    class Program
+    internal static class Program
     {
         static readonly Random random = new Random();
         static readonly Stopwatch stopwatch = Stopwatch.StartNew();
@@ -18,24 +14,31 @@ namespace PostSharp.Samples.AutoRetry
             Console.WriteLine(DownloadFile());
         }
 
+
+     
         [AutoRetry(MaxRetries = 3)]
         private static string DownloadFile()
         {
             WriteMessage("Attempting to download the file.");
 
+            // Randomly decide if the method call should succeed or fail.
             if (random.NextDouble() < 0.8)
             {
+                // Simulate a network failure.
+
                 WriteMessage("Network failure.");
                 throw new WebException();
             }
             else
             {
+                // Simulate success.
                 WriteMessage("Success!");
                 return "Hello, world.";
             }
         }
 
-        static void WriteMessage(string message)
+        // Writes a message to the console with a timestamp.
+        private static void WriteMessage(string message)
         {
             Console.WriteLine("{0} ms - {1}", stopwatch.ElapsedMilliseconds, message);
         }

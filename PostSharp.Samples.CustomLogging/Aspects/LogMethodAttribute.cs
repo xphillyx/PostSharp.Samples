@@ -1,15 +1,21 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text;
 using PostSharp.Aspects;
 using PostSharp.Serialization;
 
-namespace PostSharp.Samples.CustomLogging
+namespace PostSharp.Samples.CustomLogging.Aspects
 {
+    /// <summary>
+    /// Aspect that, when applied to a method, appends a record to the <see cref="Logger"/> class whenever this method is executed.
+    /// </summary>
     [PSerializable]
     [LinesOfCodeAvoided(6)]
     public sealed class LogMethodAttribute : OnMethodBoundaryAspect
     {
+        /// <summary>
+        /// Method invoked before the target method is executed.
+        /// </summary>
+        /// <param name="args">Method execution context.</param>
         public override void OnEntry(MethodExecutionArgs args)
         {
             var stringBuilder = new StringBuilder();
@@ -22,6 +28,10 @@ namespace PostSharp.Samples.CustomLogging
         }
 
 
+        /// <summary>
+        /// Method invoked after the target method has successfully completed.
+        /// </summary>
+        /// <param name="args">Method execution context.</param>
         public override void OnSuccess(MethodExecutionArgs args)
         {
             Logger.Unindent();
@@ -40,6 +50,10 @@ namespace PostSharp.Samples.CustomLogging
             Logger.WriteLine(stringBuilder.ToString());
         }
 
+        /// <summary>
+        /// Method invoked when the target method has failed.
+        /// </summary>
+        /// <param name="args">Method execution context.</param>
         public override void OnException(MethodExecutionArgs args)
         {
             Logger.Unindent();

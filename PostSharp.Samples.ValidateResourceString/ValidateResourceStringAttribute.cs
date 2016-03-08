@@ -8,17 +8,30 @@ using PostSharp.Reflection.Syntax;
 
 namespace PostSharp.Samples.ValidateResourceString
 {
+    /// <summary>
+    /// Custom attribute that, when applied to a <see cref="string"/> parameter, writes a warning at build-time that the value passed to the parameter is a valid name for a string stored in
+    /// a managed resource.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     [MulticastAttributeUsage(MulticastTargets.Parameter)]
     public sealed class ValidateResourceStringAttribute : ReferentialConstraint
     {
         private readonly string resourceBaseName;
 
+        /// <summary>
+        /// Initializes a new <see cref="ValidateResourceStringAttribute"/>.
+        /// </summary>
+        /// <param name="resourceBaseName">Name of the managed resource containing the string.</param>
         public ValidateResourceStringAttribute(string resourceBaseName)
         {
             this.resourceBaseName = resourceBaseName;
         }
 
+        /// <summary>
+        /// Validates that the attribute has been applied to a valid parameter.
+        /// </summary>
+        /// <param name="target">The parameter to which the attribute has been applied.</param>
+        /// <returns><c>true</c> if the attribure is applied to a valid parameter, otherwise <c>false</c>.</returns>
         public override bool ValidateConstraint(object target)
         {
             // Validate that the attribute has been applied to a parameter of type string.
@@ -52,22 +65,36 @@ namespace PostSharp.Samples.ValidateResourceString
             return true;
         }
 
+        /// <summary>
+        /// Validates an <see cref="Assembly"/> against the current constraint.
+        /// </summary>
+        /// <param name="target">Parameter to which the current constraint has been applied.</param>
+        /// <param name="assembly">Assembly being validated.</param>
         public override void ValidateCode(object target, Assembly assembly)
         {
             ParameterInfo parameter = (ParameterInfo)target;
             ResourceManager resourceManager = new ResourceManager(this.resourceBaseName, assembly);
-            Visitor visitor = new Visitor(parameter, resourceManager);
-
+            
+            // Get the list of methods referencing the parent method of the parameter.
             ISyntaxReflectionService reflectionService =
                 PostSharpEnvironment.CurrentProject.GetService<ISyntaxReflectionService>();
+            var usages = ReflectionSearch.GetMethodsUsingDeclaration(parameter.Member);
 
-            foreach (var usage in ReflectionSearch.GetMethodsUsingDeclaration(parameter.Member))
+            
+            foreach (var usage in usages)
             {
-                visitor.VisitMethodBody(reflectionService.GetMethodBody(usage.UsingMethod,
-                    SyntaxAbstractionLevel.ExpressionTree));
+                // Decompiles the method into expression trees.
+                var methodBody = reflectionService.GetMethodBody(usage.UsingMethod, SyntaxAbstractionLevel.ExpressionTree);
+
+                // Visit the method body.
+                var visitor = new Visitor(parameter, resourceManager);
+                visitor.VisitMethodBody(methodBody);
             }
         }
 
+        /// <summary>
+        /// Visits all expressions in the method body.
+        /// </summary>
         class Visitor : SyntaxTreeVisitor
         {
             private readonly ParameterInfo parameter;
@@ -79,6 +106,11 @@ namespace PostSharp.Samples.ValidateResourceString
                 this.parameter = parameter;
             }
 
+            /// <summary>
+            /// Visits a method call.
+            /// </summary>
+            /// <param name="expression"></param>
+            /// <returns></returns>
             public override object VisitMethodCallExpression(IMethodCallExpression expression)
             {
                 if (expression.Method == this.parameter.Member)
@@ -92,6 +124,7 @@ namespace PostSharp.Samples.ValidateResourceString
                         var resourceName = (string) constantExpression.Value;
                         if (resourceManager.GetString(resourceName) == null)
                         {
+                            // Write a warning.
                             Message.Write(expression.ParentMethodBody.Method, SeverityType.Warning, "VRN04", "The string \"{0}\" in method {1} is not a valid resource name.", resourceName, expression.Method );
 
                         }

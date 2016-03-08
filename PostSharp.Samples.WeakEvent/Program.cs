@@ -14,7 +14,7 @@ namespace PostSharp.Samples.WeakEvent
 
             // Raise the event when the client is alive.
             MyEvent(null, EventArgs.Empty);
-            Console.WriteLine("EventHandlerCount: {0}", EventClient.EventHandlerCount);
+            Console.WriteLine("EventHandlerCount: {0}", EventClient.EventHandlerCount); // Should be 1.
 
 
             // Cause the client to be collected.
@@ -22,12 +22,12 @@ namespace PostSharp.Samples.WeakEvent
             eventClient = null;
             GC.Collect();
 
-            Console.WriteLine("Client is alive: {0}", weakReference.IsAlive);
+            Console.WriteLine("Client is alive: {0}", weakReference.IsAlive); // Should be False.
 
             
             // Raise the event when the client is dead.
             MyEvent(null, EventArgs.Empty);
-            Console.WriteLine("EventHandlerCount: {0}", EventClient.EventHandlerCount);
+            Console.WriteLine("EventHandlerCount: {0}", EventClient.EventHandlerCount); // Should be 1.
 
         }
 

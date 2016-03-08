@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PostSharp.Samples.ExceptionHandling;
 
 // Add the AddContextOnException aspect to all methods in the assembly.
@@ -15,12 +11,16 @@ namespace PostSharp.Samples.ExceptionHandling
         static void Main(string[] args)
         {
             MainCore();
+
+            // Proofs that MainCore succeeded despite Finbonacci throwing an exception.
             Console.WriteLine("The program returns successfully.");
         }
 
         [ReportAndSwallowException]
         private static void MainCore()
         {
+            // The Fibonacci method will fail with an exception, but the [ReportAndSwallowException] aspect
+            // will swallow the exception and the MainCore method will succeed.
             Fibonacci(5);
         }
 
@@ -28,13 +28,15 @@ namespace PostSharp.Samples.ExceptionHandling
         {
             if (n < 0)
                 throw new ArgumentOutOfRangeException();
-            else if (n == 0)
+
+            if (n == 0)
                 return 0;
-            // Intentionally commented out to cause an exception.
-            // else if (n == 1)
+            // The next lines are intentionally commented out to cause an exception:
+
+            // if (n == 1)
             //    return 1;
-            else
-                return Fibonacci(n - 1) + Fibonacci(n - 2);
+
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
         }
     }
 }

@@ -48,10 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formatter.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="LogSetValueAttribute.cs" />
-    <Compile Include="LogMethodAttribute.cs" />
+    <Compile Include="Aspects\Formatter.cs" />
+    <Compile Include="Aspects\Logger.cs" />
+    <Compile Include="Aspects\LogSetValueAttribute.cs" />
+    <Compile Include="Aspects\LogMethodAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

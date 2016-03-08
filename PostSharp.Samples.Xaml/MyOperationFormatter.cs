@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
-using PostSharp.Aspects;
 using PostSharp.Patterns.Recording;
 using PostSharp.Patterns.Recording.Operations;
 
 namespace PostSharp.Samples.Xaml
 {
+    /// <summary>
+    /// Makes the operation names (in the drop-down list of the undo button) nicer.
+    /// </summary>
     internal class MyOperationFormatter : OperationFormatter
     {
         public MyOperationFormatter(OperationFormatter next) : base(next)

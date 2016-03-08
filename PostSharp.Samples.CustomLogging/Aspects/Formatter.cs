@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using PostSharp.Aspects;
 
-namespace PostSharp.Samples.CustomLogging
+namespace PostSharp.Samples.CustomLogging.Aspects
 {
+    /// <summary>
+    /// Helps creating a string out of a method call context.
+    /// </summary>
     internal static class Formatter
     {
         public static void AppendTypeName(StringBuilder stringBuilder, Type declaringType)

@@ -61,7 +61,7 @@ namespace PostSharp.Samples.ValidateResourceString {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to StringValue1.
         /// </summary>
         internal static string String1 {
             get {
@@ -70,7 +70,7 @@ namespace PostSharp.Samples.ValidateResourceString {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to StringValue2.
         /// </summary>
         internal static string String2 {
             get {
@@ -79,7 +79,7 @@ namespace PostSharp.Samples.ValidateResourceString {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to StringValue3.
         /// </summary>
         internal static string String3 {
             get {

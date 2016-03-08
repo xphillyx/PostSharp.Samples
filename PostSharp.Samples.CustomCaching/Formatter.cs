@@ -4,6 +4,9 @@ using PostSharp.Aspects;
 
 namespace PostSharp.Samples.CustomCaching
 {
+    /// <summary>
+    /// Helps creating a string out of a method call context.
+    /// </summary>
     internal static class Formatter
     {
         public static void AppendTypeName(StringBuilder stringBuilder, Type declaringType)
