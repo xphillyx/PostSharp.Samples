@@ -1,7 +1,7 @@
 ﻿using System;
 using PostSharp.Samples.CustomLogging.Aspects;
 
-// Add logging to everything method in the assembly.
+// Add logging to every method in the assembly.
 [assembly: LogMethod(AttributePriority = 0)]
 
 // Remove logging from the Aspects namespace to avoid infinite recursions (logging would log itself).
