@@ -6,13 +6,14 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.CustomCaching
 {
     /// <summary>
-    /// Custom attribure that, when applied to a method, caches the return value of the method according to parameter values.
+    ///     Custom attribure that, when applied to a method, caches the return value of the method according to parameter
+    ///     values.
     /// </summary>
     [PSerializable]
     public sealed class CacheAttribute : OnMethodBoundaryAspect
     {
         /// <summary>
-        /// Method executed <i>before</i> the target method of the aspect.
+        ///     Method executed <i>before</i> the target method of the aspect.
         /// </summary>
         /// <param name="args">Method execution context.</param>
         public override void OnEntry(MethodExecutionArgs args)
@@ -40,7 +41,7 @@ namespace PostSharp.Samples.CustomCaching
         }
 
         /// <summary>
-        /// Method executed <i>after</i> the target method of the aspect.
+        ///     Method executed <i>after</i> the target method of the aspect.
         /// </summary>
         /// <param name="args">Method execution context.</param>
         public override void OnSuccess(MethodExecutionArgs args)

@@ -22,22 +22,22 @@ namespace PostSharp.Samples.Xaml
         {
             get
             {
-                StringBuilder stringBuilder = new StringBuilder();
-                if (this.Line1 != null) stringBuilder.Append(this.Line1);
-                if (this.Line2 != null)
+                var stringBuilder = new StringBuilder();
+                if (Line1 != null) stringBuilder.Append(Line1);
+                if (Line2 != null)
                 {
                     if (stringBuilder.Length > 0) stringBuilder.Append("; ");
-                    stringBuilder.Append(this.Line2);
+                    stringBuilder.Append(Line2);
                 }
-                if (this.Town != null)
+                if (Town != null)
                 {
                     if (stringBuilder.Length > 0) stringBuilder.Append("; ");
-                    stringBuilder.Append(this.Town);
+                    stringBuilder.Append(Town);
                 }
-                if (this.Country != null)
+                if (Country != null)
                 {
-                    if (stringBuilder.Length > 0) stringBuilder.Append("; "); 
-                    stringBuilder.Append(this.Country);
+                    if (stringBuilder.Length > 0) stringBuilder.Append("; ");
+                    stringBuilder.Append(Country);
                 }
 
                 return stringBuilder.ToString();

@@ -4,7 +4,7 @@ using PostSharp.Patterns.Model;
 
 namespace PostSharp.Samples.Xaml
 {
-    public class CustomerModel: ModelBase
+    public class CustomerModel : ModelBase
     {
         public string FirstName { get; set; }
 

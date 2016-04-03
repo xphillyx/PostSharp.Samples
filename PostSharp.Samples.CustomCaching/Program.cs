@@ -4,16 +4,16 @@ using System.Threading;
 
 namespace PostSharp.Samples.CustomCaching
 {
-    class Program
+    internal class Program
     {
-        static readonly Stopwatch stopwatch = Stopwatch.StartNew();
+        private static readonly Stopwatch stopwatch = Stopwatch.StartNew();
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // First call of the cached methods. At this point, the cache is empty and execution will be slow.
             WriteMessage(Hello("world"));
             WriteMessage(Hello("universe"));
-            
+
             // Second call of the cached method. The results are already cache
             WriteMessage(Hello("world"));
             WriteMessage(Hello("universe"));
@@ -29,7 +29,7 @@ namespace PostSharp.Samples.CustomCaching
         private static string Hello(string who)
         {
             // Write something to the console and wait to show that the method is actually being executed.
-            WriteMessage( string.Format("Doing complex stuff for {0}.", who));
+            WriteMessage(string.Format("Doing complex stuff for {0}.", who));
             Thread.Sleep(500);
 
 

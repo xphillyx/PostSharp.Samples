@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PostSharp.Samples.Transactions.DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PostSharp.Samples.Transactions.DataModel.Store" Provider="System.Data.SqlClient"
+              ProviderManifestToken="2012" Alias="Self"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -45,10 +50,15 @@
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PostSharp.Samples.Transactions.Data.Finances" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PostSharp.Samples.Transactions.Data.Finances" Alias="Self"
+              annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,12 +68,15 @@
           <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="MinimalBalance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Operations" Relationship="PostSharp.Samples.Transactions.Data.Finances.FK_Operation_To_Account" FromRole="Account" ToRole="Operation" />
+          <NavigationProperty Name="Operations"
+                              Relationship="PostSharp.Samples.Transactions.Data.Finances.FK_Operation_To_Account"
+                              FromRole="Account" ToRole="Operation" />
         </EntityType>
         <EntityContainer Name="FinanceDb" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Operations" EntityType="PostSharp.Samples.Transactions.Data.Finances.Operation" />
-          <AssociationSet Name="FK_Operation_To_Account" Association="PostSharp.Samples.Transactions.Data.Finances.FK_Operation_To_Account">
+          <AssociationSet Name="FK_Operation_To_Account"
+                          Association="PostSharp.Samples.Transactions.Data.Finances.FK_Operation_To_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Operation" EntitySet="Operations" />
           </AssociationSet>
@@ -77,7 +90,9 @@
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account" Relationship="PostSharp.Samples.Transactions.Data.Finances.FK_Operation_To_Account" FromRole="Operation" ToRole="Account" />
+          <NavigationProperty Name="Account"
+                              Relationship="PostSharp.Samples.Transactions.Data.Finances.FK_Operation_To_Account"
+                              FromRole="Operation" ToRole="Account" />
         </EntityType>
         <Association Name="FK_Operation_To_Account">
           <End Type="PostSharp.Samples.Transactions.Data.Finances.Account" Role="Account" Multiplicity="1" />
@@ -96,7 +111,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PostSharpSamplesTransactionsDataModelStoreContainer" CdmEntityContainer="FinanceDb">
+        <EntityContainerMapping StorageEntityContainer="PostSharpSamplesTransactionsDataModelStoreContainer"
+                                CdmEntityContainer="FinanceDb">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="PostSharp.Samples.Transactions.Data.Finances.Account">
               <MappingFragment StoreEntitySet="Account">

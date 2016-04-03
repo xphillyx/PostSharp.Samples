@@ -33,7 +33,8 @@ namespace PostSharp.Samples.Transactions
             catch (Exception e)
             {
                 Console.WriteLine("ERROR! " + e.Message);
-                Console.WriteLine("The transaction should be rolled back and the database state identical as before the transaction.");
+                Console.WriteLine(
+                    "The transaction should be rolled back and the database state identical as before the transaction.");
             }
             Console.WriteLine();
             DumpDatabases();

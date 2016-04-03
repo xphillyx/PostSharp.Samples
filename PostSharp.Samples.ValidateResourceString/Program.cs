@@ -3,10 +3,12 @@ using System.Resources;
 
 namespace PostSharp.Samples.ValidateResourceString
 {
-    class Program
+    internal class Program
     {
         private const string resourceName = "PostSharp.Samples.ValidateResourceString.MyResource";
-        static readonly ResourceManager resourceManager = new ResourceManager(resourceName, typeof(Program).Assembly);
+
+        private static readonly ResourceManager resourceManager = new ResourceManager(resourceName,
+            typeof (Program).Assembly);
 
         private static void Main(string[] args)
         {
@@ -21,7 +23,6 @@ namespace PostSharp.Samples.ValidateResourceString
         private static string GetResourceString([ValidateResourceString(resourceName)] string key)
         {
             return resourceManager.GetString(key) ?? "*** Error ***";
-
         }
     }
 }

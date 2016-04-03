@@ -6,14 +6,16 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.ExceptionHandling
 {
     /// <summary>
-    /// Aspect that, when applied to a method and whenever this method fails with an exception, adds the value of method parameters to the <see cref="Exception"/> object.
-    /// The <see cref="ReportAndSwallowExceptionAttribute"/> can consume this information and print it if the exception is not handled.
+    ///     Aspect that, when applied to a method and whenever this method fails with an exception, adds the value of method
+    ///     parameters to the <see cref="Exception" /> object.
+    ///     The <see cref="ReportAndSwallowExceptionAttribute" /> can consume this information and print it if the exception is
+    ///     not handled.
     /// </summary>
     [PSerializable]
     public sealed class AddContextOnExceptionAttribute : OnExceptionAspect
     {
         /// <summary>
-        /// Method invoked when the target method fails with an exception.
+        ///     Method invoked when the target method fails with an exception.
         /// </summary>
         /// <param name="args">Method invocation context.</param>
         public override void OnException(MethodExecutionArgs args)
@@ -24,7 +26,6 @@ namespace PostSharp.Samples.ExceptionHandling
             {
                 stringBuilder = new StringBuilder();
                 args.Exception.Data["Context"] = stringBuilder;
-
             }
 
             // Append context to the StringBuilder.

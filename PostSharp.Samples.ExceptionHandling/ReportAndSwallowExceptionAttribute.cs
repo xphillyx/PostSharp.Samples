@@ -7,19 +7,24 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.ExceptionHandling
 {
     /// <summary>
-    /// Aspect that, when applied to a method, reports and then swallows (ignores) any exception that this method may throw.
-    /// The aspect also prints the data collected by the <see cref="AddContextOnExceptionAttribute"/> aspect.
+    ///     Aspect that, when applied to a method, reports and then swallows (ignores) any exception that this method may
+    ///     throw.
+    ///     The aspect also prints the data collected by the <see cref="AddContextOnExceptionAttribute" /> aspect.
     /// </summary>
     /// <remarks>
-    /// <para>Do not indiscriminately apply this aspect to all methods as exceptions are generally useful. Only use apply this aspect
-    /// to thread entry points or event handlers.</para>
+    ///     <para>
+    ///         Do not indiscriminately apply this aspect to all methods as exceptions are generally useful. Only use apply
+    ///         this aspect
+    ///         to thread entry points or event handlers.
+    ///     </para>
     /// </remarks>
     // Specify that this aspect must orderd after AddContextOnExceptionAttribute.
-    [AspectTypeDependency(AspectDependencyAction.Order, AspectDependencyPosition.After, typeof(AddContextOnExceptionAttribute))]
+    [AspectTypeDependency(AspectDependencyAction.Order, AspectDependencyPosition.After,
+        typeof (AddContextOnExceptionAttribute))]
     [PSerializable]
     public sealed class ReportAndSwallowExceptionAttribute : OnExceptionAspect
     {
-        public  override void OnException(MethodExecutionArgs args)
+        public override void OnException(MethodExecutionArgs args)
         {
             // Write the default exception information.
             Console.WriteLine("Exception information");
@@ -40,7 +45,6 @@ namespace PostSharp.Samples.ExceptionHandling
             // Ignore the exception.
             Console.WriteLine("*** Ignoring the exception ***");
             args.FlowBehavior = FlowBehavior.Continue;
-            
         }
     }
 }

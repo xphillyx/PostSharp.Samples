@@ -7,13 +7,13 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+<form id="form1" runat="server">
     <div>
         Session Counter: <asp:Label id="sessionCounterLabel" runat="server"/> <br/>
         Page View Counter: <asp:Label id="pageViewCounterLabel" runat="server"/> <br/>
         <asp:Button id="incrementButton" OnClick="incrementButton_OnClick" runat="server" Text="Increment"/> <br/>
-     <a href="Default.aspx">Reload</a>
+        <a href="Default.aspx">Reload</a>
     </div>
-    </form>
+</form>
 </body>
 </html>

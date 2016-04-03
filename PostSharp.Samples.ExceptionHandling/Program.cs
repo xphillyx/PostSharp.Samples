@@ -2,13 +2,14 @@
 using PostSharp.Samples.ExceptionHandling;
 
 // Add the AddContextOnException aspect to all methods in the assembly.
-[assembly:AddContextOnException]
+
+[assembly: AddContextOnException]
 
 namespace PostSharp.Samples.ExceptionHandling
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             MainCore();
 

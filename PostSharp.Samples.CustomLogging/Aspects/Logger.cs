@@ -3,7 +3,7 @@
 namespace PostSharp.Samples.CustomLogging.Aspects
 {
     /// <summary>
-    /// A simplistic logger.
+    ///     A simplistic logger.
     /// </summary>
     public static class Logger
     {

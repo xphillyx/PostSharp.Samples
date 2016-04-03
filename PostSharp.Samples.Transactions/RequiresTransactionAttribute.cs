@@ -24,6 +24,5 @@ namespace PostSharp.Samples.Transactions
             var transactionScope = (TransactionScope) args.MethodExecutionTag;
             transactionScope.Dispose();
         }
-
     }
 }

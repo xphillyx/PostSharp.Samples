@@ -5,7 +5,8 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.CustomLogging.Aspects
 {
     /// <summary>
-    /// Aspect that, when applied to a field or property, appends a record to the <see cref="Logger"/> class whenever this field or property is set to a new value.
+    ///     Aspect that, when applied to a field or property, appends a record to the <see cref="Logger" /> class whenever this
+    ///     field or property is set to a new value.
     /// </summary>
     [PSerializable]
     public sealed class LogSetValueAttribute : LocationInterceptionAspect
