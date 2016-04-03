@@ -12,6 +12,7 @@
 | PostSharp.Samples.ValidateResourceName    | ReferentialConstraint, ReflectionSearch, SyntaxTreeVisitor                               |
 | PostSharp.Samples.SessionState            | LocationInterceptionAspect, IInstanceScopedAspect, ImportMember                          |
 | PostSharp.Samples.Xaml                    | NotifyPropertyChanged, Recordable, Code Contracts                                        |
+| PostSharp.Samples.Transactions            | OnMethodBoundaryAspect, MethodExecutionTag                                               |
 
 ## How to use these examples
 

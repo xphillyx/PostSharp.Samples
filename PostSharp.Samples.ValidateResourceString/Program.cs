@@ -8,7 +8,7 @@ namespace PostSharp.Samples.ValidateResourceString
         private const string resourceName = "PostSharp.Samples.ValidateResourceString.MyResource";
         static readonly ResourceManager resourceManager = new ResourceManager(resourceName, typeof(Program).Assembly);
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // These two method calls are valid.
             Console.WriteLine(GetResourceString("String1"));
