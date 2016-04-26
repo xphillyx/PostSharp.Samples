@@ -55,3 +55,11 @@ In the code of this example, you may see `[Required]` aspects to a few propertie
 to throw an exception when someone attempts to set them to a null or empty string.
 
 In `MainWindow.xaml`, we enabled the `ValidatesOnExceptions` feature of data bindings to display red borders when a property setter throws an exception.
+
+
+In the end...
+--------------
+
+You see that you have quite extensive toolset for handling complexity of UI apps that is not perceived by users and your boss. You can handle automatic notification of property changes, undo-redo operations and use code contracts for form validations. 
+
+The best part is, if you find anything that you are doing all over again, you can just jump into Aspect Framework. Aspect Framework enables you to create your custom aspects, tailored to needs of your codebase.
