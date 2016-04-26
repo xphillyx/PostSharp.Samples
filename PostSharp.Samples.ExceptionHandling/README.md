@@ -1,7 +1,7 @@
 # PostSharp.Samples.ExceptionHandling
 
-Handling exceptions is bread and butter of every programmer, especially the one using the code throwing them. Surely it did happen to you 
-that you had no idea when and what might the method you call throw. Or worse, what a method called by that method might throw that the author did not 
+Handling exceptions is the bread and butter of every programmer, especially those using the code throwing exceptions. Surely it's happened to you. 
+You had no idea when and what might the method you call throw. Or worse, what a method called by that method might throw that the author did not 
 anticipate. 
 
 Frankly, this happens in every application and gets worse as its lifecycle progresses. As the time flows, you are pushed to patch the code here 
