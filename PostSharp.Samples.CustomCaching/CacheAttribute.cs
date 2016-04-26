@@ -6,7 +6,7 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.CustomCaching
 {
     /// <summary>
-    /// Custom attribure that, when applied to a method, caches the return value of the method according to parameter values.
+    /// Custom attribute that, when applied to a method, caches the return value of the method according to parameter values.
     /// </summary>
     [PSerializable]
     public sealed class CacheAttribute : OnMethodBoundaryAspect
