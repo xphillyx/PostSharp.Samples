@@ -1,7 +1,7 @@
 # PostSharp.Samples.CustomCaching
 
-Caching method's return value makes method execution faster trading space for time by storing the return value in a cache.
-If you call the method again then you can return a value stored in the cache, instead of doing time expensive calculation
+Caching your method's return value makes the method execution faster, trading space for time by storing the return value in a cache.
+If you call the method again then you can return a value stored in the cache, instead of doing time consuming calculation
 all over again.
 
 Typical candidates for caching are methods talking to snail-paced counterparts like databases or web services.
@@ -15,7 +15,7 @@ the return value in a cache. The execution flow looks like this:
 2) `Cache` aspect passes the execution to the decorated method which calculates the return value.
 3) `OnSuccess` method reads the cache key from `MethodExecutionTag` and stores the return value in the cache. 
 
-When you call the method for the second time then the `Cache` aspect just returns the cached return value. The execution flow looks like this:
+When you call the method for the second time then the `Cache` aspect returns the cached return value. The execution flow looks like this:
 1) `OnEntry` method reads the return value from the cache, stores the value `ReturnValue`
 and sets `FlowBehavior` to `FlowBehavior.Return`.
 2) `FlowBehavior.Return` terminates decorated method execution without doing the time consuming calculation.
