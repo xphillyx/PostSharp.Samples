@@ -1,8 +1,7 @@
 # PostSharp.Samples.ExceptionHandling
 
-Handling exceptions is the bread and butter of every programmer, especially those using the code throwing exceptions. Surely it's happened to you. 
-You had no idea when and what might the method you call throw. Or worse, what a method called by that method might throw that the author did not 
-anticipate. 
+Handling exceptions is the bread and butter of every programmer, especially those using the code throwing exceptions. Surely it has happened to you. 
+You had no idea when and what might the called method throw on you. Or worse, what something buried deep in the call tree may throw that the author of the method did not anticipate. 
 
 Frankly, this happens in every application and gets worse as its lifecycle progresses. As the time flows, you are pushed to patch the code here 
 and there, for this kind of exception and that. Mostly, you handle exceptions that have nothing to do with the code where you need to handle them. You log 
@@ -24,7 +23,9 @@ The sample implements two aspects:
    
 * `ReportAndSwallowExceptionAttribute` writes the exception to the console (including the data collected by  `AddContextOnExceptionAttribute`) and 
    suppresses the exception. Suppressing exceptions is dangerous and you cannot do that on each method. You would typically use this kind of aspects 
-   on an event handler (such as WPF and WinForms ones) or a thread entrypoint. 
+   on an event handler (such as WPF and WinForms ones) or a thread entrypoint.
+
+Now you know how to use PostSharp to handle exceptions from one place, with good separation of concerns. The logic you implement this way makes your code much more maintainable and easier to read.
 
 ## Limitations
 
