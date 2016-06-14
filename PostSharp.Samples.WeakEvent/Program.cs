@@ -2,9 +2,9 @@
 
 namespace PostSharp.Samples.WeakEvent
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var eventClient = new EventClient();
             MyEvent += eventClient.EventHandler;
@@ -24,21 +24,20 @@ namespace PostSharp.Samples.WeakEvent
 
             Console.WriteLine("Client is alive: {0}", weakReference.IsAlive); // Should be False.
 
-            
+
             // Raise the event when the client is dead.
             MyEvent(null, EventArgs.Empty);
             Console.WriteLine("EventHandlerCount: {0}", EventClient.EventHandlerCount); // Should be 1.
-
         }
 
         [WeakEvent]
-        static event EventHandler MyEvent;
+        private static event EventHandler MyEvent;
     }
 
     [WeakEventClient]
-    class EventClient
+    internal class EventClient
     {
-        static public int EventHandlerCount;
+        public static int EventHandlerCount;
 
         public void EventHandler(object sender, EventArgs e)
         {

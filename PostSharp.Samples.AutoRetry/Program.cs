@@ -6,16 +6,15 @@ namespace PostSharp.Samples.AutoRetry
 {
     internal static class Program
     {
-        static readonly Random random = new Random();
-        static readonly Stopwatch stopwatch = Stopwatch.StartNew();
+        private static readonly Random random = new Random();
+        private static readonly Stopwatch stopwatch = Stopwatch.StartNew();
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine(DownloadFile());
         }
 
 
-     
         [AutoRetry(MaxRetries = 3)]
         private static string DownloadFile()
         {
@@ -29,12 +28,9 @@ namespace PostSharp.Samples.AutoRetry
                 WriteMessage("Network failure.");
                 throw new WebException();
             }
-            else
-            {
-                // Simulate success.
-                WriteMessage("Success!");
-                return "Hello, world.";
-            }
+            // Simulate success.
+            WriteMessage("Success!");
+            return "Hello, world.";
         }
 
         // Writes a message to the console with a timestamp.

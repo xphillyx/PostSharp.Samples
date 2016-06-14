@@ -6,14 +6,15 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.CustomLogging.Aspects
 {
     /// <summary>
-    /// Aspect that, when applied to a method, appends a record to the <see cref="Logger"/> class whenever this method is executed.
+    ///     Aspect that, when applied to a method, appends a record to the <see cref="Logger" /> class whenever this method is
+    ///     executed.
     /// </summary>
     [PSerializable]
     [LinesOfCodeAvoided(6)]
     public sealed class LogMethodAttribute : OnMethodBoundaryAspect
     {
         /// <summary>
-        /// Method invoked before the target method is executed.
+        ///     Method invoked before the target method is executed.
         /// </summary>
         /// <param name="args">Method execution context.</param>
         public override void OnEntry(MethodExecutionArgs args)
@@ -29,7 +30,7 @@ namespace PostSharp.Samples.CustomLogging.Aspects
 
 
         /// <summary>
-        /// Method invoked after the target method has successfully completed.
+        ///     Method invoked after the target method has successfully completed.
         /// </summary>
         /// <param name="args">Method execution context.</param>
         public override void OnSuccess(MethodExecutionArgs args)
@@ -51,7 +52,7 @@ namespace PostSharp.Samples.CustomLogging.Aspects
         }
 
         /// <summary>
-        /// Method invoked when the target method has failed.
+        ///     Method invoked when the target method has failed.
         /// </summary>
         /// <param name="args">Method execution context.</param>
         public override void OnException(MethodExecutionArgs args)
@@ -89,7 +90,5 @@ namespace PostSharp.Samples.CustomLogging.Aspects
 
             Formatter.AppendArguments(stringBuilder, arguments);
         }
-
-       
     }
 }

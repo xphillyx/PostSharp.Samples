@@ -10,8 +10,5 @@ namespace PostSharp.Samples.Xaml
     [Recordable(ProvideMethodContext = true)]
     public abstract class ModelBase
     {
-        
     }
-
-
 }

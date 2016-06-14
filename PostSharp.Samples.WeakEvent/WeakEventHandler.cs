@@ -19,34 +19,31 @@ namespace PostSharp.Samples.WeakEvent
         {
             if (!initialized)
             {
-                this.cleanUpCounter = 0;
-                this.initialized = true;
-                this.handlers = ImmutableArray<object>.Empty;
+                cleanUpCounter = 0;
+                initialized = true;
+                handlers = ImmutableArray<object>.Empty;
             }
         }
 
         public bool AddHandler(Delegate handler, bool weak)
         {
             var lockTaken = false;
-            
+
             try
             {
-                this.spinLock.Enter(ref lockTaken);
+                spinLock.Enter(ref lockTaken);
 
-                this.handlers = this.handlers.Add(weak ? (object) new WeakReference(handler) : handler);
+                handlers = handlers.Add(weak ? (object) new WeakReference(handler) : handler);
 
-                return this.handlers.Length == 1;
-
+                return handlers.Length == 1;
             }
             finally
             {
                 if (lockTaken)
                 {
-                    this.spinLock.Exit();
+                    spinLock.Exit();
                 }
-
             }
-          
         }
 
         public bool RemoveHandler(Delegate handler)
@@ -54,19 +51,22 @@ namespace PostSharp.Samples.WeakEvent
             var lockTaken = false;
             try
             {
-                this.spinLock.Enter(ref lockTaken);
+                spinLock.Enter(ref lockTaken);
 
-                this.handlers = handlers.RemoveAll(o => ReferenceEquals( o, handler) || (o is WeakReference) && ReferenceEquals( ((WeakReference)o).Target, handler));
+                handlers =
+                    handlers.RemoveAll(
+                        o =>
+                            ReferenceEquals(o, handler) ||
+                            o is WeakReference && ReferenceEquals(((WeakReference) o).Target, handler));
 
-                return this.handlers.IsEmpty;
+                return handlers.IsEmpty;
             }
             finally
             {
                 if (lockTaken)
                 {
-                    this.spinLock.Exit();
+                    spinLock.Exit();
                 }
-
             }
         }
 
@@ -77,7 +77,7 @@ namespace PostSharp.Samples.WeakEvent
 
 
             // Take a snapshot of the handlers list.
-            var invocationList = this.handlers;
+            var invocationList = handlers;
 
             var needCleanUp = false;
 
@@ -105,30 +105,27 @@ namespace PostSharp.Samples.WeakEvent
                 handler.DynamicInvoke(args);
             }
 
-            if (needCleanUp && lastCleanUpCounter == this.cleanUpCounter)
+            if (needCleanUp && lastCleanUpCounter == cleanUpCounter)
             {
-                if (lastCleanUpCounter == this.cleanUpCounter)
+                if (lastCleanUpCounter == cleanUpCounter)
                 {
                     var lockTaken = false;
                     try
                     {
-                        this.spinLock.Enter(ref lockTaken);
-                        this.handlers = this.handlers.RemoveAll(w => w is WeakReference && !((WeakReference) w).IsAlive);
+                        spinLock.Enter(ref lockTaken);
+                        handlers = handlers.RemoveAll(w => w is WeakReference && !((WeakReference) w).IsAlive);
 
-                        Interlocked.Increment(ref this.cleanUpCounter);
-
+                        Interlocked.Increment(ref cleanUpCounter);
                     }
                     finally
                     {
                         if (lockTaken)
                         {
-                            this.spinLock.Exit();
+                            spinLock.Exit();
                         }
                     }
                 }
             }
         }
-
-     
     }
 }

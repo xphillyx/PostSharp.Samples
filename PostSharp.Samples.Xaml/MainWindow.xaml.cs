@@ -5,7 +5,7 @@ using PostSharp.Patterns.Recording;
 namespace PostSharp.Samples.Xaml
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -17,40 +17,39 @@ namespace PostSharp.Samples.Xaml
             RecordingServices.OperationFormatter = new MyOperationFormatter(RecordingServices.OperationFormatter);
 
             // Create initial data.
-            CustomerViewModel customerViewModel = new CustomerViewModel
-                                                      {
-                                                          Customer = new CustomerModel()
-                                                                         {
-                                                                             FirstName = "Jan",
-                                                                             LastName = "Novak",
-                                                                             Addresses = new AdvisableCollection<AddressModel>()
-                                                                                                       {
-                                                                                                           new AddressModel
-                                                                                                               {
-                                                                                                                   Line1 = "Saldova 1G",
-                                                                                                                   Town = "Prague"
-                                                                                                               },
-                                                                                                           new AddressModel()
-                                                                                                               {
-                                                                                                                   Line1 = "Tyrsova 25",
-                                                                                                                   Town = "Brno"
-                                                                                                               },
-                                                                                                               new AddressModel
-                                                                                                                   {
-                                                                                                                       Line1 = "Pivorarka 154",
-                                                                                                                       Town = "Pilsen"
-                                                                                                                   }
-                                                                                                       }
-                                                                         },
-                                                                         
-                                                      };
+            var customerViewModel = new CustomerViewModel
+            {
+                Customer = new CustomerModel
+                {
+                    FirstName = "Jan",
+                    LastName = "Novak",
+                    Addresses = new AdvisableCollection<AddressModel>
+                    {
+                        new AddressModel
+                        {
+                            Line1 = "Saldova 1G",
+                            Town = "Prague"
+                        },
+                        new AddressModel
+                        {
+                            Line1 = "Tyrsova 25",
+                            Town = "Brno"
+                        },
+                        new AddressModel
+                        {
+                            Line1 = "Pivorarka 154",
+                            Town = "Pilsen"
+                        }
+                    }
+                }
+            };
 
             customerViewModel.Customer.PrincipalAddress = customerViewModel.Customer.Addresses[0];
 
             // Clear the initialization steps from the recorder.
             RecordingServices.DefaultRecorder.Clear();
 
-            this.DataContext = customerViewModel;
+            DataContext = customerViewModel;
         }
     }
 }
