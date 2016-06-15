@@ -14,7 +14,7 @@
 | PostSharp.Samples.Xaml                    | Demonstrates a few ready-made aspects that are useful for XAML | NotifyPropertyChanged, Recordable, Code Contracts                                        |
 | PostSharp.Samples.Transactions            | Automatically executes a method inside a transaction. | OnMethodBoundaryAspect : MethodExecutionTag                                              |
 | PostSharp.Samples.Profiling               | Measure different execution times of methods, including async methods. | OnMethodBoundaryAspect : async methods, MethodExecutionTag                               
-
+| PostSharp.Samples.Encryption              | Automatically encrypts and decripts parameter and fields/properties | IAspectProvider, MethodInterceptionAspect, IAdviceProvider, field imports |
 
 ## How to use these examples
 

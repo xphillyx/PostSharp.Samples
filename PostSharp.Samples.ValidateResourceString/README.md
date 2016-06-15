@@ -1,6 +1,6 @@
 # PostSharp.Samples.ValidateResourceString
 
-If you validate values assigned to method parameters then usual validation is most often executed at runtime.
+When you want to validate values assigned to method parameters, the validation  is most often executed at runtime.
 You do not get any warning that something is broken until you execute a method that is being validated during testing.
 If you do not execute the method during testing then you are not notified about a possible bug at all.
 
@@ -8,7 +8,7 @@ It would be better to do the validation already at build time. Then you would no
 and there is no chance to miss any warning.
 
 This example demonstrates how to use PostSharp Architecture Framework to validate, at build time,
-that the value passed to a string parameter is a valid resource key.
+that the value passed to a string parameter is a valid string in a managed resource.
 
 The `ValidateResourceStringAttribute` implements the validation constraint. The `ValidateResourceStringAttribute`
 inherits from `ReferentialConstraint` because you need to validate the *usage* of the method, not the method itself. 
@@ -22,5 +22,5 @@ all methods invoking the validated method. Then, you use a `SyntaxTreeVisitor` t
 if values assigned to a validated parameter is a valid resource key. 
 
 The `ValidateResourceStringAttribute` constraint can validate just literal or constants passed to a validated parameter.
-If you pass an expression requiring runtime evaluation to a validate paramter, for example a variable or a method call expression
+If you pass an expression requiring runtime evaluation to a validate parameter, for example a variable or a method call expression
 then the validation at the build time cannot work.

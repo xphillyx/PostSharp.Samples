@@ -2,12 +2,15 @@
 
 This example demonstrates how to use the `EventInterceptionAspect` to implement a weak event pattern.
 
-A weak event is an event that holds a weak reference to the delegate instead of a strong reference. Therefore, the weak event does not prevent the listener objects to be garbage collected.
+A weak event is an event that holds a weak reference to the delegate instead of a strong reference. 
+Therefore, the weak event does not prevent the listener objects to be garbage collected.
 
-Event handlers are often source of memory leaks in .NET. The reason is that the delegates registered as event handlers store a strong reference to the listener objects. The event source indirectly holds a strong reference to all listener objects.
+Event handlers are often source of memory leaks in .NET. The reason is that the delegates registered as event handlers store a strong reference to the listener objects. 
+The event source indirectly holds a strong reference to all listener objects.
 
-Implementing the weak event pattern requires cooperation of the event source and the listener object. If the exposing object only stores weak references to the delegates, the delegates are immediately collected even while the consumer object
-is still alive. To prevent immediate garbage collection of delegates, the consumer must hold strong references to all delegates passed to the weak events.
+Implementing the weak event pattern requires cooperation of the event source and the listener object. If the exposing object only stores weak references to the delegates, 
+the delegates are immediately collected even while the consumer object is still alive. To prevent immediate garbage collection of delegates, 
+the consumer must hold strong references to all delegates passed to the weak events.
 
 The pattern is implemented by the following artefacts:
 

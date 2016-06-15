@@ -13,19 +13,17 @@ When you apply the `[LogMethod]` aspect to a method, the method creates a log re
 * the method returns succesfully,
 * the method fails with an exception.
 
-TODO: LogSetValueAttribute
+Additionally, you can apply the '[LogSetValue]` to a field or property to create a log record when the field or property is set.
 
 ## What is being demonstrated?
 
 The example uses the following PostSharp features:
 
-* The `OnMethodBoundaryAspect` class ...
-* The `LocationInterceptionAspect` class ...
-* The `args.Arguments`, `args.Method` or `args.Location` ...
+* The `OnMethodBoundaryAspect` class, the advices `OnEntry`, `OnSuccess`, `OnException` and context values `args.Arguments`, `args.Method`. 
+* The `LocationInterceptionAspect` class, the advice `OnSetValue` and context value `args.Location` and `args.Value`. 
+* Multicasting logging on all methods of the assembly (see `Program.cs`).
+* Logging calls to an external method, here the class `System.Math` (see `Program.cs`).
 
-(and  classes are used to build aspects that log
-the operations of invoking a method and setting the value of a field or property. The example shows how to get
-information about the calling context thanks to .)
 
 ## Limitations
 
@@ -38,7 +36,8 @@ This example is purely educational. It has the following limitations:
 If you need production-grade logging, you should consider using the
 `PostSharp.Patterns.Diagnostics.LogAttribute` aspect.
 
-The `LogAttribute` aspect works out of the box. The `LogAttribute` aspect is highly optimized for run-time performance, multithreading and reentrance. You can set up logging in a few minutes without modifying your existing source code. TODO: backends (shortly)
+The `LogAttribute` aspect works out of the box. The `LogAttribute` aspect is highly optimized for run-time performance, multithreading and reentrance. 
+You can set up logging in a few minutes without modifying your existing source code. TODO: backends (shortly)
 
 See http://doc.postsharp.net/logging.
 
