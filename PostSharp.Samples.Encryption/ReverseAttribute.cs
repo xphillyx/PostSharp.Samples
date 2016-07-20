@@ -1,10 +1,12 @@
 using System;
 using System.Text;
 using PostSharp.Serialization;
+using PostSharp.Aspects;
 
 namespace PostSharp.Samples.Encryption
 {
     [PSerializable]
+    [LinesOfCodeAvoided(2)]
     public sealed class ReverseAttribute : FilterAttribute
     {
         public override object ApplyFilter(object value)

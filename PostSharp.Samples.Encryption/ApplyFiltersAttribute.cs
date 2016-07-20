@@ -1,10 +1,12 @@
 ﻿using System;
 using PostSharp.Serialization;
+using PostSharp.Aspects;
 
 namespace PostSharp.Samples.Encryption
 {
     [PSerializable]
     [AttributeUsage(AttributeTargets.Parameter)]
+    [LinesOfCodeAvoided(2)]
     public class ApplyFiltersAttribute : FilterAttribute
     {
         // TODO: You may want to consider a design when Filter does not apply the filter on the current instance but clones the object and filters the clone.

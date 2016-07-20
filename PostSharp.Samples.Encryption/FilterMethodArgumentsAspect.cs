@@ -6,6 +6,7 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.Encryption
 {
     [PSerializable]
+    [LinesOfCodeAvoided(2)]
     public class FilterMethodArgumentsAspect : MethodInterceptionAspect
     {
         private FilterAttribute[] filters;
