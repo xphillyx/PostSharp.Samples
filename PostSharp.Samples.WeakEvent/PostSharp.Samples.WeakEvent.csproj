@@ -61,6 +61,7 @@
     <Compile Include="WeakEventAttribute.cs" />
     <Compile Include="WeakEventClientAttribute.cs" />
     <Compile Include="WeakEventHandler.cs" />
+    <Compile Include="WeakEventValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
