@@ -19,7 +19,7 @@ namespace PostSharp.Samples.WeakEvent
         {
             var reflectionService = PostSharpEnvironment.CurrentProject.GetService<ISyntaxReflectionService>();
 
-            // Iterate through all instances of WeakEventAttribute custom attribute in the current assembly. 
+            // Iterate through all instances of WeakEventAttribute custom attribute. 
             var customAttributes = ReflectionSearch.GetCustomAttributesOfType(typeof(WeakEventAttribute));
 
             foreach ( var customAttribute in customAttributes )
@@ -64,7 +64,7 @@ namespace PostSharp.Samples.WeakEvent
                         {
                             var eventClientType = methodPointerExpression.Method.DeclaringType;
 
-                            if (!typeof(IWeakEventClient).IsAssignableFrom(eventClientType) && !aspectRepositoryService.HasAspect(eventClientType, typeof(WeakEventClientAttribute)))
+                            if (!typeof(IWeakEventClient).IsAssignableFrom(eventClientType) && !HasWeakEventClientAspect(eventClientType))
                             {
                                 Message.Write(eventClientType, SeverityType.Error, "WEAKEVENT", "The type {0} should have the [WeakEventClient] aspect.", eventClientType);
                             }
@@ -74,6 +74,23 @@ namespace PostSharp.Samples.WeakEvent
                 }
 
                 return base.VisitMethodCallExpression(expression);
+            }
+
+            private static bool HasWeakEventClientAspect( Type type )
+            {
+                // Check if the current type has the aspect.
+                if (aspectRepositoryService.HasAspect(type, typeof(WeakEventClientAttribute)))
+                {
+                    return true;
+                }
+
+                // Check if the base type has the aspect.
+                if ( type.BaseType != null )
+                {
+                    return HasWeakEventClientAspect(type.BaseType.IsGenericType ? type.BaseType.GetGenericTypeDefinition() : type.BaseType);
+                }
+
+                return false;
             }
         }
     }

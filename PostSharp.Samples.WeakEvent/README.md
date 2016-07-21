@@ -16,9 +16,10 @@ The pattern is implemented by the following artefacts:
 
 * The `[WeakEvent]` aspect can be applied to any event. The `[WeakEvent]` aspect is based on `EventInterceptionAspect` and implements the `IInstanceScopedAspect` interface to store instance-scoped data.
 * The `[WeakEventClient]` aspect can be applied to any consumer of a weak event. The `[WeakEventClient]` aspect automatically implements the `IWeakEventClient` interface. The `[WeakEventClient]` aspect demonstrates the following features: `InstanceLevelAspect`, `IntroduceInterface`.
+* The `WeakEventValidation` constraint is attached to the `WeakEvent` aspect. It validates, at build time, that clients of weak events are enhanced with the `[WeakEventClient]` aspect or manually implement the `IWeakEventClient` interface.
+  Additionally to this build-time validation, the `[WeakEvent]` aspect throws an exception if the consumer class does not have the `[WeakEventClient]` aspect or does not manually implement the `IWeakEventClient` interface. 
 
-By default, the `[WeakEvent]` aspect throws an exception if the consumer class does not have the `[WeakEventClient]` aspect or does not manually implement the `IWeakEventClient` interface. 
-
+To allow an event to store strong references when the client does not implement the `IWeakEventClient` interface, use the code `[WeakEvent(AllowStrongReferences=true)]`.
 
 ## Limitations
 
