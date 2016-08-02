@@ -15,6 +15,7 @@
 | PostSharp.Samples.Transactions            | Automatically executes a method inside a transaction. | OnMethodBoundaryAspect : MethodExecutionTag                                              |
 | PostSharp.Samples.Profiling               | Measure different execution times of methods, including async methods. | OnMethodBoundaryAspect : async methods, MethodExecutionTag                               
 | PostSharp.Samples.Encryption              | Automatically encrypts and decripts parameter and fields/properties | IAspectProvider, MethodInterceptionAspect, IAdviceProvider, field imports |
+| PostSharp.Samples.Threading.PingPong      | The classic educational ping-pong example.                  | Actor |
 
 ## How to use these examples
 

@@ -54,6 +54,7 @@ namespace PostSharp.Samples.Threading.PingPong
         [ExplicitlySynchronized]
         public override string ToString()
         {
+            // It is safe to return a read-only immutable field.
             return this.name;
         }
 
