@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.CustomLogging", "PostSharp.Samples.CustomLogging\PostSharp.Samples.CustomLogging.csproj", "{C943DF92-512E-4488-83C0-96DD10CA9854}"
 EndProject
@@ -30,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Profiling", "PostSharp.Samples.Profiling\PostSharp.Samples.Profiling.csproj", "{33D8E82D-5474-4AC1-878A-0D9B0C28F73B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Encryption", "PostSharp.Samples.Encryption\PostSharp.Samples.Encryption.csproj", "{2ABD1A34-FC7D-4B6A-94D3-2266D72F09E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading.PingPong", "PostSharp.Samples.Threading.PingPong\PostSharp.Samples.Threading.PingPong.csproj", "{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{2ABD1A34-FC7D-4B6A-94D3-2266D72F09E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ABD1A34-FC7D-4B6A-94D3-2266D72F09E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ABD1A34-FC7D-4B6A-94D3-2266D72F09E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
