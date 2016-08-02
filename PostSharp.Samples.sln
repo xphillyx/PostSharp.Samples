@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Encryptio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading.PingPong", "PostSharp.Samples.Threading.PingPong\PostSharp.Samples.Threading.PingPong.csproj", "{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading.ThreadDispatching", "PostSharp.Samples.Threading.ThreadDispatching\PostSharp.Samples.Threading.ThreadDispatching.csproj", "{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

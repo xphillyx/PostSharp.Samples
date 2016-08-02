@@ -16,6 +16,7 @@
 | PostSharp.Samples.Profiling               | Measure different execution times of methods, including async methods. | OnMethodBoundaryAspect : async methods, MethodExecutionTag                               
 | PostSharp.Samples.Encryption              | Automatically encrypts and decripts parameter and fields/properties | IAspectProvider, MethodInterceptionAspect, IAdviceProvider, field imports |
 | PostSharp.Samples.Threading.PingPong      | The classic educational ping-pong example.                  | Actor |
+| PostSharp.samples.Threading.ThreadDispatching | A simple WPF progress bar updated from a background thread. | Background, Dispatched |
 
 ## How to use these examples
 
