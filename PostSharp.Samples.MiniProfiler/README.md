@@ -1,12 +1,12 @@
 # PostSharp.Samples.MiniProfiler
 
-MiniProfiler from the makers of StackOverflow is one of the most popular and most useful library for 
-ASP.NET developers. Thanks to MiniProfiler, you can easily track the execution time that selected methods.
+MiniProfiler from the makers of StackOverflow is one of the most popular and most useful libraries for 
+ASP.NET developers. Thanks to MiniProfiler, you can easily track the execution time of selected methods.
 
-Contrarily to normal profilers that track the execution time of all methods, MiniProfiler track only
+Contrarily to normal profilers that track the execution time of all methods, MiniProfiler tracks only
 the time of methods you specifically select.
 
-The inconvenient of MiniProfiler is that you have to modify your code to add a call to the 
+The problem with MiniProfiler is that you have to modify your code to add a call to the 
 `MiniProfiler.Step` method. This can be cumbersome if you have dozens or even hundreds of them.
 
 PostSharp offers a convenient way to add MiniProfiler to a large set of methods without having
