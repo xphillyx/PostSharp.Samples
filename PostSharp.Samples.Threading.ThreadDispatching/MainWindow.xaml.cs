@@ -23,10 +23,10 @@ namespace PostSharp.Samples.Threading.ThreadDispatching
         [Background]
         private void DoStuff()
         {
-            Random random = new Random();
-            for (int i = 0; i < 100; i++)
+            var random = new Random();
+            for (var i = 0; i < 100; i++)
             {
-                for (int j = 0; j < 1000000; j++)
+                for (var j = 0; j < 1000000; j++)
                 {
                     Math.Sin(random.NextDouble());
                 }

@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.MiniProfiler", "PostSharp.Samples.MiniProfiler\PostSharp.Samples.MiniProfiler.csproj", "{C24F62F1-BCFB-41F5-9119-2E36C2D7413F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Persistence", "PostSharp.Samples.Persistence\PostSharp.Samples.Persistence.csproj", "{7B76A67B-2667-4E79-8D33-6AAF769BB4FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{C24F62F1-BCFB-41F5-9119-2E36C2D7413F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C24F62F1-BCFB-41F5-9119-2E36C2D7413F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C24F62F1-BCFB-41F5-9119-2E36C2D7413F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B76A67B-2667-4E79-8D33-6AAF769BB4FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B76A67B-2667-4E79-8D33-6AAF769BB4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B76A67B-2667-4E79-8D33-6AAF769BB4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B76A67B-2667-4E79-8D33-6AAF769BB4FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
