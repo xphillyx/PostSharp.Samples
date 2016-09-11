@@ -1,4 +1,4 @@
-# PostSharp.Samples.Persistent
+# PostSharp.Samples.Persistence
 
 This example shows two aspects that cause a field or a property to be backed by a persistent storage:
 

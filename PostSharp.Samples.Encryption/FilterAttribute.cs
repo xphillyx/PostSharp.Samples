@@ -38,7 +38,7 @@ namespace PostSharp.Samples.Encryption
             }
             else
             {
-                // When the attribute is applied on a field or property, we will apply the filter when asked implicitely.
+                // When the attribute is applied on a field or property, we will apply the filter when asked implicitly.
 
                 var locationInfo = LocationInfo.ToLocationInfo(targetElement);
 

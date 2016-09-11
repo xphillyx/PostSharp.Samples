@@ -9,6 +9,7 @@ should be traced and at which level of detail.
 All this pain is taken away with PostSharp.
 
 When you apply the `[LogMethod]` aspect to a method, the method creates a log record when:
+
 * the method is invoked,
 * the method returns succesfully,
 * the method fails with an exception.
