@@ -19,7 +19,7 @@
 | [PostSharp.Samples.Threading.ThreadDispatching](PostSharp.Samples.Threading.ThreadDispatching/README.md) | A simple WPF progress bar updated from a background thread. | Background, Dispatched |
 | [PostSharp.Samples.MiniProfiler](PostSharp.Samples.MiniProfiler/README.md)            | Measures method execution time with MiniProfiler of StackExchange. | OnMethodBoundaryAspect, MulticastAttribute. |
 | [PostSharp.Samples.Persistence](PostSharp.Samples.Persistence/README.md)             | Persists fields or properties into the Windows registry or `app.config`. | LocationInterceptionAspect |
-| [PostSharp.Samples.AutoDataContract](PostSharp.Samples.AutoDataContract/README.md)]        | Automatically adds `[DataContract]` and `[DataMember]` attributes to derived classes and all properties | IAspectProvider, CustomAttributeIntroductionAspect, aspect inheritance. |
+| [PostSharp.Samples.AutoDataContract](PostSharp.Samples.AutoDataContract/README.md)        | Automatically adds `[DataContract]` and `[DataMember]` attributes to derived classes and all properties | IAspectProvider, CustomAttributeIntroductionAspect, aspect inheritance. |
 
 
 ## How to use these examples
