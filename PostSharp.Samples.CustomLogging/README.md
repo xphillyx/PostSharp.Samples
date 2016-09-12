@@ -11,7 +11,7 @@ All this pain is taken away with PostSharp.
 When you apply the `[LogMethod]` aspect to a method, the method creates a log record when:
 
 * the method is invoked,
-* the method returns succesfully,
+* the method returns successfully,
 * the method fails with an exception.
 
 Additionally, you can apply the '[LogSetValue]` to a field or property to create a log record when the field or property is set.
@@ -38,7 +38,8 @@ If you need production-grade logging, you should consider using the
 `PostSharp.Patterns.Diagnostics.LogAttribute` aspect.
 
 The `LogAttribute` aspect works out of the box. The `LogAttribute` aspect is highly optimized for run-time performance, multithreading and reentrance. 
-You can set up logging in a few minutes without modifying your existing source code. TODO: backends (shortly)
+You can set up logging in a few minutes without modifying your existing source code. 
+
 
 See http://doc.postsharp.net/logging.
 
