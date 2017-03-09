@@ -31,9 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Profiling
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Encryption", "Framework\PostSharp.Samples.Encryption\PostSharp.Samples.Encryption.csproj", "{2ABD1A34-FC7D-4B6A-94D3-2266D72F09E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading.PingPong", "Framework\PostSharp.Samples.Threading.PingPong\PostSharp.Samples.Threading.PingPong.csproj", "{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading.PingPong", "Threading\PostSharp.Samples.Threading.PingPong\PostSharp.Samples.Threading.PingPong.csproj", "{F07449FA-C066-4FD3-AA80-C0A3DC8B268B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading.ThreadDispatching", "Framework\PostSharp.Samples.Threading.ThreadDispatching\PostSharp.Samples.Threading.ThreadDispatching.csproj", "{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Threading.ThreadDispatching", "Threading\PostSharp.Samples.Threading.ThreadDispatching\PostSharp.Samples.Threading.ThreadDispatching.csproj", "{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.MiniProfiler", "Framework\PostSharp.Samples.MiniProfiler\PostSharp.Samples.MiniProfiler.csproj", "{C24F62F1-BCFB-41F5-9119-2E36C2D7413F}"
 EndProject
@@ -48,6 +48,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagnostics", "Diagnostics", "{B1F3FAC0-64CB-4CFC-994C-DF56801FC743}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging", "PostSharp.Samples.Logging\PostSharp.Samples.Logging.csproj", "{FB71F9B1-4A53-4397-A26C-23294423DA4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Threading", "Threading", "{44399EE3-2C8A-4ECE-BC3D-F4D2CA50290F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solid", "Solid", "{6B37892E-40E4-49C1-8E59-84C2AD14DD73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Caching", "Solid\PostSharp.Samples.Caching\PostSharp.Samples.Caching.csproj", "{547C4D64-3349-4909-B261-A2242E21E228}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +129,10 @@ Global
 		{FB71F9B1-4A53-4397-A26C-23294423DA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB71F9B1-4A53-4397-A26C-23294423DA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB71F9B1-4A53-4397-A26C-23294423DA4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{547C4D64-3349-4909-B261-A2242E21E228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{547C4D64-3349-4909-B261-A2242E21E228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{547C4D64-3349-4909-B261-A2242E21E228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{547C4D64-3349-4909-B261-A2242E21E228}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,11 +149,12 @@ Global
 		{4C86E0AF-0033-4583-90F1-9A37B29783F8} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{33D8E82D-5474-4AC1-878A-0D9B0C28F73B} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{2ABD1A34-FC7D-4B6A-94D3-2266D72F09E0} = {D83514BD-6473-4A66-AD23-D996968DE17C}
-		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B} = {D83514BD-6473-4A66-AD23-D996968DE17C}
-		{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047} = {D83514BD-6473-4A66-AD23-D996968DE17C}
+		{F07449FA-C066-4FD3-AA80-C0A3DC8B268B} = {44399EE3-2C8A-4ECE-BC3D-F4D2CA50290F}
+		{A4E6B3B1-D79E-4FFB-A8EB-5066C2D57047} = {44399EE3-2C8A-4ECE-BC3D-F4D2CA50290F}
 		{C24F62F1-BCFB-41F5-9119-2E36C2D7413F} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{7B76A67B-2667-4E79-8D33-6AAF769BB4FE} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{EEF6E032-8DF0-4894-A593-F9EC9CC539A7} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{FB71F9B1-4A53-4397-A26C-23294423DA4D} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
+		{547C4D64-3349-4909-B261-A2242E21E228} = {6B37892E-40E4-49C1-8E59-84C2AD14DD73}
 	EndGlobalSection
 EndGlobal

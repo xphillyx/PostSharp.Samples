@@ -1,37 +1,90 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace PostSharp.Samples.AutoRetry
 {
     internal static class Program
     {
+        private const double failureRate = 0.1;
         private static readonly Random random = new Random();
         private static readonly Stopwatch stopwatch = Stopwatch.StartNew();
 
         private static void Main(string[] args)
         {
-            var content = DownloadFile();
-            Console.WriteLine(content);
+            try
+            {
+                DownloadFile("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pineisland_oli_2017026_lrg-crop.jpg");
+            }
+            catch
+            {
+                Console.WriteLine("DownloadFile failed!");
+            }
+
+            try
+            {
+                DownloadFileAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pineisland_oli_2017026_lrg-crop.jpg").Wait();
+            }
+            catch
+            {
+                Console.WriteLine("DownloadFileAsync failed!");
+            }
         }
 
 
         [AutoRetry(MaxRetries = 3)]
-        private static string DownloadFile()
+        private static void DownloadFile(string url)
+        {
+            WriteMessage("Attempting to download the file.");
+            
+            var webClient = new WebClient();
+            var buffer = new byte[16 * 1024];
+
+            
+            using (var stream = webClient.OpenRead(url))
+            {
+                int countRead;
+                while ((countRead = stream.Read(buffer, 0, buffer.Length)) != 0)
+                {
+                    // Simulate a network failure.
+                    if (random.NextDouble() < failureRate)
+                    {
+                        WriteMessage("Network failure.");
+                        throw new WebException();
+                    }
+                }
+            }
+           
+            // Simulate success.
+            WriteMessage("Success!");
+        }
+
+        [AutoRetry(MaxRetries = 3)]
+        private static async Task DownloadFileAsync(string url)
         {
             WriteMessage("Attempting to download the file.");
 
-            // Randomly decide if the method call should succeed or fail.
-            if (random.NextDouble() < 0.8)
-            {
-                // Simulate a network failure.
+            var webClient = new WebClient();
+            var buffer = new byte[16 * 1024];
 
-                WriteMessage("Network failure.");
-                throw new WebException();
+
+            using (var stream = webClient.OpenRead(url))
+            {
+                int countRead;
+                while ((countRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                {
+                    // Simulate a network failure.
+                    if (random.NextDouble() < failureRate)
+                    {
+                        WriteMessage("Network failure.");
+                        throw new WebException();
+                    }
+                }
             }
+
             // Simulate success.
             WriteMessage("Success!");
-            return "Hello, world.";
         }
 
         // Writes a message to the console with a timestamp.

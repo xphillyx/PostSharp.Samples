@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using PostSharp.Aspects;
 using PostSharp.Serialization;
 
@@ -65,8 +66,7 @@ namespace PostSharp.Samples.AutoRetry
                 {
                     // The intercepted method threw an exception. Figure out if we can retry the method.
 
-                    if (i < MaxRetries &&
-                        (HandledExceptions == null || HandledExceptions.Any(type => type.IsInstanceOfType(e))))
+                    if (CanRetry(i, e))
                     {
                         // Yes, we can retry. Write some message and wait a bit.
 
@@ -85,6 +85,50 @@ namespace PostSharp.Samples.AutoRetry
                     }
                 }
             }
+        }
+
+        public override async Task OnInvokeAsync(MethodInterceptionArgs args)
+        {
+            for (var i = 0; ; i++)
+            {
+                try
+                {
+                    // Invoke the intercepted method.
+                    await args.ProceedAsync();
+
+                    // If we get here, it means the execution was successful.
+                    return;
+                }
+                catch (Exception e)
+                {
+                    // The intercepted method threw an exception. Figure out if we can retry the method.
+
+                    if (CanRetry(i, e))
+                    {
+                        // Yes, we can retry. Write some message and wait a bit.
+
+                        Console.WriteLine(
+                            "Method failed with exception {0}. Sleeping {1} s and retrying. This was our {2}th attempt.",
+                            e.GetType().Namespace, Delay, i + 1);
+
+                        await Task.Delay(TimeSpan.FromSeconds(Delay));
+
+                        // Continue to the next iteration.
+                    }
+                    else
+                    {
+                        // No, we cannot retry. Retry the exception.
+                        throw;
+                    }
+                }
+            }
+        }
+
+
+
+        private bool CanRetry(int attempt, Exception e)
+        {
+            return attempt < MaxRetries && (HandledExceptions == null || HandledExceptions.Any(type => type.IsInstanceOfType(e)));
         }
     }
 }
