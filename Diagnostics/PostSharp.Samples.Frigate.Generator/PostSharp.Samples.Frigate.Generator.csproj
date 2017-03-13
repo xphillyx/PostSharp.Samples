@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\PostSharp.5.0.20-preview\build\PostSharp.props" Condition="Exists('..\packages\PostSharp.5.0.20-preview\build\PostSharp.props')" />
+  <Import Project="..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.props" Condition="Exists('..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FB71F9B1-4A53-4397-A26C-23294423DA4D}</ProjectGuid>
+    <ProjectGuid>{963578D1-7916-49E9-BE59-BA52721A6FF3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PostSharp.Samples.Logging</RootNamespace>
-    <AssemblyName>PostSharp.Samples.Logging</AssemblyName>
+    <RootNamespace>PostSharp.Samples.Frigate.Generator</RootNamespace>
+    <AssemblyName>PostSharp.Samples.Frigate.Generator</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,13 +36,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PostSharp, Version=5.0.20.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Redist.5.0.20-preview\lib\net45\PostSharp.dll</HintPath>
+      <HintPath>..\..\packages\PostSharp.Redist.5.0.20-preview\lib\net45\PostSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp.Frigate.FileFormat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Frigate.5.0.20-preview\lib\net45\PostSharp.Frigate.FileFormat.dll</HintPath>
     </Reference>
     <Reference Include="PostSharp.Patterns.Common, Version=5.0.20.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Common.Redist.5.0.20-preview\lib\net45\PostSharp.Patterns.Common.dll</HintPath>
+      <HintPath>..\..\packages\PostSharp.Patterns.Common.Redist.5.0.20-preview\lib\net45\PostSharp.Patterns.Common.dll</HintPath>
     </Reference>
     <Reference Include="PostSharp.Patterns.Diagnostics, Version=5.0.20.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Diagnostics.Redist.5.0.20-preview\lib\net45\PostSharp.Patterns.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Redist.5.0.20-preview\lib\net45\PostSharp.Patterns.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp.Patterns.Diagnostics.Backends.Frigate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Frigate.5.0.20-preview\lib\net45\PostSharp.Patterns.Diagnostics.Backends.Frigate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,23 +60,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomLoggingBackend.cs" />
-    <Compile Include="FancyIntFormatter.cs" />
-    <Compile Include="GlobalAspects.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="postsharp.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\PostSharp.5.0.20-preview\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.5.0.20-preview\build\PostSharp.props'))" />
-    <Error Condition="!Exists('..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets'))" />
+    <Error Condition="!Exists('..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.props'))" />
+    <Error Condition="!Exists('..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets'))" />
   </Target>
-  <Import Project="..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets" Condition="Exists('..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets')" />
+  <Import Project="..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets" Condition="Exists('..\..\packages\PostSharp.5.0.20-preview\build\PostSharp.targets')" />
 </Project>

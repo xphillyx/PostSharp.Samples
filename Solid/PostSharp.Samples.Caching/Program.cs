@@ -7,9 +7,11 @@ using System.Threading;
 using PostSharp.Patterns.Caching.Backends.Redis;
 using StackExchange.Redis;
 using System.Linq;
+using PostSharp.Patterns.Caching.Backends;
 
 namespace PostSharp.Samples.Caching
 {
+    [CacheConfiguration(AbsoluteExpirationOffset =5)]
     class Program
     {
         static void Main(string[] args)
@@ -20,11 +22,12 @@ namespace PostSharp.Samples.Caching
                 {
                     connection.ErrorMessage += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Message);
                     connection.ConnectionFailed += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Exception);
-
-                    using (RedisCachingBackend backend = RedisCachingBackend.Create(connection))
+                    
+                    using (var backend = new TwoLayerCacheEnhancer(RedisCachingBackend.Create(connection)))
                     using (RedisCacheDependencyOnlineCollector.Create(connection))  // With Redis, we need at least one instance of the collection engine.
                     {
                         CachingServices.Backend = backend;
+                        CachingServices.GetProfile("default").AbsoluteExpiration = TimeSpan.FromSeconds(10);
 
                         // Testing direct invalidation.
                         Console.WriteLine("Retrieving the customer for the 1st time should hit the database.");
@@ -53,7 +56,7 @@ namespace PostSharp.Samples.Caching
         }
 
         // Demonstrates simple caching.
-        [Cache]
+        [Cache(AbsoluteExpirationOffset = 10)]
         public static Customer GetCustomer(int id)
         {
             Console.WriteLine($">> Retrieving the customer {id} from database...");

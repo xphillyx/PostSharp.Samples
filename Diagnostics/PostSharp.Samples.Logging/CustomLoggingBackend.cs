@@ -21,7 +21,7 @@ namespace PostSharp.Samples.Logging
             public RecordBuilder(ConsoleLoggingBackend backend) : base(backend)
             {
             }
-
+            
             protected override void Write(UnsafeString message)
             {
                 Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId} \u00A6 " + message);
