@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Text;
 using PostSharp.Patterns.Contracts;
+using PostSharp.Patterns.Model;
 
 namespace PostSharp.Samples.Xaml
 {
@@ -18,6 +19,7 @@ namespace PostSharp.Samples.Xaml
 
         public string Country { get; set; }
 
+        [SafeForDependencyAnalysis]
         public string FullAddress
         {
             get

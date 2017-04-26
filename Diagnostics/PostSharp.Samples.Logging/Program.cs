@@ -1,4 +1,5 @@
 ﻿using PostSharp.Patterns.Diagnostics;
+using PostSharp.Patterns.Diagnostics.Audit;
 using System;
 using System.Net;
 using System.Security.Cryptography;
@@ -13,10 +14,10 @@ namespace PostSharp.Samples.Logging
         static Program()
         {
             CustomLoggingBackend backend = new CustomLoggingBackend();
-            backend.FormattingOptions.Delimiter = " \u00A6 ";
+            backend.Options.Delimiter = " \u00A6 ";
            
             LoggingServices.DefaultBackend = backend;
-            LoggingServices.Formatters.RegisterFormatter(new FancyIntFormatter());
+            LoggingServices.Formatters.Register(new FancyIntFormatter());
             AuditServices.RecordPublished += OnAuditRecordPublished;
             
 
@@ -37,7 +38,7 @@ namespace PostSharp.Samples.Logging
             try
             {
                 logger.Write(LogLevel.Info, "Disabling debug logging the WebUtil.");
-                LoggingServices.DefaultBackend.GetCategory(LoggingRoles.Tracing, typeof(WebUtil)).SetEnabled(LogLevel.Info);
+                LoggingServices.DefaultBackend.GetSource(LoggingRoles.Tracing, typeof(WebUtil)).SetLevel(LogLevel.Info);
                 Task.WaitAll(
                     WebUtil.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pineisland_oli_2017026_lrg-crop.jpg"),
                     WebUtil.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pia20521-1041.jpg"));

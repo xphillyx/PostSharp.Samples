@@ -8,7 +8,7 @@ namespace PostSharp.Samples.Caching
     class Account : ICacheDependency
     {
         public int AccountId;
-        public string Key => $"Account:{AccountId}";
+        public string GetCacheKey() => $"Account:{AccountId}";
 
         public bool Equals(ICacheDependency other)
         {

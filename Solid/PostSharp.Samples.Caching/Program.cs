@@ -11,7 +11,7 @@ using PostSharp.Patterns.Caching.Backends;
 
 namespace PostSharp.Samples.Caching
 {
-    [CacheConfiguration(AbsoluteExpirationOffset =5)]
+    [CacheConfiguration(AbsoluteExpiration =5)]
     class Program
     {
         static void Main(string[] args)
@@ -20,14 +20,16 @@ namespace PostSharp.Samples.Caching
             {
                 using (ConnectionMultiplexer connection = ConnectionMultiplexer.Connect("localhost:6380,abortConnect = False"))
                 {
+                    RedisCachingBackendConfiguration configuration = new RedisCachingBackendConfiguration();
+
                     connection.ErrorMessage += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Message);
                     connection.ConnectionFailed += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Exception);
                     
-                    using (var backend = new TwoLayerCacheEnhancer(RedisCachingBackend.Create(connection)))
-                    using (RedisCacheDependencyOnlineCollector.Create(connection))  // With Redis, we need at least one instance of the collection engine.
+                    using (var backend = new TwoLayerCachingBackendEnhancer(RedisCachingBackend.Create(connection, configuration)))
+                    using (RedisCacheDependencyGarbageCollector.Create(connection, configuration))  // With Redis, we need at least one instance of the collection engine.
                     {
-                        CachingServices.Backend = backend;
-                        CachingServices.GetProfile("default").AbsoluteExpiration = TimeSpan.FromSeconds(10);
+                        CachingServices.DefaultBackend = backend;
+                        CachingServices.Profiles["default"].AbsoluteExpiration = TimeSpan.FromSeconds(10);
 
                         // Testing direct invalidation.
                         Console.WriteLine("Retrieving the customer for the 1st time should hit the database.");
@@ -56,7 +58,7 @@ namespace PostSharp.Samples.Caching
         }
 
         // Demonstrates simple caching.
-        [Cache(AbsoluteExpirationOffset = 10)]
+        [Cache(AbsoluteExpiration = 10)]
         public static Customer GetCustomer(int id)
         {
             Console.WriteLine($">> Retrieving the customer {id} from database...");
@@ -92,7 +94,8 @@ namespace PostSharp.Samples.Caching
 
             var account = new Account { AccountId = id };
 
-            CachingContext.Current.AddDependency(account);
+            // TODO: Uncomment this once it's fixed in PostSharp.
+            //CachingContext.Current.AddDependency(account);
 
             return account;
         }

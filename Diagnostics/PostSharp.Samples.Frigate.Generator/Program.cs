@@ -11,8 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.Frigate;
+using PostSharp.Patterns.Diagnostics.ThreadingInstrumentation;
 
-[assembly: TaskInstrumentationPolicy]
+[assembly: ThreadingInstrumentationPolicy]
 
 namespace PostSharp.Frigate.TestProgram
 {
@@ -52,12 +53,11 @@ namespace PostSharp.Frigate.TestProgram
             Task[] tasks = new Task[count];
             for (int i = 0; i < count; i++)
             {
-                tasks[i] = TaskEx.Run(MakeOneMillionCalls);
+                tasks[i] = Task.Run(() => MakeOneMillionCalls());
             }
 
 
-            // TODO: Instrumentation of Task.WhenAll and Task.Wait will be automatic.
-            TaskEx.WhenAll(tasks).LoggedWait();
+            Task.WhenAll(tasks).Wait();
 
             Console.WriteLine($"Generated 11M records in in {stopwatch.Elapsed}. This is ~{1E3 * 11 / stopwatch.Elapsed.TotalSeconds:0}K records per second/core.");
 
@@ -72,7 +72,7 @@ namespace PostSharp.Frigate.TestProgram
             }
 
             // TODO: Instrumentation of Task.Wait will be automatic.
-            ReadUrls("http://www.nasa.gov/images/content/178493main_sig07-009-hires.jpg", "http://tse2.mm.bing.net/th?id=OIP.Ma1c2cdaa5ded4fd36cd7884605f53471o0&pid=15.1", "https://www.postsharp.net/").LoggedWait();
+            ReadUrls("http://www.nasa.gov/images/content/178493main_sig07-009-hires.jpg", "http://tse2.mm.bing.net/th?id=OIP.Ma1c2cdaa5ded4fd36cd7884605f53471o0&pid=15.1", "https://www.postsharp.net/").Wait();
         }    
 
         [Log]
@@ -131,8 +131,7 @@ namespace PostSharp.Frigate.TestProgram
                 tasks[i] = ReadAndHashAsync( urls[i] );
             }
 
-            // TODO: Instrumentation of Task.WhenAll.
-            await TaskEx.WhenAll( tasks );
+            await Task.WhenAll( tasks );
         }
 
         [Log]

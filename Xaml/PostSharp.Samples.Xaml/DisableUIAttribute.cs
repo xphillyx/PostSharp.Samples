@@ -12,7 +12,7 @@ using PostSharp.Serialization;
 namespace PostSharp.Samples.Xaml
 {
     [PSerializable]
-    [AspectTypeDependency(AspectDependencyAction.Require, AspectDependencyPosition.Any, typeof(BackgroundAttribute))]
+    [AspectTypeDependency(AspectDependencyAction.Require, AspectDependencyPosition.After, typeof(BackgroundAttribute))]
     [LinesOfCodeAvoided(4)]
     public sealed class DisableUIAttribute : OnMethodBoundaryAspect
     {

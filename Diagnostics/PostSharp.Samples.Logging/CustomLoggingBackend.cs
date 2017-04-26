@@ -1,5 +1,6 @@
 ﻿using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.Console;
+using PostSharp.Patterns.Diagnostics.RecordBuilders;
 using PostSharp.Patterns.Formatters;
 using System;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace PostSharp.Samples.Logging
 
 
         [Log(AttributeExclude = true)]
-        class RecordBuilder : ConsoleRecordBuilder
+        class RecordBuilder : ConsoleLogRecordBuilder
         {
             public RecordBuilder(ConsoleLoggingBackend backend) : base(backend)
             {
