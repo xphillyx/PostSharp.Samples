@@ -2,15 +2,15 @@
 using PostSharp.Aspects;
 using PostSharp.Extensibility;
 using PostSharp.Serialization;
+using System.Threading;
 
 namespace PostSharp.Samples.Encryption
 {
     [PSerializable]
     [LinesOfCodeAvoided(2)]
-    public class FilterMethodArgumentsAspect : MethodInterceptionAspect
+    public sealed class FilterMethodArgumentsAspect : MethodInterceptionAspect
     {
         private FilterAttribute[] filters;
-
         internal FilterMethodArgumentsAspect(MethodBase method)
         {
             this.filters = new FilterAttribute[method.GetParameters().Length];

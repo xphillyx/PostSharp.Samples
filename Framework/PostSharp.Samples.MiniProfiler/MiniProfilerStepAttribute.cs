@@ -15,7 +15,7 @@ namespace PostSharp.Samples.MiniProfiler
 
         public MiniProfilerStepAttribute()
         {
-            this.ApplyToStateMachine = true;
+            this.SemanticallyAdvisedMethodKinds = SemanticallyAdvisedMethodKinds.Async;
         }
 
         public override bool CompileTimeValidate(MethodBase method)

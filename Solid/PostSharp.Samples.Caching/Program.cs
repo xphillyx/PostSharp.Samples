@@ -94,8 +94,7 @@ namespace PostSharp.Samples.Caching
 
             var account = new Account { AccountId = id };
 
-            // TODO: Uncomment this once it's fixed in PostSharp.
-            //CachingContext.Current.AddDependency(account);
+            CachingServices.CurrentContext.AddDependency(account);
 
             return account;
         }
