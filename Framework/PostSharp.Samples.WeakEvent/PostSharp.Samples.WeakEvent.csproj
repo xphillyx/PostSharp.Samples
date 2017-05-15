@@ -57,13 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IWeakEventClient.cs" />
+    <Compile Include="DelegateReferenceKeeper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeakEventAttribute.cs" />
-    <Compile Include="WeakEventClientAttribute.cs" />
     <Compile Include="WeakEventHandler.cs" />
-    <Compile Include="WeakEventValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,7 +7,6 @@ using PostSharp.Serialization;
 
 namespace PostSharp.Samples.WeakEvent
 {
-    [PSerializable]
     internal struct WeakEventHandler
     {
         private bool initialized;
@@ -25,7 +24,7 @@ namespace PostSharp.Samples.WeakEvent
             }
         }
 
-        public bool AddHandler(Delegate handler, bool weak)
+        public bool AddHandler(Delegate handler)
         {
             var lockTaken = false;
 
@@ -33,7 +32,7 @@ namespace PostSharp.Samples.WeakEvent
             {
                 spinLock.Enter(ref lockTaken);
 
-                handlers = handlers.Add(weak ? (object) new WeakReference(handler) : handler);
+                handlers = handlers.Add(new WeakReference(handler));
 
                 return handlers.Length == 1;
             }
@@ -55,9 +54,7 @@ namespace PostSharp.Samples.WeakEvent
 
                 handlers =
                     handlers.RemoveAll(
-                        o =>
-                            ReferenceEquals(o, handler) ||
-                            o is WeakReference && ReferenceEquals(((WeakReference) o).Target, handler));
+                        o => ReferenceEquals(((WeakReference) o).Target, handler));
 
                 return handlers.IsEmpty;
             }
@@ -83,24 +80,20 @@ namespace PostSharp.Samples.WeakEvent
 
             foreach (var obj in invocationList)
             {
-                var handler = obj as Delegate;
+              
+                var handler = (Delegate) ((WeakReference) obj).Target;
 
                 if (handler == null)
                 {
-                    handler = (Delegate) ((WeakReference) obj).Target;
-
-                    if (handler == null)
+                    if (!needCleanUp)
                     {
-                        if (!needCleanUp)
-                        {
-                            needCleanUp = true;
-                            lastCleanUpCounter = cleanUpCounter;
-                        }
-
-                        continue;
+                        needCleanUp = true;
+                        lastCleanUpCounter = cleanUpCounter;
                     }
-                }
 
+                    continue;
+                }
+               
 
                 handler.DynamicInvoke(args);
             }
@@ -113,7 +106,7 @@ namespace PostSharp.Samples.WeakEvent
                     try
                     {
                         spinLock.Enter(ref lockTaken);
-                        handlers = handlers.RemoveAll(w => w is WeakReference && !((WeakReference) w).IsAlive);
+                        handlers = handlers.RemoveAll(w => !((WeakReference) w).IsAlive);
 
                         Interlocked.Increment(ref cleanUpCounter);
                     }

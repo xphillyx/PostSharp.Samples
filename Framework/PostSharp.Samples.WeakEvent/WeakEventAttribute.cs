@@ -14,29 +14,9 @@ namespace PostSharp.Samples.WeakEvent
     /// </summary>
     [PSerializable]
     [LinesOfCodeAvoided(6)]
-    [WeakEventValidation]
     public sealed class WeakEventAttribute : EventInterceptionAspect, IInstanceScopedAspect
     {
         [PNonSerialized] private WeakEventHandler weakEventHandler;
-
-
-        /// <summary>
-        ///     Initializes a new <see cref="WeakEventAttribute" />
-        /// </summary>
-        /// <param name="allowStrongReferences">
-        ///     Determines whether the current aspect is allowed to create a strong reference if the client does not have
-        ///     the <see cref="WeakEventClientAttribute" /> aspect. The default value is <c>false</c>.
-        /// </param>
-        public WeakEventAttribute(bool allowStrongReferences = false)
-        {
-            AllowStrongReferences = allowStrongReferences;
-        }
-
-        /// <summary>
-        ///     Determines whether the current aspect is allowed to create a strong reference if the client does not have
-        ///     the <see cref="WeakEventClientAttribute" /> aspect.
-        /// </summary>
-        public bool AllowStrongReferences { get; set; }
 
 
         /// <summary>
@@ -73,31 +53,19 @@ namespace PostSharp.Samples.WeakEvent
         /// <param name="args">Context information.</param>
         public override void OnAddHandler(EventInterceptionArgs args)
         {
-            var weakEventClient = args.Handler.Target as IWeakEventClient;
-            var supportsWeakReference = weakEventClient != null;
-
-            // Throw an exception if the client does not support weak events and we are not allowed to hold strong references.
-            if (!supportsWeakReference && args.Handler.Target != null && !AllowStrongReferences)
-            {
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Attempt to add a reference to the weak event {0} from type {1}, which does not implement the IWeakEventClient interface.",
-                        args.Event, args.Handler.Target.GetType()));
-            }
+           
 
             // Add the handler to our own list.
-            if (weakEventHandler.AddHandler(args.Handler, supportsWeakReference))
+            if (weakEventHandler.AddHandler(args.Handler))
             {
                 // If it is the first handler we are adding, add a fake handler to ourselves to the target event.
                 // Whichever handler will add here will be passed to OnInvokeHandler, so it is safe and convenient to pass null.
                 args.AddHandler(null);
             }
 
+
             // Register the handler to the client to prevent garbage collection of the handler.
-            if (supportsWeakReference)
-            {
-                weakEventClient.RegisterEventHandler(args.Handler);
-            }
+            DelegateReferenceKeeper.AddReference(args.Handler);
         }
 
         /// <summary>
@@ -106,11 +74,7 @@ namespace PostSharp.Samples.WeakEvent
         /// <param name="args">Context information.</param>
         public override void OnRemoveHandler(EventInterceptionArgs args)
         {
-            var weakEventClient = args.Handler.Target as IWeakEventClient;
-
-            var supportsWeakReference = weakEventClient != null;
-
-            // Remove the handler from our own list.
+             // Remove the handler from our own list.
             if (weakEventHandler.RemoveHandler(args.Handler))
             {
                 // If this is the last handler, remove the fake handler to ourselves from the target event.
@@ -118,10 +82,7 @@ namespace PostSharp.Samples.WeakEvent
             }
 
             // Remove the handler from the client.
-            if (supportsWeakReference)
-            {
-                weakEventClient.UnregisterEventHandler(args.Handler);
-            }
+            DelegateReferenceKeeper.RemoveReference(args.Handler);
         }
 
         /// <summary>
