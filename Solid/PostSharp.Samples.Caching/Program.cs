@@ -11,7 +11,6 @@ using PostSharp.Patterns.Caching.Backends;
 
 namespace PostSharp.Samples.Caching
 {
-    [CacheConfiguration(AbsoluteExpiration =5)]
     class Program
     {
         static void Main(string[] args)
@@ -57,8 +56,7 @@ namespace PostSharp.Samples.Caching
             }
         }
 
-        // Demonstrates simple caching.
-        [Cache(AbsoluteExpiration = 10)]
+        // TODO: Demonstrates simple caching.
         public static Customer GetCustomer(int id)
         {
             Console.WriteLine($">> Retrieving the customer {id} from database...");
@@ -67,8 +65,7 @@ namespace PostSharp.Samples.Caching
         }
 
 
-        // Demonstrates declarative direct invalidation.
-        [InvalidateCache(nameof(GetCustomer))]
+        // TODO: Demonstrates declarative direct invalidation.
         public static void UpdateCustomer(int id, string newName)
         {
             Console.WriteLine($">> Updating the customer {id} in database...");
@@ -76,7 +73,7 @@ namespace PostSharp.Samples.Caching
         }
 
 
-        // Demonstrates programmatic direct invalidation.
+        // TODO: Demonstrates programmatic direct invalidation.
         public static void DeleteCustomer(int id, string newName)
         {
             Console.WriteLine($">> Deleting the customer {id} from database...");
@@ -85,8 +82,7 @@ namespace PostSharp.Samples.Caching
             CachingServices.Invalidation.Invalidate(GetCustomer, id);
         }
 
-        // Demonstrates object-oriented dependencies.
-        [Cache]
+        // TODO: Demonstrates object-oriented dependencies.
         public static Account GetAccount(int id)
         {
             Console.WriteLine($">> Retrieving the account {id} from database...");
@@ -94,25 +90,21 @@ namespace PostSharp.Samples.Caching
 
             var account = new Account { AccountId = id };
 
-            CachingServices.CurrentContext.AddDependency(account);
-
             return account;
         }
 
-        // Demonstrates nested dependencies.
-        [Cache]
+        // TODO: Demonstrates nested dependencies.
         public static IEnumerable<Account> GetAccountsOfCustomer(int customerId)
         {
             yield return GetAccount(1);
             yield return GetAccount(2);
         }
 
-        // Demonstrates invaliding dependencies.
+        // TODO: Demonstrates invaliding dependencies.
         public static void UpdateAccount(Account account)
         {
             Console.WriteLine($">> Updating the account {account.AccountId} in database...");
             Thread.Sleep(1000);
-            CachingServices.Invalidation.Invalidate(account);
         }
 
 
