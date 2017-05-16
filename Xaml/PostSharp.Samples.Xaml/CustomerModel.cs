@@ -1,10 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading;
 using System.Windows;
-using PostSharp.Patterns.Collections;
-using PostSharp.Patterns.Contracts;
-using PostSharp.Patterns.Model;
-using PostSharp.Patterns.Threading;
 
 namespace PostSharp.Samples.Xaml
 {
@@ -12,20 +9,16 @@ namespace PostSharp.Samples.Xaml
     {
         public string FirstName { get; set; }
 
-        [Required]
         public string LastName { get; set; }
 
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
 
-        [Child]
-        public AdvisableCollection<AddressModel> Addresses { get; set; }
+        public ObservableCollection<AddressModel> Addresses { get; set; }
 
-        [Reference]
         public AddressModel PrincipalAddress { get; set; }
 
-        [Reader]
         public void Save(string path)
         {
             using (var stringWriter = new StreamWriter(path))

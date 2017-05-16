@@ -11,8 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PostSharp.Patterns.Contracts;
-using PostSharp.Patterns.Xaml;
 
 namespace PostSharp.Samples.Xaml
 {
@@ -26,9 +24,6 @@ namespace PostSharp.Samples.Xaml
             InitializeComponent();
         }
 
-        public static DependencyProperty TextProperty { get; private set; }
-
-        [DependencyProperty]
         public string Text { get; set; }
 
 

@@ -1,8 +1,5 @@
-﻿using PostSharp.Patterns.Model;
-
-namespace PostSharp.Samples.Xaml
+﻿namespace PostSharp.Samples.Xaml
 {
-    [NotifyPropertyChanged]
     public class CustomerViewModel
     {
         public CustomerModel Customer { get; set; }

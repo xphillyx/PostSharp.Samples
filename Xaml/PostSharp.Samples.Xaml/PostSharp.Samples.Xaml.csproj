@@ -70,7 +70,6 @@
     </Compile>
     <Compile Include="CustomerModel.cs" />
     <Compile Include="CustomerViewModel.cs" />
-    <Compile Include="DisableUIAttribute.cs" />
     <Compile Include="FancyTextBlock.xaml.cs">
       <DependentUpon>FancyTextBlock.xaml</DependentUpon>
     </Compile>
@@ -81,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelBase.cs" />
-    <Compile Include="MyOperationFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -109,7 +107,6 @@
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
