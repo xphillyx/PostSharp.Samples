@@ -3,14 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xaml="clr-namespace:PostSharp.Samples.Xaml"
         xmlns:controls="clr-namespace:PostSharp.Patterns.Model.Controls;assembly=PostSharp.Patterns.Xaml"
-        Title="Contact Form" Height="292.584" Width="352.753">
+        Title="Contact Form" Height="292.584" Width="352.753"
+        x:Name="Window"
+        >
     <Window.DataContext>
         <xaml:CustomerViewModel />
     </Window.DataContext>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
-                <Button Name="SaveButton" Click="SaveButton_OnClick">Save</Button>
+                <Button Name="SaveButton" Command="{Binding ElementName=Window, Path=SaveCommand}">Save</Button>
                 <controls:UndoButton />
                 <controls:RedoButton />
             </ToolBar>
@@ -29,7 +31,7 @@
             <ComboBox HorizontalAlignment="Left" Margin="127,100,0,0" VerticalAlignment="Top" Width="189"
                       ItemsSource="{Binding Path=Customer.Addresses}"
                       SelectedValue="{Binding Path=Customer.PrincipalAddress}" DisplayMemberPath="FullAddress" />
-            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding Path=FullName}"
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Text="{Binding Path=FullName}"
                        VerticalAlignment="Top" Height="18" Width="214" />
             <Label Content="Line1:" HorizontalAlignment="Left" Margin="41,130,0,0" VerticalAlignment="Top" />
             <TextBox HorizontalAlignment="Left" Height="23" Margin="127,134,0,0" TextWrapping="Wrap"

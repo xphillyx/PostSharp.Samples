@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Text;
 using PostSharp.Patterns.Contracts;
 using PostSharp.Patterns.Model;
@@ -18,6 +19,11 @@ namespace PostSharp.Samples.Xaml
         public string Town { get; set; }
 
         public string Country { get; set; }
+
+        public DateTime Expiration { get; set; }
+
+        [IgnoreAutoChangeNotification]
+        public TimeSpan Lifetime => DateTime.Now - this.Expiration;
 
         [SafeForDependencyAnalysis]
         public string FullAddress
