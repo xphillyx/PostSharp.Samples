@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Reflection;
+using System.Threading;
 using PostSharp.Aspects;
 using PostSharp.Serialization;
 
@@ -8,15 +10,19 @@ namespace PostSharp.Samples.WeakEvent
     /// <summary>
     ///     Aspect that, when applied to an event, prevents the target event from holding a strong reference to event handlers.
     ///     Therefore, the aspect prevents the event to prevent clients to be garbage collected.
-    ///     Client classes must have the <see cref="WeakEventClientAttribute" /> aspect, otherwise an exception will be thrown
-    ///     at runtime (if <see cref="AllowStrongReferences" /> is set to <c>true</c>), or a
-    ///     strong reference will be created.
     /// </summary>
     [PSerializable]
     [LinesOfCodeAvoided(6)]
     public sealed class WeakEventAttribute : EventInterceptionAspect, IInstanceScopedAspect
     {
-        [PNonSerialized] private WeakEventHandler weakEventHandler;
+        [PNonSerialized]
+        private bool initialized;
+        [PNonSerialized]
+        private ImmutableArray<object> handlers;
+        [PNonSerialized]
+        private volatile int cleanUpCounter;
+        [PNonSerialized]
+        private SpinLock spinLock;
 
 
         /// <summary>
@@ -33,7 +39,12 @@ namespace PostSharp.Samples.WeakEvent
         /// </summary>
         void IInstanceScopedAspect.RuntimeInitializeInstance()
         {
-            weakEventHandler.Initialize();
+            if (!initialized)
+            {
+                cleanUpCounter = 0;
+                initialized = true;
+                handlers = ImmutableArray<object>.Empty;
+            }
         }
 
         /// <summary>
@@ -43,20 +54,26 @@ namespace PostSharp.Samples.WeakEvent
         {
             if (eventInfo.AddMethod.IsStatic)
             {
-                weakEventHandler.Initialize();
+                if (!initialized)
+                {
+                    cleanUpCounter = 0;
+                    initialized = true;
+                    handlers = ImmutableArray<object>.Empty;
+                }
             }
         }
 
+        #region Add
         /// <summary>
         ///     Method invoked when (instead of) a new handler is added to the target event.
         /// </summary>
         /// <param name="args">Context information.</param>
         public override void OnAddHandler(EventInterceptionArgs args)
         {
-           
+
 
             // Add the handler to our own list.
-            if (weakEventHandler.AddHandler(args.Handler))
+            if (AddHandler(args.Handler))
             {
                 // If it is the first handler we are adding, add a fake handler to ourselves to the target event.
                 // Whichever handler will add here will be passed to OnInvokeHandler, so it is safe and convenient to pass null.
@@ -68,14 +85,37 @@ namespace PostSharp.Samples.WeakEvent
             DelegateReferenceKeeper.AddReference(args.Handler);
         }
 
+        private bool AddHandler(Delegate handler)
+        {
+            var lockTaken = false;
+
+            try
+            {
+                spinLock.Enter(ref lockTaken);
+
+                handlers = handlers.Add(new WeakReference(handler));
+
+                return handlers.Length == 1;
+            }
+            finally
+            {
+                if (lockTaken)
+                {
+                    spinLock.Exit();
+                }
+            }
+        }
+        #endregion
+
+        #region Remove
         /// <summary>
         ///     Method invoked when (instead of) a new handler is removed from the target event.
         /// </summary>
         /// <param name="args">Context information.</param>
         public override void OnRemoveHandler(EventInterceptionArgs args)
         {
-             // Remove the handler from our own list.
-            if (weakEventHandler.RemoveHandler(args.Handler))
+            // Remove the handler from our own list.
+            if (RemoveHandler(args.Handler))
             {
                 // If this is the last handler, remove the fake handler to ourselves from the target event.
                 args.RemoveHandler(null);
@@ -85,6 +125,33 @@ namespace PostSharp.Samples.WeakEvent
             DelegateReferenceKeeper.RemoveReference(args.Handler);
         }
 
+
+        private bool RemoveHandler(Delegate handler)
+        {
+            var lockTaken = false;
+            try
+            {
+                spinLock.Enter(ref lockTaken);
+
+                handlers =
+                    handlers.RemoveAll(
+                        o => ReferenceEquals(((WeakReference)o).Target, handler));
+
+                return handlers.IsEmpty;
+            }
+            finally
+            {
+                if (lockTaken)
+                {
+                    spinLock.Exit();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Invoke
+
         /// <summary>
         ///     Method invoked when (instead of) a the target event is raised.
         /// </summary>
@@ -93,8 +160,67 @@ namespace PostSharp.Samples.WeakEvent
         {
             // Note that args.Handler == null because it's the value we added in OnAddHandler, but it really does not matter.
 
-            weakEventHandler.InvokeHandler(args.Arguments.ToArray());
+            InvokeHandler(args.Arguments.ToArray());
         }
+
+
+
+
+        private void InvokeHandler(object[] args)
+        {
+            var lastCleanUpCounter = -1;
+
+
+            // Take a snapshot of the handlers list.
+            var invocationList = handlers;
+
+            var needCleanUp = false;
+
+            foreach (var obj in invocationList)
+            {
+
+                var handler = (Delegate)((WeakReference)obj).Target;
+
+                if (handler == null)
+                {
+                    if (!needCleanUp)
+                    {
+                        needCleanUp = true;
+                        lastCleanUpCounter = cleanUpCounter;
+                    }
+
+                    continue;
+                }
+
+
+                handler.DynamicInvoke(args);
+            }
+
+            if (needCleanUp && lastCleanUpCounter == cleanUpCounter)
+            {
+                if (lastCleanUpCounter == cleanUpCounter)
+                {
+                    var lockTaken = false;
+                    try
+                    {
+                        spinLock.Enter(ref lockTaken);
+                        handlers = handlers.RemoveAll(w => !((WeakReference)w).IsAlive);
+
+                        Interlocked.Increment(ref cleanUpCounter);
+                    }
+                    finally
+                    {
+                        if (lockTaken)
+                        {
+                            spinLock.Exit();
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
 
     }
 }
