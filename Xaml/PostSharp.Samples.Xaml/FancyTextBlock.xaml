@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PostSharp.Samples.Xaml"
-             mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Border BorderThickness="3" Padding="5">
+             mc:Ignorable="d">
+    <Border BorderThickness="3" Padding="5" DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:FancyTextBlock}}">
         <Border.BorderBrush>
             <RadialGradientBrush>
                 <GradientStop Color="Yellow" Offset="0"/>
