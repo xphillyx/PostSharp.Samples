@@ -7,51 +7,22 @@ using System.Threading.Tasks;
 
 namespace PostSharp.Samples.Logging
 {
+    [Log(AttributeExclude = true)]
     class Program
     {
-        static Logger logger;
-
-        static Program()
-        {
-            CustomLoggingBackend backend = new CustomLoggingBackend();
-            backend.Options.Delimiter = " \u00A6 ";
-           
-            LoggingServices.DefaultBackend = backend;
-            LoggingServices.Formatters.Register(new FancyIntFormatter());
-            AuditServices.RecordPublished += OnAuditRecordPublished;
-            
-
-            logger = Logger.GetLogger("Custom", typeof(Logger));
-        }
-
-     
+        
         static void Main(string[] args)
         {
-            Fibonacci(5);
+            var backend = new Patterns.Diagnostics.Backends.Console.ConsoleLoggingBackend();
+            backend.Options.Delimiter = " \u00A6 ";
+            backend.Options.UseColors = false;
+            LoggingServices.DefaultBackend = backend ;
 
-            
-            Task.WaitAll(
-                WebUtil.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pineisland_oli_2017026_lrg-crop.jpg"),
-                WebUtil.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pia20521-1041.jpg") );
+            LoggingServices.Formatters.Register(new FancyIntFormatter());
+            AuditServices.RecordPublished += OnAuditRecordPublished;
 
-            var activity = logger.OpenActivity("Hashing images without logging");
-            try
-            {
-                logger.Write(LogLevel.Info, "Disabling debug logging the WebUtil.");
-                LoggingServices.DefaultBackend.GetSource(LoggingRoles.Tracing, typeof(WebUtil)).SetLevel(LogLevel.Info);
-                Task.WaitAll(
-                    WebUtil.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pineisland_oli_2017026_lrg-crop.jpg"),
-                    WebUtil.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pia20521-1041.jpg"));
+            LoggedProgram.Execute();
 
-                activity.SetSuccess();
-            }
-            catch ( Exception e )
-            {
-                activity.SetException(e);
-                throw;
-            }
-
-            UpdateCustomer(5, "new data");
 
         }
 
@@ -61,8 +32,44 @@ namespace PostSharp.Samples.Logging
             Console.WriteLine("AUDIT: " + e.Record.Text);
         }
 
+    }
 
-        private static int Fibonacci(int n)
+    static class LoggedProgram
+    {
+        static Logger logger = Logger.GetLogger("Custom", typeof(LoggedProgram));
+
+
+        public static void Execute()
+        {
+            Fibonacci(5);
+
+
+            Task.WaitAll(
+                LoggedProgram.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pineisland_oli_2017026_lrg-crop.jpg"),
+                LoggedProgram.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pia20521-1041.jpg"));
+
+            var activity = logger.OpenActivity("Hashing images without logging");
+            try
+            {
+                logger.Write(LogLevel.Info, "Disabling debug logging the WebUtil.");
+                LoggingServices.DefaultBackend.GetSource(LoggingRoles.Tracing, typeof(LoggedProgram)).SetLevel(LogLevel.Info);
+                Task.WaitAll(
+                    LoggedProgram.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pineisland_oli_2017026_lrg-crop.jpg"),
+                    LoggedProgram.ReadAndHashAsync("https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/pia20521-1041.jpg"));
+
+                activity.SetSuccess();
+            }
+            catch (Exception e)
+            {
+                activity.SetException(e);
+                throw;
+            }
+
+            UpdateCustomer(5, new CustomerData { FirstName = "Joe", LastName = "Brick"});
+
+        }
+
+        public static int Fibonacci(int n)
         {
             if (n < 0)
                 throw new ArgumentOutOfRangeException();
@@ -75,19 +82,10 @@ namespace PostSharp.Samples.Logging
         }
 
         [Audit]
-        private static void UpdateCustomer( int customerId, string customerData )
+        public static void UpdateCustomer(int customerId, CustomerData customerData)
         {
-            logger.Write(LogLevel.Info, "Let's pretend we're updating customer {CustomerId}.", customerId);
+            logger.Write(LogLevel.Info, "Let's pretend we're updating customer {CustomerId} with {Data}.", customerId, customerData);
         }
-
-      
-       
-    }
-
-    static class WebUtil
-    {
-        static Logger logger = Logger.GetLogger("Custom", typeof(WebUtil));
-
 
         public static async Task ReadAndHashAsync(string url)
         {
