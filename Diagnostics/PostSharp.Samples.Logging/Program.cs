@@ -15,7 +15,6 @@ namespace PostSharp.Samples.Logging
         {
             var backend = new Patterns.Diagnostics.Backends.Console.ConsoleLoggingBackend();
             backend.Options.Delimiter = " \u00A6 ";
-            backend.Options.UseColors = false;
             LoggingServices.DefaultBackend = backend ;
 
             LoggingServices.Formatters.Register(new FancyIntFormatter());

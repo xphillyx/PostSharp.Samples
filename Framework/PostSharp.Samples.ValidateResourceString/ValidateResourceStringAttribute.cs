@@ -4,7 +4,7 @@ using System.Resources;
 using PostSharp.Constraints;
 using PostSharp.Extensibility;
 using PostSharp.Reflection;
-using PostSharp.Reflection.Syntax;
+using PostSharp.Reflection.MethodBody;
 
 namespace PostSharp.Samples.ValidateResourceString
 {
@@ -83,7 +83,7 @@ namespace PostSharp.Samples.ValidateResourceString
 
             // Get the list of methods referencing the parent method of the parameter.
             var reflectionService =
-                PostSharpEnvironment.CurrentProject.GetService<ISyntaxReflectionService>();
+                PostSharpEnvironment.CurrentProject.GetService<IMethodBodyService>();
             var usages = ReflectionSearch.GetMethodsUsingDeclaration(parameter.Member);
 
 
@@ -91,7 +91,7 @@ namespace PostSharp.Samples.ValidateResourceString
             {
                 // Decompiles the method into expression trees.
                 var methodBody = reflectionService.GetMethodBody(usage.UsingMethod,
-                    SyntaxAbstractionLevel.ExpressionTree);
+                    MethodBodyAbstractionLevel.ExpressionTree);
 
                 // Visit the method body.
                 var visitor = new Visitor(parameter, resourceManager);
@@ -102,7 +102,7 @@ namespace PostSharp.Samples.ValidateResourceString
         /// <summary>
         ///     Visits all expressions in the method body.
         /// </summary>
-        private class Visitor : SyntaxTreeVisitor
+        private class Visitor : MethodBodyVisitor
         {
             private readonly ParameterInfo parameter;
             private readonly ResourceManager resourceManager;
