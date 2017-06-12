@@ -35,7 +35,7 @@ namespace PostSharp.Samples.Logging
 
     static class LoggedProgram
     {
-        static Logger logger = Logger.GetLogger("Custom", typeof(LoggedProgram));
+        static readonly Logger logger = Logger.GetLogger();
 
 
         public static void Execute()
