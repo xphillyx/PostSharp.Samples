@@ -27,7 +27,7 @@ namespace PostSharp.Samples.ResharperAnnotations
 
             try
             {
-                p.Foo("a");
+                p.Foo("");
             }
             catch (Exception e)
             {

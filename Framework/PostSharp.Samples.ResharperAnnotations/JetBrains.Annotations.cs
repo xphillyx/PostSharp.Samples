@@ -66,7 +66,7 @@ namespace JetBrains.Annotations
                     yield break;
             }
 
-            yield return new AspectInstance(target, new ObjectConstruction(typeof(RequiredAttribute)), new LocationInterceptionAspectConfiguration { SerializerType = TypeIdentity.FromType(typeof(MsilAspectSerializer))});
+            yield return new AspectInstance(target, new ObjectConstruction(typeof(PostSharp.Patterns.Contracts.NotNullAttribute)), new LocationInterceptionAspectConfiguration { SerializerType = TypeIdentity.FromType(typeof(MsilAspectSerializer))});
         }
     }
 
