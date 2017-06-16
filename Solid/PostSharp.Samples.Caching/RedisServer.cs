@@ -8,6 +8,7 @@ namespace PostSharp.Samples.Caching
     class RedisServer : IDisposable
     {
         Process process;
+
         private RedisServer(Process process)
         {
             this.process = process;
