@@ -48,22 +48,36 @@ namespace JetBrains.Annotations
         {
             var target = targetElement;
 
-            var targetMethod = target as MethodInfo;
-
-
-            if (targetMethod != null)
+            if (target is MethodInfo targetMethod)
             {
                 if (targetMethod.IsAbstract || targetMethod.DeclaringType.Namespace.StartsWith("JetBrains."))
+                {
                     yield break;
+                }
+                else if (targetMethod.IsSpecialName && targetMethod.Name.StartsWith("set_"))
+                {
+                    target = targetMethod.DeclaringType.GetProperty(targetMethod.Name.Substring(4),
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+                }
+                else if (targetMethod.IsSpecialName && targetMethod.Name.StartsWith("get_"))
+                {
+                    yield break;
+                }
+                else
+                {
+                    target = targetMethod.ReturnParameter;
 
-                target = targetMethod.ReturnParameter;
+                }
             }
-            else
+            else if (target is ParameterInfo targetParameter)
             {
-                var targetParameter = (ParameterInfo)target;
                 var targetMember = (MethodBase)targetParameter.Member;
                 if (targetMember.IsAbstract || targetMember.DeclaringType.Namespace.StartsWith("JetBrains."))
                     yield break;
+            }
+            else if (!(target is PropertyInfo))
+            {
+                yield break;
             }
 
             yield return new AspectInstance(target, new ObjectConstruction(typeof(PostSharp.Patterns.Contracts.NotNullAttribute)), null );
