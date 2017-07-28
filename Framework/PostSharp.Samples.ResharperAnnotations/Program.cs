@@ -7,6 +7,9 @@ namespace PostSharp.Samples.ResharperAnnotations
 
         [JetBrains.Annotations.NotNull]
         string Foo([JetBrains.Annotations.NotNull] string bar);
+
+        [JetBrains.Annotations.NotNull]
+        string FooFoo { get; set; }
     }
 
     class Program : IProgram
@@ -33,12 +36,32 @@ namespace PostSharp.Samples.ResharperAnnotations
             {
                 Console.WriteLine(e.Message);
             }
+
+            try
+            {
+                p.FooFoo = null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            try
+            {
+                p.FooFoo = "";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public string Foo(string bar)
         {
             return null;
         }
+
+        public string FooFoo { get; set; }
     }
 
    
