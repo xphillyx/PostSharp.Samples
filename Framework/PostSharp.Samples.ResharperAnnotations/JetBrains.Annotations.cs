@@ -48,7 +48,8 @@ namespace JetBrains.Annotations
         {
             var target = targetElement;
 
-            if (target is MethodInfo targetMethod)
+            var targetMethod = target as MethodInfo;
+            if (targetMethod != null)
             {
                 if (targetMethod.IsAbstract || targetMethod.DeclaringType.Namespace.StartsWith("JetBrains."))
                 {
@@ -69,15 +70,19 @@ namespace JetBrains.Annotations
 
                 }
             }
-            else if (target is ParameterInfo targetParameter)
+            else
             {
-                var targetMember = (MethodBase)targetParameter.Member;
-                if (targetMember.IsAbstract || targetMember.DeclaringType.Namespace.StartsWith("JetBrains."))
+                var targetParameter = target as ParameterInfo;
+                if (targetParameter != null)
+                {
+                    var targetMember = (MethodBase) targetParameter.Member;
+                    if (targetMember.IsAbstract || targetMember.DeclaringType.Namespace.StartsWith("JetBrains."))
+                        yield break;
+                }
+                else if (!(target is PropertyInfo))
+                {
                     yield break;
-            }
-            else if (!(target is PropertyInfo))
-            {
-                yield break;
+                }
             }
 
             yield return new AspectInstance(target, new ObjectConstruction(typeof(PostSharp.Patterns.Contracts.NotNullAttribute)), null );
