@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.CustomLogging", "Framework\PostSharp.Samples.CustomLogging\PostSharp.Samples.CustomLogging.csproj", "{C943DF92-512E-4488-83C0-96DD10CA9854}"
 EndProject
@@ -58,6 +58,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Frigate.Generator", "Diagnostics\PostSharp.Samples.Frigate.Generator\PostSharp.Samples.Frigate.Generator.csproj", "{963578D1-7916-49E9-BE59-BA52721A6FF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.ResharperAnnotations", "Framework\PostSharp.Samples.ResharperAnnotations\PostSharp.Samples.ResharperAnnotations.csproj", "{4CC21052-7D9D-41DE-B8BB-0263F63C0133}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture Framework", "Architecture Framework", "{941432CE-B1EA-4050-B86A-A0689F0F18A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,7 +157,7 @@ Global
 		{011B1320-BB21-4CC8-81C9-64A9CA31DD69} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{2413A15B-6B4C-48BB-AF5E-3AAF0C1FDE7F} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{4868DED2-44EA-47BB-BAD9-DB35E97FF3BB} = {D83514BD-6473-4A66-AD23-D996968DE17C}
-		{6ACA8A5D-2E0D-438B-898F-E73594D6D8F8} = {D83514BD-6473-4A66-AD23-D996968DE17C}
+		{6ACA8A5D-2E0D-438B-898F-E73594D6D8F8} = {941432CE-B1EA-4050-B86A-A0689F0F18A7}
 		{B483DC19-BD2F-4276-9F08-A77DB8589C1C} = {D83514BD-6473-4A66-AD23-D996968DE17C}
 		{B10B8456-75F7-4D68-9775-CC87517B07B6} = {0EB69154-BD96-40EF-8404-398B2F956C79}
 		{4C86E0AF-0033-4583-90F1-9A37B29783F8} = {D83514BD-6473-4A66-AD23-D996968DE17C}
