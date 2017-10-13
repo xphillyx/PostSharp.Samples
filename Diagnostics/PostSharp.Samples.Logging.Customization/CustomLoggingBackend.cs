@@ -22,7 +22,17 @@ namespace PostSharp.Samples.Logging
             public RecordBuilder(ConsoleLoggingBackend backend) : base(backend)
             {
             }
-            
+
+            public override void SetParameter<T>(int index, string parameterName, ParameterDirection direction, string typeName, T value,
+                IFormatter<T> formatter)
+            {
+                this.StringBuilder.Append('[');
+                this.StringBuilder.Append(direction.ToString());
+                this.StringBuilder.Append(']', ' ');
+
+                base.SetParameter(index, parameterName, direction, typeName, value, formatter);
+            }
+
             protected override void Write(UnsafeString message)
             {
                 Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId} \u00A6 " + message);

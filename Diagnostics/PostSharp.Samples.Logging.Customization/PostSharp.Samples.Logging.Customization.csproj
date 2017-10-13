@@ -8,7 +8,7 @@
     <ProjectGuid>{FB71F9B1-4A53-4397-A26C-23294423DA4D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>PostSharp.Samples.Logging</RootNamespace>
-    <AssemblyName>PostSharp.Samples.Logging</AssemblyName>
+    <AssemblyName>PostSharp.Samples.Logging.Customization</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -57,11 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerData.cs" />
+    <Compile Include="ExampleFormattable.cs" />
     <Compile Include="CustomLoggingBackend.cs" />
     <Compile Include="FancyIntFormatter.cs" />
-    <Compile Include="GlobalAspects.cs" />
-    <Compile Include="ProgramImpl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,7 +67,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="postsharp.config" />
+    <None Include="README.md" />
   </ItemGroup>
+  <Import Project="..\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
