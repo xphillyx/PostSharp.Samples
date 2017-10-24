@@ -73,7 +73,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.Customization", "Diagnostics\PostSharp.Samples.Logging.Customization\PostSharp.Samples.Logging.Customization.csproj", "{FB71F9B1-4A53-4397-A26C-23294423DA4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Authorization", "Framework\PostSharp.Samples.Authorization\PostSharp.Samples.Authorization\PostSharp.Samples.Authorization.csproj", "{6C94BDFF-B0F8-42DE-898B-93375A165ACC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Authorization", "Framework\PostSharp.Samples.Authorization\PostSharp.Samples.Authorization.csproj", "{6C94BDFF-B0F8-42DE-898B-93375A165ACC}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
