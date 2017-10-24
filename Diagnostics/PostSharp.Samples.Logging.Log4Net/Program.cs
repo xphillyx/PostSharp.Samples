@@ -20,7 +20,7 @@ namespace PostSharp.Samples.Logging.Log4Net
         {
             XmlConfigurator.Configure(new FileInfo("log4net.xml"));
 
-            Log4NetLoggingBackend log4NetLoggingBackend = new Log4NetLoggingBackend();
+            var log4NetLoggingBackend = new Log4NetLoggingBackend();
             LoggingServices.DefaultBackend = log4NetLoggingBackend;
 
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");

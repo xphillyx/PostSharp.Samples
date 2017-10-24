@@ -15,7 +15,7 @@ namespace PostSharp.Samples.Logging.NLog
     {
         static void Main(string[] args)
         {
-            LoggingConfiguration nlogConfig = new LoggingConfiguration();
+            var nlogConfig = new LoggingConfiguration();
 
             var fileTarget = new FileTarget("file")
             {

@@ -16,7 +16,7 @@ namespace PostSharp.Samples.Logging.Etw
     {
         static void Main(string[] args)
         {
-            EventSourceLoggingBackend eventSourceBackend = new EventSourceLoggingBackend(new PostSharpEventSource());
+            var eventSourceBackend = new EventSourceLoggingBackend(new PostSharpEventSource());
             if (eventSourceBackend.EventSource.ConstructionException != null)
                 throw eventSourceBackend.EventSource.ConstructionException;
 

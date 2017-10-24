@@ -18,6 +18,7 @@
 | [PostSharp.Samples.MiniProfiler](Framework/PostSharp.Samples.MiniProfiler/README.md)                         | Measures method execution time with MiniProfiler of StackExchange.                           | OnMethodBoundaryAspect, MulticastAttribute. |
 | [PostSharp.Samples.Persistence](Framework/PostSharp.Samples.Persistence/README.md)                           | Persists fields or properties into the Windows registry or `app.config`.                     | LocationInterceptionAspect |
 | [PostSharp.Samples.AutoDataContract](Framework/PostSharp.Samples.AutoDataContract/README.md)                 | Automatically adds `[DataContract]` and `[DataMember]` attributes to derived classes and all properties | IAspectProvider, CustomAttributeIntroductionAspect, aspect inheritance. |
+| [PostSharp.Samples.Authorization](Framework/PostSharp.Samples.Authorization/README.md)                       | Requires permissions before getting or setting fields or executing methods.                  | IAspectProvider, OnMethodBoundaryAspect, LocationInterceptionAspect, serialization |
 
 ## Diagnostics
 

@@ -11,7 +11,7 @@ namespace PostSharp.Samples.WeakEvent
 
         public static void AddReference(Delegate handler)
         {
-            List<Delegate> list = table.GetOrCreateValue(handler.Target ?? staticObj);
+            var list = table.GetOrCreateValue(handler.Target ?? staticObj);
             lock (list)
             {
                 list.Add(handler);

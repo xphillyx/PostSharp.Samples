@@ -18,7 +18,7 @@ namespace PostSharp.Samples.Caching
         {
             if (!Process.GetProcessesByName("redis-server").Any())
             {
-                string configFile = Path.GetFullPath("redis.conf");
+                var configFile = Path.GetFullPath("redis.conf");
 
                 Console.WriteLine("Starting Redis server with config file: " + configFile);
 

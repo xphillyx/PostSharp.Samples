@@ -41,17 +41,17 @@ namespace PostSharp.Frigate.TestProgram
             logger.Write(LogLevel.Warning, "This is a warning.");
             logger.Write(LogLevel.Error, "This is an error.");
 
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            var stopwatch = Stopwatch.StartNew();
             Fibonacci(20);
 
-            int count = Environment.ProcessorCount / 2;
+            var count = Environment.ProcessorCount / 2;
 
             Console.WriteLine($"Generating the log file {fileName} using {count} cores...");
 
 
 
-            Task[] tasks = new Task[count];
-            for (int i = 0; i < count; i++)
+            var tasks = new Task[count];
+            for (var i = 0; i < count; i++)
             {
                 tasks[i] = Task.Run(() => MakeOneMillionCalls());
             }
@@ -100,7 +100,7 @@ namespace PostSharp.Frigate.TestProgram
         [Log]
         private static void MakeOneMillionCalls()
         {
-            for ( int i = 0; i < 1000000; i++ )
+            for ( var i = 0; i < 1000000; i++ )
             {
                 MakeTenCalls();  
             }
@@ -109,7 +109,7 @@ namespace PostSharp.Frigate.TestProgram
         [Log]
         private static void MakeTenCalls()
         {
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 Oops();
             }
@@ -124,9 +124,9 @@ namespace PostSharp.Frigate.TestProgram
         [Log]
         private static async Task ReadUrls( params string[] urls )
         {
-            Task[] tasks = new Task[urls.Length];
+            var tasks = new Task[urls.Length];
 
-            for ( int i = 0; i < urls.Length; i++ )
+            for ( var i = 0; i < urls.Length; i++ )
             {
                 tasks[i] = ReadAndHashAsync( urls[i] );
             }

@@ -1,37 +1,29 @@
-# PostSharp.Samples.ExceptionHandling
+# PostSharp.Samples.Authorization
 
-Exception handling is one of the most common sources of boilerplate code and makes the business logic less readable. With PostSharp, you can
-define exception handling policies centrally and apply them to your business logic from a single point.
+This example demonstrates how to enforce a non-trivial security model with aspect-oriented programming. 
 
-This example implements two aspects:
+The `PostSharp.Samples.Authorization.Framework` defines the skeleton of an abstract security model. The key concept is represented the `IPermission` interface, with typical
+values `Permission.Read` or `Permission.Write`, for instance. Permissions are things that the current `ISubject` need to be granted to be allowed to read or write a field
+or execute a method. However
 
-* `AddContextOnExceptionAttribute` is meant to be added to all methods in the assembly using the one-liner `[assembly:AddContextOnException]`. Its role is 
-   to add the parameter values of the current value to the `Exception.Data["Context"]` object. Since the aspect is supposed to be applied to all 
-   user-written methods, the aspect will gather the parameter values of all user-written methods in the call stack, and it will be a great help for 
-   debugging. This aspect does not suppress the exception.
-   
-* `ReportAndSwallowExceptionAttribute` writes the exception to the console (including the data collected by  `AddContextOnExceptionAttribute`) and 
-   suppresses the exception. Suppressing exceptions is dangerous and you cannot do that on each method. You would typically use this kind of aspects 
-   on an event handler (such as WPF and WinForms ones) or a thread entrypoint.
+The `ApplyDefaultPermissionsAttribute` aspect automatically requires the `Permission.Read` or `Permission.Write` on public fields and properties.
 
-By combining these two aspects, you can achieve better maintainability of your application without making the code unreadable and thus unmanageable.
+You can use the `RequiresPermissionAttribute` aspect on fields, properties and methods to require a specific permission.
 
+The abstract security framework does not specify how to determine whether the current `ISubject` has a given `IPermission`. This job is delegated to the `ISecurityPolicy` interface, 
+which can have different implementations.
 
-## What is being demonstrated?
+The `PostSharp.Samples.Authorization.RoleBased` namespace provides an example implementation of the role-based security model:
 
-This example demonstrates the following techniques:
+* Each business object has a list of assignments of users to roles (for instance Mikki is Sales Manager in the business unit).
+* Each business object has a parent and inherits user-role assignments from its parent (for instance an Invoice inherits the role assignments from its parent business unit).
+* For each class of business objects, there is a list of assignments of roles to permissions (for instance, Sale Managers have the Write permission on invoices).
 
-* The `OnExceptionAspect` aspect.
-* Multicasting the `AddContextOnExceptionAttribute` aspect to all methods in the assembly thanks to `[assembly: AddContextOnException]` (see `Program.cs`).
-
-Now you know how to use PostSharp to handle exceptions from one place, with good separation of concerns.
- The logic you implement this way makes your code much more maintainable and easier to read.
+The `RoleBasedSecurityPolicy` class implements the `ISecurityPolicy` interface for the role-based model.
 
 
 ## Limitations
 
-This example is not concerned with many details you are concerned with in your production code:
+* THIS EXAMPLE IS NOT SUFFICIENTLY TESTED FOR PRODUCTION USE. This is only a proof of concept.
+* Performance is really poor because even evaluating a property causes the evaluation of complex policies and allocations of memory on the heap. A better implementation should cache permissions.
 
-* Not thread-safe.
-* Not optimized.
-* Not having robust logging of exception.

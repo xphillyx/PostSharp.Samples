@@ -18,9 +18,9 @@ namespace PostSharp.Samples.Caching
         {
             using (RedisServer.Start())
             {
-                using (ConnectionMultiplexer connection = ConnectionMultiplexer.Connect("localhost:6380,abortConnect = False"))
+                using (var connection = ConnectionMultiplexer.Connect("localhost:6380,abortConnect = False"))
                 {
-                    RedisCachingBackendConfiguration configuration = new RedisCachingBackendConfiguration();
+                    var configuration = new RedisCachingBackendConfiguration();
 
                     connection.ErrorMessage += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Message);
                     connection.ConnectionFailed += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Exception);

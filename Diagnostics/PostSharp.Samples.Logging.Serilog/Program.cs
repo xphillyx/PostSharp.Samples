@@ -15,6 +15,11 @@ namespace PostSharp.Samples.Logging.Serilog
     [Log(AttributeExclude = true)]
     class Program
     {
+        static Program()
+        {
+            Logger logger;
+        }
+
         static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
@@ -24,11 +29,17 @@ namespace PostSharp.Samples.Logging.Serilog
                 .CreateLogger();
             
 
-            SerilogLoggingBackend serilogBackend = new SerilogLoggingBackend();
+            var serilogBackend = new SerilogLoggingBackend();
             
             LoggingServices.DefaultBackend = serilogBackend;
 
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
+        }
+
+        [Log]
+        static void M()
+        {
+            
         }
     }
 }

@@ -19,10 +19,10 @@ namespace PostSharp.Samples.Logging.BusinessLogic
 
         private static void ProcessItem(QueueItem item)
         {
-            LogActivity activity = logger.OpenActivity("Processing item {item}", item);
+            var activity = logger.OpenActivity("Processing item {item}", item);
             try
             {
-                Request request = RequestStorage.GetRequest(item.Id);
+                var request = RequestStorage.GetRequest(item.Id);
 
                 if (item.Id == 56)
                 {
