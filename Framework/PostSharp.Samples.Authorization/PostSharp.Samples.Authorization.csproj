@@ -81,8 +81,7 @@
     <Compile Include="Framework\ISubject.cs" />
     <Compile Include="Framework\LocationAuthorizationAspect.cs" />
     <Compile Include="Framework\MethodAuthorizationAspect.cs" />
-    <Compile Include="Framework\PermissionAction.cs" />
-    <Compile Include="RoleBased\RolePermissionAssignment.cs" />
+    <Compile Include="RoleBased\PermissionAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\RequiresPermissionAttribute.cs" />

@@ -2,6 +2,12 @@
 
 namespace PostSharp.Samples.Authorization.Framework
 {
+    /// <summary>
+    /// A trivial implementation of the <see cref="IPermission"/> interface where permissions are uniquely named.
+    /// </summary>
+    /// <remarks>
+    /// In a real implementations, permissions are database entities.
+    /// </remarks>
     public class Permission : IPermission
     {
         public static readonly Permission Read = new Permission(StandardPermission.Read.ToString());

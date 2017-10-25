@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Security;
 using PostSharp.Aspects;
 using PostSharp.Patterns.Contracts;
 
 namespace PostSharp.Samples.Authorization.Framework
 {
+    /// <summary>
+    /// Base class for <see cref="MethodAuthorizationAspect"/> and <see cref="LocationAuthorizationAspect"/>.
+    /// </summary>
     [Serializable]
     public abstract class AuthorizationAspect : IAspect
     {
@@ -19,11 +23,21 @@ namespace PostSharp.Samples.Authorization.Framework
         [ThreadStatic]
         private static bool evaluatingPermissions;
 
-        internal void AddPermission(OperationSemantic semantic, int parameterIndex, IPermissionFactory permissionFactory)
+        /// <summary>
+        /// Adds a permission for a given semantic and index parameter. This method is invoked at build time.
+        /// </summary>
+        /// <param name="parameterIndex">The 1-based index of the parameter on which the permission is required, or 0 if the permission is required on the <c>this</c> object.</param>
+        /// <param name="permissionFactory">The <see cref="IPermissionFactory"/> that will be used to instantiate the permission at run time.</param>
+        internal void AddPermission(int parameterIndex, IPermissionFactory permissionFactory)
         {
-            _permissionFactories.Add(new OperationPermission<IPermissionFactory>(semantic,  parameterIndex,  permissionFactory));
+            _permissionFactories.Add(new OperationPermission<IPermissionFactory>(OperationSemantic.Default,  parameterIndex,  permissionFactory));
         }
 
+        /// <summary>
+        /// Instantiates all permissions. This method is called at run=time.
+        /// </summary>
+        /// <param name="parameterCount">The number of parameters in the method, plus 1 for the <c>this</c> parameter.</param>
+        /// <param name="semantics">The set of semantics for which permissions are initialized.</param>
         internal void InitializePermissions(int parameterCount, OperationSemantic[] semantics)
         {
 
@@ -43,12 +57,24 @@ namespace PostSharp.Samples.Authorization.Framework
             
         }
 
+        /// <summary>
+        /// Determines whether there is at least one permission required for the given parameter.
+        /// </summary>
+        /// <param name="parameterIndex">The 1-based index of the parameter on which the permission is required, or 0 if the permission is required on the <c>this</c> object.</param>
+        /// <returns></returns>
         internal bool HasPermissionForParameter(int parameterIndex)
         {
             return _hasPermissionForParameter[parameterIndex];
         }
 
-        internal void RequirePermission(OperationSemantic semantic, int parameterIndex, object securable)
+        /// <summary>
+        /// Requires a permission for the given operation semantic, parameter index and securable object.
+        /// </summary>
+        /// <param name="member">The member, field or property being accessed.</param>
+        /// <param name="semantic">The semantic of the operation being executed.</param>
+        /// <param name="parameterIndex">The 1-based index of the parameter on which the permission is required, or 0 if the permission is required on the <c>this</c> object.</param>
+        /// <param name="securable"></param>
+        internal void RequirePermission(MemberInfo member, OperationSemantic semantic, int parameterIndex, object securable)
         {
             if (evaluatingPermissions)
                 return;
@@ -74,10 +100,27 @@ namespace PostSharp.Samples.Authorization.Framework
                     {
                         if (!policy.Evaluate(subject, permission.Permission, securable))
                         {
-                            SecurityContext.Current.ExceptionHandler?.OnSecurityException(SecurityContext.Current.Subject, permission.Permission, securable);
+                            SecurityContext.Current.ExceptionHandler?.OnSecurityException(member, semantic, securable, SecurityContext.Current.Subject, permission.Permission);
 
-
-                            throw new SecurityException($"The subject '{subject.Name}' does not have the {permission.Permission.Name} permission on the object '{securable}'.");
+                            string memberKind;
+                            if (member is FieldInfo)
+                            {
+                                memberKind = "field";
+                            }
+                            else if (member is PropertyInfo)
+                            {
+                                memberKind = "property";
+                            }
+                            else if (member is MethodBase)
+                            {
+                                memberKind = "method";
+                            }
+                            else
+                            {
+                                throw new ArgumentOutOfRangeException( nameof(member ) );
+                            }
+                            
+                            throw new SecurityException($"Cannot {semantic.ToString().ToLowerInvariant()} the {memberKind} {member.DeclaringType.Name}.{member.Name}: the subject '{subject.Name}' does not have the {permission.Permission.Name} permission on the object '{securable}'.");
                         }
                     }
                 }
