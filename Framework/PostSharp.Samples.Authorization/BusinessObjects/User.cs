@@ -11,6 +11,7 @@ namespace PostSharp.Samples.Authorization.BusinessObjects
         }
 
         public Guid Id { get;  }
+
         public string Name { get; set; }
 
        

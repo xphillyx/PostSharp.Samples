@@ -14,26 +14,23 @@ namespace PostSharp.Samples.Authorization
             
             var securityPolicy = new RoleBasedSecurityPolicy();
 
+            // Set up role-permission assignments. Depending on your application, this can be hardcoded or stored in a database.
+
             // By default, everybody can read an entity but only the owner can write it.
-            securityPolicy.AddRolePermissionAssignment(new RolePermissionAssignment(typeof(object), Permission.Read,
-                Role.Everyone, PermissionAction.Grant));
-            securityPolicy.AddRolePermissionAssignment(new RolePermissionAssignment(typeof(object), Permission.Write,
-                Role.Owner, PermissionAction.Grant));
-            securityPolicy.AddRolePermissionAssignment(new RolePermissionAssignment(typeof(object), Permission.Assign,
-                Role.Owner, PermissionAction.Grant));
+            securityPolicy.AddRolePermissionAssignment(typeof(object), Permission.Read, Role.Everyone, PermissionAction.Grant);
+            securityPolicy.AddRolePermissionAssignment(typeof(object), Permission.Write, Role.Owner, PermissionAction.Grant);
+            securityPolicy.AddRolePermissionAssignment(typeof(object), Permission.Assign, Role.Owner, PermissionAction.Grant);
 
             // Sales managers have Write and Assign rights to invoices in their business unit.
-            securityPolicy.AddRolePermissionAssignment(new RolePermissionAssignment(typeof(Invoice), Permission.Write,
-                Role.SalesManager, PermissionAction.Grant));
-            securityPolicy.AddRolePermissionAssignment(new RolePermissionAssignment(typeof(Invoice), Permission.Assign,
-                Role.SalesManager, PermissionAction.Grant));
+            securityPolicy.AddRolePermissionAssignment(typeof(Invoice), Permission.Write, Role.SalesManager, PermissionAction.Grant);
+            securityPolicy.AddRolePermissionAssignment(typeof(Invoice), Permission.Assign, Role.SalesManager, PermissionAction.Grant);
 
             // Administrators have the right to assign roles.
-            securityPolicy.AddRolePermissionAssignment(new RolePermissionAssignment(typeof(object), Permission.ManageRoles,
-                Role.Administrator, PermissionAction.Grant));
+            securityPolicy.AddRolePermissionAssignment(typeof(object), Permission.ManageRoles, Role.Administrator, PermissionAction.Grant);
 
 
             // Set up an object graph. This would typically be stored in a database.
+            // Note that security is disabled at this point because SecurityContext.Current is null.
             var company = new BusinessUnit { Name = "Contoso s.r.o." };
 
             var mikki = new User(Guid.NewGuid()) {Name = "Mikki Grisham"};

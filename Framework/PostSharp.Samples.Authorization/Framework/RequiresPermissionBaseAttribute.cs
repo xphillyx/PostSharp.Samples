@@ -7,13 +7,23 @@ using PostSharp.Extensibility;
 
 namespace PostSharp.Samples.Authorization.Framework
 {
+    /// <summary>
+    /// Base class for <see cref="RequiresPermissionAttribute"/>. This abstraction does not make any assumption regarding
+    /// the implementation of the <see cref="IPermission"/>, i.e. it does not assume that a permission is simply a named object.
+    /// It could be used to implementation for instance parametric permissions.
+    /// </summary>
     [Serializable]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = true)]
     public abstract class RequiresPermissionBaseAttribute : Attribute, IPermissionFactory, IAspectProvider
     {
+        /// <inheritdoc />
         public abstract IPermission CreatePermission(OperationSemantic semantic);
 
-        public OperationSemantic Semantic { get; set; }
+        /// <summary>
+        /// Invoked at build time to get the list of aspects required to implement the current custom attribute.
+        /// </summary>
+        /// <param name="targetElement">Declaration on which the attribute has been applied.</param>
+        /// <returns>A collection of aspect instances.</returns>
 
         public virtual IEnumerable<AspectInstance> ProvideAspects(object targetElement)
         {
@@ -57,7 +67,7 @@ namespace PostSharp.Samples.Authorization.Framework
                 parameterIndex = parameterInfo.Position + 1;
             }
 
-            aspect.AddPermission(this.Semantic, parameterIndex, this );
+            aspect.AddPermission(parameterIndex, this );
         }
     }
 }
