@@ -15,31 +15,23 @@ namespace PostSharp.Samples.Logging.Serilog
     [Log(AttributeExclude = true)]
     class Program
     {
-        static Program()
-        {
-            Logger logger;
-        }
-
+       
         static void Main(string[] args)
         {
+            // Configure Serilog.
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.File("serilog.log")
                 .WriteTo.ColoredConsole()
                 .CreateLogger();
             
+            // Configure PostSharp Logging to use Serilog
+            LoggingServices.DefaultBackend = new SerilogLoggingBackend();
 
-            var serilogBackend = new SerilogLoggingBackend();
-            
-            LoggingServices.DefaultBackend = serilogBackend;
-
+            // Simulate some business logic.
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
         }
 
-        [Log]
-        static void M()
-        {
-            
-        }
+       
     }
 }

@@ -21,6 +21,7 @@ namespace PostSharp.Samples.Logging
             LoggingServices.Formatters.Register(new FancyIntFormatter());
 
 
+            // Simulate some business logic.
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
 
             ExampleFormattable.Greet( new ExampleFormattable { FirstName = "Yuri", LastName = "Gagarin"} );

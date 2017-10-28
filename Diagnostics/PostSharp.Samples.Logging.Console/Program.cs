@@ -16,10 +16,11 @@ namespace PostSharp.Samples.Logging.Console
     {
         static void Main(string[] args)
         {
-            var backend = new ConsoleLoggingBackend();
             
-            LoggingServices.DefaultBackend = backend;
+            // Configure PostSharp Logging to output logs to the console.
+            LoggingServices.DefaultBackend = new ConsoleLoggingBackend();
 
+            // Simulate some business logic.
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
         }
     }

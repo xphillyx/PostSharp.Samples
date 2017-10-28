@@ -18,11 +18,14 @@ namespace PostSharp.Samples.Logging.Log4Net
     {
         static void Main(string[] args)
         {
+            // Configure Log4Net
             XmlConfigurator.Configure(new FileInfo("log4net.xml"));
 
+            // Configure PostSharp Logging to use Log4Net
             var log4NetLoggingBackend = new Log4NetLoggingBackend();
             LoggingServices.DefaultBackend = log4NetLoggingBackend;
 
+            // Simulate some business logic.
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
         }
     }

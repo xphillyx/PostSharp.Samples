@@ -30,6 +30,7 @@
 | [PostSharp.Samples.Logging.Log4Net](Diagnostics/PostSharp.Samples.Logging.Log4Net/README.md)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *log4net*.   | Log4NetLoggingBackend.                                                                   |
 | [PostSharp.Samples.Logging.NLog](Diagnostics/PostSharp.Samples.Logging.NLog/README.md)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *NLog*.   | NLogLoggingBackend.                                                                   |
 | [PostSharp.Samples.Logging.Serilog](Diagnostics/PostSharp.Samples.Logging.Serilog/README.md)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *Serilog*.   | SerilogLoggingBackend.                                                                   |
+| [PostSharp.Samples.Logging.CustomBackend.ServiceStack](Diagnostics/PostSharp.Samples.Logging.CustomBackend.ServiceStackSerilog/README.md)  | Demonstrates how to implement a PostSharp Logging adapter for your custom logging framework.   | TextLoggingBackend, LoggingTypeSource, TextLogRecordBuilder. |
 
 
 ## XAML

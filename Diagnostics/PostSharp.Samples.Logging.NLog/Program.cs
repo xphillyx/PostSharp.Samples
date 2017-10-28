@@ -15,6 +15,7 @@ namespace PostSharp.Samples.Logging.NLog
     {
         static void Main(string[] args)
         {
+            // Configure NLog.
             var nlogConfig = new LoggingConfiguration();
 
             var fileTarget = new FileTarget("file")
@@ -31,13 +32,15 @@ namespace PostSharp.Samples.Logging.NLog
             nlogConfig.AddTarget(consoleTarget);
             nlogConfig.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, consoleTarget));
 
-
-
-            LoggingServices.DefaultBackend = new NLogLoggingBackend();
-
             LogManager.Configuration = nlogConfig;
             LogManager.EnableLogging();
 
+
+            // Configure PostSharp Logging to use NLog.
+            LoggingServices.DefaultBackend = new NLogLoggingBackend();
+
+
+            // Simulate some business logic.
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
         }
     }

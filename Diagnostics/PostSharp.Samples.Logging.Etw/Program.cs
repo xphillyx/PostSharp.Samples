@@ -22,6 +22,7 @@ namespace PostSharp.Samples.Logging.Etw
 
             LoggingServices.DefaultBackend = eventSourceBackend;
 
+            // Simulate some business logic.
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
 
             // To collect and view the log:
