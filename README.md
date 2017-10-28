@@ -30,8 +30,9 @@
 | [PostSharp.Samples.Logging.Log4Net](Diagnostics/PostSharp.Samples.Logging.Log4Net/README.md)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *log4net*.   | Log4NetLoggingBackend.                                                                   |
 | [PostSharp.Samples.Logging.NLog](Diagnostics/PostSharp.Samples.Logging.NLog/README.md)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *NLog*.   | NLogLoggingBackend.                                                                   |
 | [PostSharp.Samples.Logging.Serilog](Diagnostics/PostSharp.Samples.Logging.Serilog/README.md)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *Serilog*.   | SerilogLoggingBackend.                                                                   |
-| [PostSharp.Samples.Logging.CustomBackend.ServiceStack](Diagnostics/PostSharp.Samples.Logging.CustomBackend.ServiceStackSerilog/README.md)  | Demonstrates how to implement a PostSharp Logging adapter for your custom logging framework.   | TextLoggingBackend, LoggingTypeSource, TextLogRecordBuilder. |
-| [PostSharp.Samples.Logging.Audit](Diagnostics/PostSharp.Samples.AuditServiceStackSerilog/README.md)  | Shows how to append an audit record to a database when a method is invoked.   | [Audit], AuditServices.RecordPublished. |
+| [PostSharp.Samples.Logging.CustomBackend.ServiceStack](Diagnostics/PostSharp.Samples.Logging.CustomBackend.ServiceStack/README.md)  | Demonstrates how to implement a PostSharp Logging adapter for your custom logging framework.   | TextLoggingBackend, LoggingTypeSource, TextLogRecordBuilder. |
+| [PostSharp.Samples.Logging.Audit](Diagnostics/PostSharp.Samples.Audit/README.md)  | Shows how to append an audit record to a database when a method is invoked.   | [Audit], AuditServices.RecordPublished. |
+| [PostSharp.Samples.Logging.Audit.Extended](Diagnostics/PostSharp.Samples.Audit.Extended/README.md)  | Shows how to add custom pieces of information to the audit record.   | AuditBackend, AuditRecordBuilder. |
 
 
 ## XAML

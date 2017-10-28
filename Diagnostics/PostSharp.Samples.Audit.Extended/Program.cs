@@ -1,28 +1,34 @@
-﻿using System.Security.Principal;
+﻿using System.Linq;
+using System.Security.Principal;
+using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Audit;
 
-namespace PostSharp.Samples.Audit
+namespace PostSharp.Samples.Audit.Extended
 {
     class Program
     {
         static void Main(string[] args)
         {
             // Configure the auditing services.
+            LoggingServices.Roles[LoggingRoles.Audit].Backend = new ExtendedAuditBackend();
             AuditServices.RecordPublished += OnAuditRecordPublished;
 
             // Simulate some audited business operation.
             var po = new PurchaseOrder();
-            po.Approve();
+            var employee = new Employee();
+            po.AssignTo(employee);
 
         }
 
         private static void OnAuditRecordPublished(object sender, AuditRecordEventArgs e)
         {
+            var extendedRecord = (ExtendedAuditRecord) e.Record;
             var record = new DbAuditRecord(
                 WindowsIdentity.GetCurrent().Name,
-                (BusinessObject) e.Record.Target,
-                e.Record.MemberName,
-                e.Record.Text
+                ((BusinessObject) extendedRecord.Target).Id,
+                extendedRecord.RelatedBusinessObjects.Select( r => r.Id ),
+                extendedRecord.MemberName,
+                extendedRecord.Text
                 );
 
             record.AppendToDatabase();

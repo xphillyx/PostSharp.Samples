@@ -1,10 +1,13 @@
 ﻿using System;
+using PostSharp.Patterns.Diagnostics.Backends.Audit;
+using PostSharp.Patterns.Diagnostics.Contexts;
+using PostSharp.Patterns.Diagnostics.RecordBuilders;
 
 namespace PostSharp.Samples.Audit
 {
-    public class AuditRecord
+    public class DbAuditRecord
     {
-        public AuditRecord(string user, BusinessObject businessObject, string method, string description)
+        public DbAuditRecord(string user, BusinessObject businessObject, string method, string description)
         {
             User = user;
             BusinessObject = businessObject;
@@ -23,4 +26,5 @@ namespace PostSharp.Samples.Audit
             Console.WriteLine($"TODO - Write to the database: {{BusinessObjectId={this.BusinessObject.Id}, Operation={this.Method}, Description=\"{this.Description}\", User={this.User}}}.");
         }
     }
+
 }

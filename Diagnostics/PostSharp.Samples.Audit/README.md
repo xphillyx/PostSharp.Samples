@@ -11,7 +11,7 @@ Whenever an audited method is executed, the `AuditServices.RecordPublished` even
 to this event and write all relevant pieces of information to the audit database table. The event arguments gives information about
 the business object being accessed, the name of method being invoked, and a detailed description of the event similar to a logging log record.
 
-In this sample, the `AuditRecord` class simulates a database entity. In a real-world example, you would write the audit record into a database table.
+In this sample, the `DbAuditRecord` class simulates a database entity. In a real-world example, you would write the audit record into a database table.
 
 
 

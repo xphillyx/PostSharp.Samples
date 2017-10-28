@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55027D93-3DA2-4659-A334-CCCCB98E8AEB}</ProjectGuid>
+    <ProjectGuid>{4AA8652E-00D6-46F0-A176-2CA5BFFDDA58}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PostSharp.Samples.Audit</RootNamespace>
-    <AssemblyName>PostSharp.Samples.Audit</AssemblyName>
+    <RootNamespace>PostSharp.Samples.Audit.Extended</RootNamespace>
+    <AssemblyName>PostSharp.Samples.Audit.Extended</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -56,6 +56,10 @@
   <ItemGroup>
     <Compile Include="DbAuditRecord.cs" />
     <Compile Include="BusinessObject.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="ExtendedAuditBackend.cs" />
+    <Compile Include="ExtendedAuditRecord.cs" />
+    <Compile Include="ExtendedAuditRecordBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseOrder.cs" />
@@ -63,7 +67,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
