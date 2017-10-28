@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC3F424B-E1BE-4555-A77E-52FA4B14BDA0}</ProjectGuid>
+    <ProjectGuid>{55027D93-3DA2-4659-A334-CCCCB98E8AEB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PostSharp.Samples.Logging.CustomBackend.ServiceStack</RootNamespace>
-    <AssemblyName>PostSharp.Samples.Logging.CustomBackend.ServiceStack</AssemblyName>
+    <RootNamespace>PostSharp.Samples.Audit</RootNamespace>
+    <AssemblyName>PostSharp.Samples.Audit</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -44,15 +44,6 @@
     <Reference Include="PostSharp.Patterns.Diagnostics, Version=5.0.36.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Redist.5.0.36\lib\net46\PostSharp.Patterns.Diagnostics.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ServiceStack.Common.4.5.4\lib\net45\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ServiceStack.Interfaces.4.5.14\lib\portable-wp80+sl5+net45+win8+wpa81+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ServiceStack.Text.4.5.4\lib\net45\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,19 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditRecord.cs" />
+    <Compile Include="BusinessObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceStackLoggingBackend.cs" />
-    <Compile Include="ServiceStackLoggingBackendOptions.cs" />
-    <Compile Include="ServiceStackLoggingTypeSource.cs" />
-    <Compile Include="ServiceStackLogRecordBuilder.cs" />
+    <Compile Include="PurchaseOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <Import Project="..\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
