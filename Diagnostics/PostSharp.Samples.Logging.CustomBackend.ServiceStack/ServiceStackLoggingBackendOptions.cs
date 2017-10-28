@@ -4,6 +4,5 @@ namespace PostSharp.Samples.Logging.CustomBackend.ServiceStack
 {
     public class ServiceStackLoggingBackendOptions : TextLoggingBackendOptions
     {
-        
     }
 }
