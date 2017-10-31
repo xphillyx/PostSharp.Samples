@@ -22,13 +22,11 @@ namespace PostSharp.Samples.Logging.Loupe
 
             // Simulate some business logic.
             QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
-
-            
-
             
             Console.WriteLine("Press Enter to finish.");
             Console.ReadLine();
 
+            // Close Loupe.
             Log.EndSession();
         }
     }
