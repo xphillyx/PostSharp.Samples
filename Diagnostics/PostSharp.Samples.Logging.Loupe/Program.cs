@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Gibraltar.Agent;
 using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.Loupe;
@@ -18,9 +13,10 @@ namespace PostSharp.Samples.Logging.Loupe
     {
         static void Main(string[] args)
         {
-            Gibraltar.Agent.Log.StartSession();
-            Gibraltar.Agent.Log.ShowLiveViewer();
 
+            // Initialize Loupe.
+            Log.StartSession();
+            
             // Configure PostSharp Logging to use Loupe.
             LoggingServices.DefaultBackend = new LoupeLoggingBackend();
 
@@ -33,7 +29,7 @@ namespace PostSharp.Samples.Logging.Loupe
             Console.WriteLine("Press Enter to finish.");
             Console.ReadLine();
 
-            Gibraltar.Agent.Log.EndSession();
+            Log.EndSession();
         }
     }
 }

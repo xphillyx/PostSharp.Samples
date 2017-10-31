@@ -6,6 +6,7 @@ using PostSharp.Samples.Logging.BusinessLogic;
 
 [assembly: Log]
 
+
 namespace PostSharp.Samples.Logging.Log4Net
 {
     [Log(AttributeExclude = true)]

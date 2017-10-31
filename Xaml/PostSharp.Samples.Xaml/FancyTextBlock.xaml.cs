@@ -26,8 +26,7 @@ namespace PostSharp.Samples.Xaml
             InitializeComponent();
         }
 
-        public static DependencyProperty TextProperty { get; private set; }
-
+    
         [DependencyProperty]
         public string Text { get; set; }
 

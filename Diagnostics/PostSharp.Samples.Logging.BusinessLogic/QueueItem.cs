@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace PostSharp.Samples.Logging.BusinessLogic
+﻿namespace PostSharp.Samples.Logging.BusinessLogic
 {
     public class QueueItem
     {

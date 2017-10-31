@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using PostSharp.Patterns.Diagnostics;
 
 namespace PostSharp.Samples.Logging.BusinessLogic
 {
