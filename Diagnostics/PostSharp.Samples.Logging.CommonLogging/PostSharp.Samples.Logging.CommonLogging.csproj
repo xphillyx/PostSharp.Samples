@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90A7F2AD-E82B-4285-9D3D-070E95D2F0BA}</ProjectGuid>
+    <ProjectGuid>{CD5F3675-C0BC-4FE4-8FAE-0CF0A66FD644}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>PostSharp.Samples.Logging.Loupe</RootNamespace>
-    <AssemblyName>PostSharp.Samples.Logging.Loupe</AssemblyName>
+    <RootNamespace>PostSharp.Samples.Logging.CommonLogging</RootNamespace>
+    <AssemblyName>PostSharp.Samples.Logging.CommonLogging</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,11 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gibraltar.Agent, Version=4.5.0.0, Culture=neutral, PublicKeyToken=ca42a1ee8d2e42d3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Gibraltar.Agent.4.5.15\lib\net40\Gibraltar.Agent.dll</HintPath>
+    <Reference Include="Common.Logging, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.3.2.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="LoupeViewer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Gibraltar.Loupe.Viewer.4.1.25\lib\net45\LoupeViewer.exe</HintPath>
+    <Reference Include="Common.Logging.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Common.Logging.Core.3.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="PostSharp, Version=5.0.37.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PostSharp.Redist.5.0.37\lib\net45\PostSharp.dll</HintPath>
@@ -50,8 +50,8 @@
     <Reference Include="PostSharp.Patterns.Diagnostics, Version=5.0.37.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Redist.5.0.37\lib\net46\PostSharp.Patterns.Diagnostics.dll</HintPath>
     </Reference>
-    <Reference Include="PostSharp.Patterns.Diagnostics.Backends.Loupe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Loupe.5.0.37\lib\net40\PostSharp.Patterns.Diagnostics.Backends.Loupe.dll</HintPath>
+    <Reference Include="PostSharp.Patterns.Diagnostics.Backends.CommonLogging, Version=5.0.37.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.CommonLogging.5.0.37\lib\net40\PostSharp.Patterns.Diagnostics.Backends.CommonLogging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
