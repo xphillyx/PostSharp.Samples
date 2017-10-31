@@ -69,6 +69,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="postsharp.config" />
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="..\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems" Label="Shared" />
