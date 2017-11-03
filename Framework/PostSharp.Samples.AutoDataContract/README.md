@@ -1,6 +1,4 @@
-﻿# PostSharp.Samples.AutoDataContract
-
-When you have a large object model, annotating it for the WCF serializer (`DataContractFormatter`)
+﻿When you have a large object model, annotating it for the WCF serializer (`DataContractFormatter`)
 can be tedious. All classes and derived classes need to be annotated with the `[DataContract]` custom
 attribute, and all properties need the `[DataMember]` custom attribute. If you forget a single `[DataMember]` 
 attribute, no build-time error or run-time will occur, but your program will behave incorrectly and the

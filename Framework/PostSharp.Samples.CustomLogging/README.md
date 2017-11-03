@@ -1,5 +1,3 @@
-# PostSharp.Samples.CustomLogging
-
 Have you ever had the problem where your program misbehaves and you just do not have a debugger attached
 at the moment? Or that some bug is appearing occasionally and you just don't know how to reproduce
 such a case manually? The usual solution here is logging. But introducing logging into your code comes with

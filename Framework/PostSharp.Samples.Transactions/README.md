@@ -1,4 +1,3 @@
-# PostSharp.Samples.Transactions
 
 This example demonstrates how to build an aspect `RequiresTransactionAttribute` that forces the method to which it is applied
 to execute into a transaction. The aspect relies on the `System.Transactions` namespace, which supports distributed transactions,

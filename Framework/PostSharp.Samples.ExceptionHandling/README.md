@@ -1,5 +1,3 @@
-# PostSharp.Samples.ExceptionHandling
-
 Exception handling is one of the most common sources of boilerplate code and makes the business logic less readable. With PostSharp, you can
 define exception handling policies centrally and apply them to your business logic from a single point.
 

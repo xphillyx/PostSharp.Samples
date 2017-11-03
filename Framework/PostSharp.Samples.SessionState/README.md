@@ -1,5 +1,3 @@
-# PostSharp.Samples.SessionState
-
 This example demonstrates how to use `LocationInterceptionAspect` to persist a field or property in the ASP.NET session state or page view state.
 
 * The `SessionStateAttribute` class is a Aspect that persists a field or property into the session state. This attribute can be

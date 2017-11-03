@@ -1,5 +1,3 @@
-# PostSharp.Samples.AutoRetry
-
 The `AutoRetry` aspect, when applied to a method, retries the execution of the method when the previous execution results in an exception.
 
 You can use the `AutoRetry` aspect to improve the stability of your application by making it more resilient to anticipated, temporary failures. 

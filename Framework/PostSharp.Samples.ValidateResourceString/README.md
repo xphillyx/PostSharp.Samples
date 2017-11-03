@@ -1,5 +1,3 @@
-# PostSharp.Samples.ValidateResourceString
-
 When you want to validate values assigned to method parameters, the validation  is most often executed at runtime.
 You do not get any warning that something is broken until you execute a method that is being validated during testing.
 If you do not execute the method during testing then you are not notified about a possible bug at all.

@@ -1,5 +1,3 @@
-# PostSharp.Samples.Audit.Extended
-
 This example demonstrates how to extend the default Audit logging back-end so that the audit records contains pieces of information that are
 not provided by the default implementation.
 

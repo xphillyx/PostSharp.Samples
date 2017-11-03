@@ -1,5 +1,3 @@
-# PostSharp.Samples.Audit
-
 This example shows how to implement audit in a business application.
 
 Audit records are typically appended to a database and correlated, through a foreign key, to the object entity being accessed and the user performing the operation.

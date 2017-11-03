@@ -1,5 +1,3 @@
-# PostSharp.Samples.Xaml
-
 Very often, an application seems to have only simple requirements from a user's point of view, for instance just a few forms with a few actions.
 However, users may have implicit requirements and they won't be happy until these requirements are not only identified, but also implemented.
 Undo/redo, automatic UI refresh and input validation are a few of those.

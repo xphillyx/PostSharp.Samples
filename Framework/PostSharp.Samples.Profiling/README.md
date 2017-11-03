@@ -1,5 +1,3 @@
-# PostSharp.Samples.Profiling
-
 This example demonstrates how to build an aspect `ProfileAttribute` that you can apply to any method to measure 
 its execution time.
 

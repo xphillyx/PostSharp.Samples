@@ -1,5 +1,3 @@
-# PostSharp.Samples.Threading.PingPong
-
 This example implements the classic ping-pong game between two players using *actors*.
 
 The players are represented by the `Player` class. Each player has a skill level between 0 and 1, equal to the probability to successfully

@@ -1,5 +1,3 @@
-# PostSharp.Samples.MiniProfiler
-
 MiniProfiler from the makers of StackOverflow is one of the most popular and most useful libraries for 
 ASP.NET developers. Thanks to MiniProfiler, you can easily track the execution time of selected methods.
 

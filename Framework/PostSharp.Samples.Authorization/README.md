@@ -1,5 +1,3 @@
-# PostSharp.Samples.Authorization
-
 This example demonstrates how to enforce a non-trivial security model with aspect-oriented programming. 
 
 The `PostSharp.Samples.Authorization.Framework` defines the skeleton of an abstract security model. The key concept is represented the `IPermission` interface, with typical

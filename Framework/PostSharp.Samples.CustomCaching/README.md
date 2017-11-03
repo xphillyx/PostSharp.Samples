@@ -1,5 +1,3 @@
-# PostSharp.Samples.CustomCaching
-
 Caching your method's return value makes the method execution faster, trading memory for time by storing the return value in a cache.
 If you call the method again then you can return a value stored in the cache, instead of doing time consuming calculation
 all over again.

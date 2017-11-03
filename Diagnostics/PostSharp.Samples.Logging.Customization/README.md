@@ -1,5 +1,3 @@
-# PostSharp.Samples.Logging.Customization
-
 This example demonstrates several ways to override the default behavior of PostSharp Logging:
 
 * A value formatter named `FancyIntFormatter`, which demonstrates the implementation of the `Formatter` class.

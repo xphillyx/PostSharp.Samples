@@ -1,6 +1,4 @@
-﻿# PostSharp.Samples.Encryption
-
-This example demonstrates how to build aspects that automatically encrypt or decrypt parameter 
+﻿This example demonstrates how to build aspects that automatically encrypt or decrypt parameter 
 values. The only encryption algorithm implemented in this example is string reversal. This
 is not real encryption, of course! In practice, you would probably use a format-preserving
 encryption algorithm from a third party.

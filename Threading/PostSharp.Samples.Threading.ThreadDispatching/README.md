@@ -1,5 +1,3 @@
-# PostSharp.Samples.Threading.ThreadDispatching
-
 This example demonstrates how to execute some methods in the background and some other methods in the UI thread using just custom attributes.
 
 The `DoStuff` method has the `[Background]` aspect and therefore will be executed in the thread pool. This method invokes the `SetProgress` and `EnableControls` methods,
