@@ -1,5 +1,3 @@
-# PostSharp.Samples.WeakEvent
-
 This example demonstrates how to use the `EventInterceptionAspect` to implement a weak event pattern.
 
 A weak event is an event that holds a weak reference to the delegate instead of a strong reference. 
