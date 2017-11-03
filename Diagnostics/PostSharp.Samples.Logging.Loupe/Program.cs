@@ -1,5 +1,4 @@
-
-{using System;
+using System;
 using Gibraltar.Agent;
 using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.Loupe;
