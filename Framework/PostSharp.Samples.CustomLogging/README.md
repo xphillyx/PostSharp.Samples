@@ -12,7 +12,7 @@ When you apply the `[LogMethod]` aspect to a method, the method creates a log re
 * the method returns successfully,
 * the method fails with an exception.
 
-Additionally, you can apply the '[LogSetValue]` to a field or property to create a log record when the field or property is set.
+Additionally, you can apply the `[LogSetValue]` to a field or property to create a log record when the field or property is set.
 
 ## What is being demonstrated?
 
@@ -33,9 +33,9 @@ This example is purely educational. It has the following limitations:
 * Subject to infinite loops if you add logging to the `ToString` method.
 
 If you need production-grade logging, you should consider using the
-`PostSharp.Patterns.Diagnostics.LogAttribute` aspect.
+`[Log]` aspect from the `[PostSharp.Patterns.Diagnostics]` namespace.
 
-The `LogAttribute` aspect works out of the box. The `LogAttribute` aspect is highly optimized for run-time performance, multithreading and reentrance. 
+The `[Log]` aspect works out of the box. It is highly optimized for run-time performance, multithreading and reentrance. 
 You can set up logging in a few minutes without modifying your existing source code. 
 
 
