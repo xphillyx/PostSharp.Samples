@@ -2,7 +2,8 @@
 
 Welcome to this collection of PostSharp example projects.
 
-You can browse these samples online at <http://samples.postsharp.net/> and navigate the code just by clicking on code references, or you can download them from <https://www.github.com/postsharp/PostSharp.Samples>.
+You can [browse these samples online](http://samples.postsharp.net/) and navigate the code just by clicking on code references, 
+or you can download them on [GitHub](https://www.github.com/postsharp/PostSharp.Samples).
 
 
 | Project                                                                                                      | Description                                                                                  |
