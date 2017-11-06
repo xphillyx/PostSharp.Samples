@@ -1,69 +1,65 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace PostSharp.Samples.ResharperAnnotations
 {
-    interface IProgram
+  internal interface IProgram
+  {
+    [NotNull]
+    string FooFoo { get; set; }
+
+    [NotNull]
+    string Foo([NotNull] string bar);
+  }
+
+  internal class Program : IProgram
+  {
+    public string Foo(string bar)
     {
-
-        [JetBrains.Annotations.NotNull]
-        string Foo([JetBrains.Annotations.NotNull] string bar);
-
-        [JetBrains.Annotations.NotNull]
-        string FooFoo { get; set; }
+      return null;
     }
 
-    class Program : IProgram
+    public string FooFoo { get; set; }
+
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
+      IProgram p = new Program();
 
-            IProgram p = new Program();
+      try
+      {
+        p.Foo(null);
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
+      }
 
-            try
-            {
-                p.Foo(null);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+      try
+      {
+        p.Foo("");
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
+      }
 
-            try
-            {
-                p.Foo("");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+      try
+      {
+        p.FooFoo = null;
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
+      }
 
-            try
-            {
-                p.FooFoo = null;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            try
-            {
-                p.FooFoo = "";
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        public string Foo(string bar)
-        {
-            return null;
-        }
-
-        public string FooFoo { get; set; }
+      try
+      {
+        p.FooFoo = "";
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.Message);
+      }
     }
-
-   
-
+  }
 }

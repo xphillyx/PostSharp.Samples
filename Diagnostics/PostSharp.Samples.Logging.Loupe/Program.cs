@@ -8,36 +8,36 @@ using PostSharp.Samples.Logging.BusinessLogic;
 
 namespace PostSharp.Samples.Logging.Loupe
 {
-    [Log(AttributeExclude = true)]
-    class Program
+  [Log(AttributeExclude = true)]
+  internal class Program
+  {
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            try 
-            {                
-                // Initialize Loupe.
-                Log.StartSession();
-            
-                // Configure PostSharp Logging to use Loupe.
-                LoggingServices.DefaultBackend = new LoupeLoggingBackend();
+      try
+      {
+        // Initialize Loupe.
+        Log.StartSession();
 
-                // Simulate some business logic.
-                QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
-            
-                Console.WriteLine("Press Enter to finish.");
-                Console.ReadLine();
-            }
-            catch (Exception ex)
-            {
-                //Optional but recommended - write fatal exceptions to loupe this way so the session is marked as crashed.
-                Log.RecordException(ex, "Program", false);
-                throw;
-            }
-            finally
-            {
-                // Close Loupe.
-                Log.EndSession();
-            }
-        }
+        // Configure PostSharp Logging to use Loupe.
+        LoggingServices.DefaultBackend = new LoupeLoggingBackend();
+
+        // Simulate some business logic.
+        QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
+
+        Console.WriteLine("Press Enter to finish.");
+        Console.ReadLine();
+      }
+      catch (Exception ex)
+      {
+        //Optional but recommended - write fatal exceptions to loupe this way so the session is marked as crashed.
+        Log.RecordException(ex, "Program", false);
+        throw;
+      }
+      finally
+      {
+        // Close Loupe.
+        Log.EndSession();
+      }
     }
+  }
 }

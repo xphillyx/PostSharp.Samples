@@ -1,23 +1,23 @@
 ﻿namespace PostSharp.Samples.Authorization.Framework
 {
+  /// <summary>
+  ///   Enumeration of semantics of fields, properties and methods.
+  /// </summary>
+  public enum OperationSemantic
+  {
     /// <summary>
-    /// Enumeration of semantics of fields, properties and methods.
+    ///   Invoking a method.
     /// </summary>
-    public enum OperationSemantic
-    {
-        /// <summary>
-        /// Invoking a method.
-        /// </summary>
-        Default,
+    Default,
 
-        /// <summary>
-        /// Reading a field or a property.
-        /// </summary>
-        Read,
+    /// <summary>
+    ///   Reading a field or a property.
+    /// </summary>
+    Read,
 
-        /// <summary>
-        /// Writing a field or a property.
-        /// </summary>
-        Write
-    }
+    /// <summary>
+    ///   Writing a field or a property.
+    /// </summary>
+    Write
+  }
 }

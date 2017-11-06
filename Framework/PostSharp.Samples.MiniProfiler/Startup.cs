@@ -1,14 +1,16 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using PostSharp.Samples.MiniProfiler;
 
-[assembly: OwinStartupAttribute(typeof(PostSharp.Samples.MiniProfiler.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace PostSharp.Samples.MiniProfiler
 {
-    public partial class Startup
+  public partial class Startup
+  {
+    public void Configuration(IAppBuilder app)
     {
-        public void Configuration(IAppBuilder app)
-        {
-            ConfigureAuth(app);
-        }
+      ConfigureAuth(app);
     }
+  }
 }

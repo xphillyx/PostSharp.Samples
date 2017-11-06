@@ -4,8 +4,7 @@
         xmlns:xaml="clr-namespace:PostSharp.Samples.Xaml"
         xmlns:controls="clr-namespace:PostSharp.Patterns.Model.Controls;assembly=PostSharp.Patterns.Xaml"
         Title="Contact Form" Height="292.584" Width="352.753"
-        x:Name="Window"
-        >
+        x:Name="Window">
     <Window.DataContext>
         <xaml:CustomerViewModel />
     </Window.DataContext>
@@ -18,29 +17,38 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
-            <Label Content="First Name:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" />
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="127,62,0,0" TextWrapping="Wrap"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="29*" />
+                <ColumnDefinition Width="316*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="First Name:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"
+                   Grid.ColumnSpan="2" />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="97.846,62,0,0" TextWrapping="Wrap"
                      Text="{Binding Path=Customer.FirstName, ValidatesOnExceptions=True}" VerticalAlignment="Top"
-                     Width="189" />
-            <Label Content="Last Name:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" />
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="127,92,0,0" TextWrapping="Wrap"
+                     Width="189" Grid.Column="1" />
+            <Label Content="Last Name:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"
+                   Grid.ColumnSpan="2" />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="97.846,92,0,0" TextWrapping="Wrap"
                      Text="{Binding Path=Customer.LastName, ValidatesOnExceptions=True}" VerticalAlignment="Top"
-                     Width="189" />
+                     Width="189" Grid.Column="1" />
             <Label Content="Principal Address:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"
-                   RenderTransformOrigin="-0.105,-0.462" />
-            <ComboBox HorizontalAlignment="Left" Margin="127,120,0,0" VerticalAlignment="Top" Width="189"
+                   RenderTransformOrigin="-0.105,-0.462" Grid.ColumnSpan="2" />
+            <ComboBox HorizontalAlignment="Left" Margin="97.846,120,0,0" VerticalAlignment="Top" Width="189"
                       ItemsSource="{Binding Path=Customer.Addresses}"
-                      SelectedValue="{Binding Path=Customer.PrincipalAddress}" DisplayMemberPath="FullAddress" />
+                      SelectedValue="{Binding Path=Customer.PrincipalAddress}" DisplayMemberPath="FullAddress"
+                      Grid.Column="1" />
             <xaml:FancyTextBlock HorizontalAlignment="Left" Margin="10,15,0,0" Text="{Binding Path=FullName}"
-                       VerticalAlignment="Top" Width="214" />
-            <Label Content="Line1:" HorizontalAlignment="Left" Margin="41,150,0,0" VerticalAlignment="Top" />
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="127,154,0,0" TextWrapping="Wrap"
+                                 VerticalAlignment="Top" Width="214" Grid.ColumnSpan="2" />
+            <Label Content="Line1:" HorizontalAlignment="Left" Margin="11.846,150,0,0" VerticalAlignment="Top"
+                   Grid.Column="1" />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="97.846,154,0,0" TextWrapping="Wrap"
                      Text="{Binding Path=Customer.PrincipalAddress.Line1, ValidatesOnExceptions=True}"
-                     VerticalAlignment="Top" Width="189" />
-            <Label Content="Town:" HorizontalAlignment="Left" Margin="42,176,0,0" VerticalAlignment="Top" />
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="127,182,0,0" TextWrapping="Wrap"
+                     VerticalAlignment="Top" Width="189" Grid.Column="1" />
+            <Label Content="Town:" HorizontalAlignment="Left" Margin="12.846,176,0,0" VerticalAlignment="Top"
+                   Grid.Column="1" />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="97.846,182,0,0" TextWrapping="Wrap"
                      Text="{Binding Path=Customer.PrincipalAddress.Town, ValidatesOnExceptions=True}"
-                     VerticalAlignment="Top" Width="189" />
+                     VerticalAlignment="Top" Width="189" Grid.Column="1" />
         </Grid>
     </DockPanel>
 </Window>

@@ -8,41 +8,36 @@ using PostSharp.Reflection;
 
 namespace PostSharp.Samples.AutoDataContract
 {
-    
-    // We set up multicast inheritance so  the aspect is automatically added to children types. This is optional.
-    [MulticastAttributeUsage(Inheritance = MulticastInheritance.Strict)]
+  // We set up multicast inheritance so  the aspect is automatically added to children types. This is optional.
+  [MulticastAttributeUsage(Inheritance = MulticastInheritance.Strict)]
 
-    // Since we want the aspect to be applied on types, we derive our class from TypeLevelAspect.
-    // If you want to have a project-wide aspect provider, derive the class from AssemblyLevelAspect.
-    public class AutoDataContractAttribute : TypeLevelAspect, IAspectProvider
+  // Since we want the aspect to be applied on types, we derive our class from TypeLevelAspect.
+  // If you want to have a project-wide aspect provider, derive the class from AssemblyLevelAspect.
+  public class AutoDataContractAttribute : TypeLevelAspect, IAspectProvider
+  {
+    // This method is called at build time and should just provide other aspects.
+
+    public IEnumerable<AspectInstance> ProvideAspects(object targetElement)
     {
-        // This method is called at build time and should just provide other aspects.
+      var targetType = (Type) targetElement;
 
-        public IEnumerable<AspectInstance> ProvideAspects(object targetElement)
-        {
-            var targetType = (Type)targetElement;
+      var introduceDataContractAspect =
+        new CustomAttributeIntroductionAspect(
+          new ObjectConstruction(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes)));
 
-            var introduceDataContractAspect =
-                new CustomAttributeIntroductionAspect(
-                    new ObjectConstruction(typeof(DataContractAttribute).GetConstructor(Type.EmptyTypes)));
-
-            var introduceDataMemberAspect =
-                new CustomAttributeIntroductionAspect(
-                    new ObjectConstruction(typeof(DataMemberAttribute).GetConstructor(Type.EmptyTypes)));
+      var introduceDataMemberAspect =
+        new CustomAttributeIntroductionAspect(
+          new ObjectConstruction(typeof(DataMemberAttribute).GetConstructor(Type.EmptyTypes)));
 
 
-            // Add the DataContract attribute to the type.
-            yield return new AspectInstance(targetType, introduceDataContractAspect);
+      // Add the DataContract attribute to the type.
+      yield return new AspectInstance(targetType, introduceDataContractAspect);
 
-            // Add a DataMember attribute to every relevant property.
-            foreach (var property in
-                targetType.GetProperties(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance))
-            {
-                if (property.CanWrite && !property.IsDefined(typeof(NotDataMemberAttribute)))
-                {
-                    yield return new AspectInstance(property, introduceDataMemberAspect);
-                }
-            }
-        }
+      // Add a DataMember attribute to every relevant property.
+      foreach (var property in
+        targetType.GetProperties(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance))
+        if (property.CanWrite && !property.IsDefined(typeof(NotDataMemberAttribute)))
+          yield return new AspectInstance(property, introduceDataMemberAspect);
     }
+  }
 }

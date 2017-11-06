@@ -2,12 +2,11 @@
 
 namespace PostSharp.Samples.Audit
 {
-    public class PurchaseOrder : BusinessObject
+  public class PurchaseOrder : BusinessObject
+  {
+    [Audit]
+    public void Approve(string comment = null)
     {
-        [Audit]
-        public void Approve(string comment = null)
-        {
-            
-        }
     }
+  }
 }

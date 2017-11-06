@@ -3,11 +3,11 @@ using PostSharp.Patterns.Diagnostics.RecordBuilders;
 
 namespace PostSharp.Samples.Audit.Extended
 {
-    public class ExtendedAuditBackend : AuditBackend
+  public class ExtendedAuditBackend : AuditBackend
+  {
+    public override LogRecordBuilder CreateRecordBuilder()
     {
-        public override LogRecordBuilder CreateRecordBuilder()
-        {
-            return new ExtendedAuditRecordBuilder(this);
-        }
+      return new ExtendedAuditRecordBuilder(this);
     }
+  }
 }

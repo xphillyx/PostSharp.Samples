@@ -1,18 +1,17 @@
 ﻿namespace PostSharp.Samples.Logging.BusinessLogic
 {
-    public class QueueItem
+  public class QueueItem
+  {
+    public int Id;
+
+    public QueueItem(int id)
     {
-        public int Id;
-
-        public QueueItem(int id)
-        {
-            this.Id = id;
-        }
-
-        public override string ToString()
-        {
-            return "SyncRequest EntityId=" + this.Id;
-
-        }
+      Id = id;
     }
+
+    public override string ToString()
+    {
+      return "SyncRequest EntityId=" + Id;
+    }
+  }
 }

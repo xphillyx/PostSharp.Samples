@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PostSharp.Patterns.Diagnostics;
+﻿using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.Console;
 using PostSharp.Samples.Logging.BusinessLogic;
 
@@ -11,17 +6,16 @@ using PostSharp.Samples.Logging.BusinessLogic;
 
 namespace PostSharp.Samples.Logging.Console
 {
-    [Log(AttributeExclude = true)]
-    class Program
+  [Log(AttributeExclude = true)]
+  internal class Program
+  {
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            
-            // Configure PostSharp Logging to output logs to the console.
-            LoggingServices.DefaultBackend = new ConsoleLoggingBackend();
+      // Configure PostSharp Logging to output logs to the console.
+      LoggingServices.DefaultBackend = new ConsoleLoggingBackend();
 
-            // Simulate some business logic.
-            QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
-        }
+      // Simulate some business logic.
+      QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
     }
+  }
 }

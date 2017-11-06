@@ -4,26 +4,26 @@ using ServiceStack.Logging;
 
 namespace PostSharp.Samples.Logging.CustomBackend.ServiceStack
 {
-    public class ServiceStackLoggingTypeSource : LoggingTypeSource
+  public class ServiceStackLoggingTypeSource : LoggingTypeSource
+  {
+    public ServiceStackLoggingTypeSource(LoggingNamespaceSource parent, Type sourceType) : base(parent, sourceType)
     {
-        public ILog Log { get; }
-
-        public ServiceStackLoggingTypeSource(LoggingNamespaceSource parent, Type sourceType) : base(parent, sourceType)
-        {
-            this.Log = LogManager.GetLogger(sourceType);
-        }
-
-        protected override bool IsBackendEnabled(LogLevel level)
-        {
-            switch (level)
-            {
-                case LogLevel.Trace:
-                case LogLevel.Debug:
-                    return this.Log.IsDebugEnabled;
-
-                default:
-                    return true;
-            }
-        }
+      Log = LogManager.GetLogger(sourceType);
     }
+
+    public ILog Log { get; }
+
+    protected override bool IsBackendEnabled(LogLevel level)
+    {
+      switch (level)
+      {
+        case LogLevel.Trace:
+        case LogLevel.Debug:
+          return Log.IsDebugEnabled;
+
+        default:
+          return true;
+      }
+    }
+  }
 }

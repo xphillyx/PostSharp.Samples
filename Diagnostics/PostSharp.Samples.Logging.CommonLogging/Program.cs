@@ -8,19 +8,19 @@ using PostSharp.Samples.Logging.BusinessLogic;
 
 namespace PostSharp.Samples.Logging.CommonLogging
 {
-    [Log(AttributeExclude = true)]
-    class Program
+  [Log(AttributeExclude = true)]
+  internal class Program
+  {
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            // Configure Common.Logging to direct outputs to the system console.
-            LogManager.Adapter = new ConsoleOutLoggerFactoryAdapter();
+      // Configure Common.Logging to direct outputs to the system console.
+      LogManager.Adapter = new ConsoleOutLoggerFactoryAdapter();
 
-            // Configure PostSharp Logging to direct outputs to Common.Logging.
-            LoggingServices.DefaultBackend = new CommonLoggingLoggingBackend();
+      // Configure PostSharp Logging to direct outputs to Common.Logging.
+      LoggingServices.DefaultBackend = new CommonLoggingLoggingBackend();
 
-            // Simulate some business logic.
-            QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
-        }
+      // Simulate some business logic.
+      QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
     }
+  }
 }

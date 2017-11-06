@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using PostSharp.Extensibility;
 using PostSharp.Samples.MiniProfiler;
@@ -37,5 +36,7 @@ using PostSharp.Samples.MiniProfiler;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 // Add the mini-profiler to all services.
-[assembly: MiniProfilerStep(AttributeTargetTypes = "*Service", AttributeTargetMemberAttributes = MulticastAttributes.Public)]
-[assembly: MiniProfilerStep(AttributeTargetTypes = "*Controller", AttributeTargetMemberAttributes = MulticastAttributes.Public)]
+[assembly:
+  MiniProfilerStep(AttributeTargetTypes = "*Service", AttributeTargetMemberAttributes = MulticastAttributes.Public)]
+[assembly:
+  MiniProfilerStep(AttributeTargetTypes = "*Controller", AttributeTargetMemberAttributes = MulticastAttributes.Public)]

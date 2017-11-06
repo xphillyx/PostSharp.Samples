@@ -2,20 +2,20 @@
 
 namespace PostSharp.Samples.Transactions
 {
-    public static class OrderService
+  public static class OrderService
+  {
+    [RequiresTransaction]
+    public static void PlaceOrder(string description, decimal amount)
     {
-        [RequiresTransaction]
-        public static void PlaceOrder(string description, decimal amount)
+      using (var orderDb = new OrderDb())
+      {
+        orderDb.Orders.Add(new Order
         {
-            using (var orderDb = new OrderDb())
-            {
-                orderDb.Orders.Add(new Order
-                {
-                    Description = description,
-                    TotalAmount = amount
-                });
-                orderDb.SaveChanges();
-            }
-        }
+          Description = description,
+          TotalAmount = amount
+        });
+        orderDb.SaveChanges();
+      }
     }
+  }
 }

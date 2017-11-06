@@ -9,20 +9,20 @@ using PostSharp.Samples.Logging.BusinessLogic;
 
 namespace PostSharp.Samples.Logging.Log4Net
 {
-    [Log(AttributeExclude = true)]
-    class Program
+  [Log(AttributeExclude = true)]
+  internal class Program
+  {
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            // Configure Log4Net
-            XmlConfigurator.Configure(new FileInfo("log4net.config"));
+      // Configure Log4Net
+      XmlConfigurator.Configure(new FileInfo("log4net.config"));
 
-            // Configure PostSharp Logging to use Log4Net
-            var log4NetLoggingBackend = new Log4NetLoggingBackend();
-            LoggingServices.DefaultBackend = log4NetLoggingBackend;
+      // Configure PostSharp Logging to use Log4Net
+      var log4NetLoggingBackend = new Log4NetLoggingBackend();
+      LoggingServices.DefaultBackend = log4NetLoggingBackend;
 
-            // Simulate some business logic.
-            QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
-        }
+      // Simulate some business logic.
+      QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
     }
+  }
 }

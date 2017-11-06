@@ -6,28 +6,28 @@ using PostSharp.Patterns.Formatters;
 
 namespace PostSharp.Samples.Audit.Extended
 {
-    public class ExtendedAuditRecordBuilder : AuditRecordBuilder
+  public class ExtendedAuditRecordBuilder : AuditRecordBuilder
+  {
+    public ExtendedAuditRecordBuilder(AuditBackend backend) : base(backend)
     {
-        public ExtendedAuditRecordBuilder(AuditBackend backend) : base(backend)
-        {
-        }
-
-        protected override AuditRecord CreateRecord(LoggingContext context, ref LogRecordInfo recordInfo, ref LogMemberInfo memberInfo)
-        {
-            return new ExtendedAuditRecord(context.Source.SourceType, memberInfo.MemberName, recordInfo.RecordKind);
-        }
-
-        public override void SetParameter<T>(int index, string parameterName, ParameterDirection direction, string typeName, T value,
-            IFormatter<T> formatter)
-        {
-            var businessObject = value as BusinessObject;
-
-            if (businessObject != null)
-            {
-                ((ExtendedAuditRecord) this.CurrentRecord).RelatedBusinessObjects.Add(businessObject);
-            }
-
-            base.SetParameter(index, parameterName, direction, typeName, value, formatter);
-        }
     }
+
+    protected override AuditRecord CreateRecord(LoggingContext context, ref LogRecordInfo recordInfo,
+      ref LogMemberInfo memberInfo)
+    {
+      return new ExtendedAuditRecord(context.Source.SourceType, memberInfo.MemberName, recordInfo.RecordKind);
+    }
+
+    public override void SetParameter<T>(int index, string parameterName, ParameterDirection direction, string typeName,
+      T value,
+      IFormatter<T> formatter)
+    {
+      var businessObject = value as BusinessObject;
+
+      if (businessObject != null)
+        ((ExtendedAuditRecord) CurrentRecord).RelatedBusinessObjects.Add(businessObject);
+
+      base.SetParameter(index, parameterName, direction, typeName, value, formatter);
+    }
+  }
 }

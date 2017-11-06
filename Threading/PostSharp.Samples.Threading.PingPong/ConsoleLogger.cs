@@ -4,20 +4,19 @@ using PostSharp.Patterns.Threading;
 
 namespace PostSharp.Samples.Threading.PingPong
 {
-    [Actor]
-    class ConsoleLogger
+  [Actor]
+  internal class ConsoleLogger
+  {
+    [Reentrant]
+    public async void WriteLine(string message, ConsoleColor color = ConsoleColor.White)
     {
-        [Reentrant]
-        public async void WriteLine( string message, ConsoleColor color = ConsoleColor.White )
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(message);
-        }
-
-        [Reentrant]
-        public async Task Flush()
-        {
-            
-        }
+      Console.ForegroundColor = color;
+      Console.WriteLine(message);
     }
+
+    [Reentrant]
+    public async Task Flush()
+    {
+    }
+  }
 }

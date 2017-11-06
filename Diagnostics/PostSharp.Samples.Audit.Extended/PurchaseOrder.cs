@@ -2,12 +2,11 @@
 
 namespace PostSharp.Samples.Audit.Extended
 {
-    public class PurchaseOrder : BusinessObject
+  public class PurchaseOrder : BusinessObject
+  {
+    [Audit]
+    public void AssignTo(Employee employee)
     {
-        [Audit]
-        public void AssignTo(Employee employee)
-        {
-            
-        }
     }
+  }
 }

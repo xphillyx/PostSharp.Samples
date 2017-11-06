@@ -1,13 +1,11 @@
-﻿using PostSharp.Patterns.Caching;
-using System;
+﻿using System;
 
 namespace PostSharp.Samples.Caching
 {
-    [Serializable]
-    class Customer
-    {
-        public int Id;
-        public string Name;
-    }
-
+  [Serializable]
+  internal class Customer
+  {
+    public int Id;
+    public string Name;
+  }
 }

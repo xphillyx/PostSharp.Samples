@@ -2,22 +2,22 @@
 
 namespace PostSharp.Samples.Xaml
 {
-    [NotifyPropertyChanged]
-    public class CustomerViewModel
+  [NotifyPropertyChanged]
+  public class CustomerViewModel
+  {
+    public CustomerModel Customer { get; set; }
+
+    public string FullName
     {
-        public CustomerModel Customer { get; set; }
+      get
+      {
+        if (Customer == null) return "(No Data)";
 
-        public string FullName
-        {
-            get
-            {
-                if (Customer == null) return "(No Data)";
-
-                return string.Format("{0} {1} from {2}",
-                    Customer.FirstName,
-                    Customer.LastName,
-                    Customer.PrincipalAddress != null ? Customer.PrincipalAddress.FullAddress : "?");
-            }
-        }
+        return string.Format("{0} {1} from {2}",
+          Customer.FirstName,
+          Customer.LastName,
+          Customer.PrincipalAddress != null ? Customer.PrincipalAddress.FullAddress : "?");
+      }
     }
+  }
 }
