@@ -22,3 +22,7 @@ In this sample, the `DbAuditRecord` class simulates a database entity. In a real
 
 
 
+## Documentation 
+
+ [Adding Audit to Your Solution](http://doc.postsharp.net/audit).
+
