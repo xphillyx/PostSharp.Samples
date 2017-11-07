@@ -4,11 +4,12 @@ using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.CommonLogging;
 using PostSharp.Samples.Logging.BusinessLogic;
 
+// Adds logging to all methods of this project.
 [assembly: Log]
 
 namespace PostSharp.Samples.Logging.CommonLogging
 {
-  [Log(AttributeExclude = true)]
+  [Log(AttributeExclude = true)]  // Removes logging from the Program class itself.
   internal class Program
   {
     private static void Main(string[] args)

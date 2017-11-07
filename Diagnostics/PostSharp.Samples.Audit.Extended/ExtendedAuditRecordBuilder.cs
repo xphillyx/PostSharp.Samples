@@ -15,6 +15,7 @@ namespace PostSharp.Samples.Audit.Extended
     protected override AuditRecord CreateRecord(LoggingContext context, ref LogRecordInfo recordInfo,
       ref LogMemberInfo memberInfo)
     {
+      // Return an instance of our own extended class.
       return new ExtendedAuditRecord(context.Source.SourceType, memberInfo.MemberName, recordInfo.RecordKind);
     }
 
@@ -22,12 +23,14 @@ namespace PostSharp.Samples.Audit.Extended
       T value,
       IFormatter<T> formatter)
     {
+      base.SetParameter(index, parameterName, direction, typeName, value, formatter);
+
+      // When the parameter is a business object, add it to the list of correlated business objects.      
       var businessObject = value as BusinessObject;
 
       if (businessObject != null)
         ((ExtendedAuditRecord) CurrentRecord).RelatedBusinessObjects.Add(businessObject);
 
-      base.SetParameter(index, parameterName, direction, typeName, value, formatter);
     }
   }
 }

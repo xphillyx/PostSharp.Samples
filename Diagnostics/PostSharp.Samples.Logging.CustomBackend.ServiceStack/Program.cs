@@ -2,7 +2,10 @@
 using PostSharp.Samples.Logging.BusinessLogic;
 using ServiceStack.Logging;
 
+// Add logging to all methods of this project.
 [assembly: Log(AttributePriority = 0)]
+
+// Exclude logging from the PostSharp.Samples.Logging.CustomBackend.ServiceStack namespace.
 [assembly:
   Log(AttributePriority = 1, AttributeExclude = true,
     AttributeTargetTypes = "PostSharp.Samples.Logging.CustomBackend.ServiceStack.*")]

@@ -4,11 +4,12 @@ using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.Loupe;
 using PostSharp.Samples.Logging.BusinessLogic;
 
+// Add logging to all methods of this project.
 [assembly: Log]
 
 namespace PostSharp.Samples.Logging.Loupe
 {
-  [Log(AttributeExclude = true)]
+  [Log(AttributeExclude = true)]   // Removes logging from the Program class itself.
   internal class Program
   {
     private static void Main(string[] args)

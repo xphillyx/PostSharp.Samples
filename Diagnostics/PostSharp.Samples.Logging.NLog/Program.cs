@@ -6,11 +6,12 @@ using PostSharp.Patterns.Diagnostics.Backends.NLog;
 using PostSharp.Samples.Logging.BusinessLogic;
 using LogLevel = NLog.LogLevel;
 
+// Add logging to all methods of this project.
 [assembly: Log]
 
 namespace PostSharp.Samples.Logging.NLog
 {
-  [Log(AttributeExclude = true)]
+  [Log(AttributeExclude = true)]   // Removes logging from the Program class itself.
   internal static class Program
   {
     private static void Main(string[] args)

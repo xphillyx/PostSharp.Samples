@@ -2,11 +2,12 @@
 using PostSharp.Patterns.Diagnostics.Backends.EventSource;
 using PostSharp.Samples.Logging.BusinessLogic;
 
+// Add logging to all methods of this project.
 [assembly: Log]
 
 namespace PostSharp.Samples.Logging.Etw
 {
-  [Log(AttributeExclude = true)]
+  [Log(AttributeExclude = true)]   // Removes logging from the Program class itself.
   internal class Program
   {
     private static void Main(string[] args)
