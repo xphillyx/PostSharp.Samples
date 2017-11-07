@@ -11,5 +11,7 @@ the business object being accessed, the name of method being invoked, and a deta
 
 In this sample, the `DbAuditRecord` class simulates a database entity. In a real-world example, you would write the audit record into a database table.
 
+## Documentation 
 
+ [Adding Audit to Your Solution](http://doc.postsharp.net/audit).
 

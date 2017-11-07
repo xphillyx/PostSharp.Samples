@@ -4,5 +4,9 @@ This example demonstrates several ways to override the default behavior of PostS
 * A formattable class named `ExampleFormattable`, which demonstrates the implementation of the `IFormattable` interface.
 * A custom backend derived named `CustomLoggingBackend` which derives from `ConsoleLoggingBackend` but adds the thread id to the record line and a prefix to the parameter.
 
+## Documentation
 
+[Implementing a Custom Formatter](http://doc.postsharp.net/custom-formatter)
+
+[Implementing an Adapter to a Custom Logging Framework](http://doc.postsharp.net/custom-logging-backend)
 

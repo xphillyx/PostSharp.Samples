@@ -3,3 +3,6 @@ The application automatically opens an empty window of the Loupe Viewer. You sho
 session is available. Click on this notification to open the log, and ignore the empty window that first opened.
 
 
+## Documentation
+
+[Logging to the Loupe](http://doc.postsharp.net/loupe)

@@ -3,4 +3,6 @@ either the adapter either the target logging framework itself.
 
 We chose `ServiceStack.Logging` as the example framework, but you can easily follow the same techniques to build an adapter for your own back-end.
 
+## Documentation
 
+[Implementing an Adapter to a Custom Logging Framework](http://doc.postsharp.net/custom-logging-backend)
