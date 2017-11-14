@@ -30,8 +30,7 @@ namespace PostSharp.Samples.Authorization.Framework
       var aspects = aspectRepositoryService.GetAspectInstances(targetElement) ?? new IAspectInstance[0];
 
 
-      var aspect = (AuthorizationAspect) aspects.Where(i => i != null) // TODO: Fix bug in PostSharp and remove this.
-        .Select(i => i.Aspect).SingleOrDefault(i => i is AuthorizationAspect);
+      var aspect = (AuthorizationAspect) aspects.Select(i => i.Aspect).SingleOrDefault(i => i is AuthorizationAspect);
 
       if (aspect == null)
       {
