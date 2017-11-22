@@ -16,13 +16,17 @@ namespace PostSharp.Samples.Caching
       {
         using (var connection = ConnectionMultiplexer.Connect("localhost:6380,abortConnect = False"))
         {
-          var configuration = new RedisCachingBackendConfiguration();
 
           connection.ErrorMessage += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Message);
           connection.ConnectionFailed += (sender, eventArgs) => Console.Error.WriteLine(eventArgs.Exception);
 
-          using (var backend =
-            new TwoLayerCachingBackendEnhancer(RedisCachingBackend.Create(connection, configuration)))
+          var configuration = new RedisCachingBackendConfiguration
+          {
+            IsLocallyCached = true,
+            SupportsDependencies = true
+          };
+
+          using (var backend = RedisCachingBackend.Create(connection, configuration))
           using (RedisCacheDependencyGarbageCollector.Create(connection, configuration)
           ) // With Redis, we need at least one instance of the collection engine.
           {
