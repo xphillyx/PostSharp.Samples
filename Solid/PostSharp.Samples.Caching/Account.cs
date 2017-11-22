@@ -10,11 +10,13 @@ namespace PostSharp.Samples.Caching
 
     public string GetCacheKey()
     {
+      // Note that this key should be globally unique, not just unique within the Account class.
       return $"Account:{AccountId}";
     }
 
     public bool Equals(ICacheDependency other)
     {
+      // TODO: Remove this method. Future builds of PostSharp will not need to implement it.
       throw new NotImplementedException();
     }
   }

@@ -37,6 +37,8 @@ or you can download them on [GitHub](https://www.github.com/postsharp/PostSharp.
 | [PostSharp.Samples.Logging.Audit.Extended](Diagnostics/PostSharp.Samples.Audit.Extended/)  | Shows how to add custom pieces of information to the audit record.   | 
 | **XAML**                 
 | [PostSharp.Samples.Xaml](Xaml/PostSharp.Samples.Xaml/)                                              | Demonstrates a few ready-made aspects that are useful for XAML                               | 
+| **Caching**                 
+| [PostSharp.Samples.Caching](Solid/PostSharp.Samples.Caching/)             | Caching method results with Redis and different ways to remove things from the cache. | 
 | **Threading**                 
 | [PostSharp.Samples.Threading.PingPong](Threading/PostSharp.Samples.Threading.PingPong/)             | The classic educational ping-pong example.                                                   | 
 | [PostSharp.Samples.Threading.ThreadDispatching](Threading/PostSharp.Samples.Threading.ThreadDispatching/) | A simple WPF progress bar updated from a background thread.                            | 

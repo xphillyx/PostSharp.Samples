@@ -27,33 +27,39 @@ namespace PostSharp.Samples.Caching
           };
 
           using (var backend = RedisCachingBackend.Create(connection, configuration))
-          using (RedisCacheDependencyGarbageCollector.Create(connection, configuration)
-          ) // With Redis, we need at least one instance of the collection engine.
           {
-            CachingServices.DefaultBackend = backend;
-            CachingServices.Profiles["Account"].AbsoluteExpiration = TimeSpan.FromSeconds(10);
+            // With Redis, we need at least one instance of the collection engine.
+            using (RedisCacheDependencyGarbageCollector.Create(connection, configuration))
 
-            // Testing direct invalidation.
-            Console.WriteLine("Retrieving the customer for the 1st time should hit the database.");
-            CustomerServices.GetCustomer(1);
-            Console.WriteLine("Retrieving the customer for the 2nd time should NOT hit the database.");
-            CustomerServices.GetCustomer(1);
-            Console.WriteLine("This should invalidate the GetCustomer method.");
-            CustomerServices.UpdateCustomer(1, "New name");
-            Console.WriteLine("This should hit the database again because GetCustomer has been invalidated.");
-            CustomerServices.GetCustomer(1);
+            {
+              CachingServices.DefaultBackend = backend;
 
-            // Testing indirect invalidation (dependencies).
-            Console.WriteLine("Retrieving the account list for the 1st time should hit the database.");
-            AccountServices.GetAccountsOfCustomer(1);
-            Console.WriteLine("Retrieving the account list for the 2nt time should NOT hit the database.");
-            var accounts = AccountServices.GetAccountsOfCustomer(1);
-            Console.WriteLine("This should invalidate the accounts");
-            AccountServices.UpdateAccount(accounts.First());
-            Console.WriteLine("This should hit the database again because GetAccountsOfCustomer has been invalidated.");
-            AccountServices.GetAccountsOfCustomer(1);
+              // Configure the Account caching profile used in the AccountServices class.
+              CachingServices.Profiles["Account"].AbsoluteExpiration = TimeSpan.FromSeconds(10);
 
-            Console.WriteLine("Done!");
+              // Testing direct invalidation.
+              Console.WriteLine("Retrieving the customer for the 1st time should hit the database.");
+              CustomerServices.GetCustomer(1);
+              Console.WriteLine("Retrieving the customer for the 2nd time should NOT hit the database.");
+              CustomerServices.GetCustomer(1);
+              Console.WriteLine("This should invalidate the GetCustomer method.");
+              CustomerServices.UpdateCustomer(1, "New name");
+              Console.WriteLine("This should hit the database again because GetCustomer has been invalidated.");
+              CustomerServices.GetCustomer(1);
+
+              // Testing indirect invalidation (dependencies).
+              Console.WriteLine("Retrieving the account list for the 1st time should hit the database.");
+              AccountServices.GetAccountsOfCustomer(1);
+              Console.WriteLine("Retrieving the account list for the 2nt time should NOT hit the database.");
+              var accounts = AccountServices.GetAccountsOfCustomer(1);
+              Console.WriteLine("This should invalidate the accounts");
+              AccountServices.UpdateAccount(accounts.First());
+              Console.WriteLine(
+                "This should hit the database again because GetAccountsOfCustomer has been invalidated.");
+              AccountServices.GetAccountsOfCustomer(1);
+
+              Console.WriteLine("Done!");
+            }
           }
         }
       }

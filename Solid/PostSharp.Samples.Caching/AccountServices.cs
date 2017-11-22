@@ -5,7 +5,7 @@ using PostSharp.Patterns.Caching;
 
 namespace PostSharp.Samples.Caching
 {
-  [CacheConfiguration(ProfileName = "Account")]
+  [CacheConfiguration(ProfileName = "Account")] // See Program.cs for the configuration of the "Account" caching profile.
   internal class AccountServices
   {
     [Cache]
@@ -24,6 +24,7 @@ namespace PostSharp.Samples.Caching
     [Cache]
     public static IEnumerable<Account> GetAccountsOfCustomer(int customerId)
     {
+      // Dependencies of GetAccount are automatically added to GetAccountsOfCustomer.
       yield return GetAccount(1);
       yield return GetAccount(2);
     }
@@ -32,6 +33,8 @@ namespace PostSharp.Samples.Caching
     {
       Console.WriteLine($">> Updating the account {account.AccountId} in database...");
       Thread.Sleep(1000);
+
+      // This will invalidate both GetAccount and GetAccountsOfCustomer.
       CachingServices.Invalidation.Invalidate(account);
     }
   }
