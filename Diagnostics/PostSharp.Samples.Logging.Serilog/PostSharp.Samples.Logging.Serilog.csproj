@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\PostSharp.5.0.37\build\PostSharp.props" Condition="Exists('..\..\packages\PostSharp.5.0.37\build\PostSharp.props')" />
+  <Import Project="..\..\packages\PostSharp.5.0.40\build\PostSharp.props" Condition="Exists('..\..\packages\PostSharp.5.0.40\build\PostSharp.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,31 +35,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PostSharp, Version=5.0.37.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7">
-      <HintPath>..\..\packages\PostSharp.Redist.5.0.37\lib\net45\PostSharp.dll</HintPath>
+    <Reference Include="PostSharp, Version=5.0.40.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7">
+      <HintPath>..\..\packages\PostSharp.Redist.5.0.40\lib\net45\PostSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PostSharp.Patterns.Common, Version=5.0.37.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078">
-      <HintPath>..\..\packages\PostSharp.Patterns.Common.Redist.5.0.37\lib\net46\PostSharp.Patterns.Common.dll</HintPath>
+    <Reference Include="PostSharp.Patterns.Common, Version=5.0.40.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078">
+      <HintPath>..\..\packages\PostSharp.Patterns.Common.Redist.5.0.40\lib\net46\PostSharp.Patterns.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PostSharp.Patterns.Diagnostics, Version=5.0.37.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078">
-      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Redist.5.0.37\lib\net46\PostSharp.Patterns.Diagnostics.dll</HintPath>
+    <Reference Include="PostSharp.Patterns.Diagnostics, Version=5.0.40.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078">
+      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Redist.5.0.40\lib\net46\PostSharp.Patterns.Diagnostics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PostSharp.Patterns.Diagnostics.Backends.Serilog, Version=5.0.37.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078">
-      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Serilog.5.0.37\lib\net40\PostSharp.Patterns.Diagnostics.Backends.Serilog.dll</HintPath>
+    <Reference Include="PostSharp.Patterns.Diagnostics.Backends.Serilog, Version=5.0.40.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078">
+      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.Serilog.5.0.40\lib\net40\PostSharp.Patterns.Diagnostics.Backends.Serilog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
-      <HintPath>..\..\packages\Serilog.2.5.0\lib\net46\Serilog.dll</HintPath>
+      <HintPath>..\..\packages\Serilog.2.6.0\lib\net46\Serilog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Serilog.Sinks.ColoredConsole, Version=3.0.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Serilog.Sinks.ColoredConsole.3.0.1\lib\net45\Serilog.Sinks.ColoredConsole.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Sinks.Console, Version=3.0.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serilog.Sinks.Console.3.0.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    <Reference Include="Serilog.Sinks.Console, Version=3.1.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10">
+      <HintPath>..\..\packages\Serilog.Sinks.Console.3.1.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
@@ -90,8 +91,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\PostSharp.5.0.37\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.37\build\PostSharp.props'))" />
     <Error Condition="!Exists('..\..\packages\PostSharp.5.0.37\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.37\build\PostSharp.targets'))" />
-    <Error Condition="!Exists('..\..\packages\PostSharp.5.0.37\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.37\build\PostSharp.props'))" />
-    <Error Condition="!Exists('..\..\packages\PostSharp.5.0.37\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.37\build\PostSharp.targets'))" />
+    <Error Condition="!Exists('..\..\packages\PostSharp.5.0.40\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.40\build\PostSharp.props'))" />
+    <Error Condition="!Exists('..\..\packages\PostSharp.5.0.40\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\PostSharp.5.0.40\build\PostSharp.targets'))" />
   </Target>
-  <Import Project="..\..\packages\PostSharp.5.0.37\build\PostSharp.targets" Condition="Exists('..\..\packages\PostSharp.5.0.37\build\PostSharp.targets')" />
+  <Import Project="..\..\packages\PostSharp.5.0.40\build\PostSharp.targets" Condition="Exists('..\..\packages\PostSharp.5.0.40\build\PostSharp.targets')" />
 </Project>

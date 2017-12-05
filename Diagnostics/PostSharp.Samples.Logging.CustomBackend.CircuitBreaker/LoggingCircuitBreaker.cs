@@ -10,6 +10,9 @@ namespace PostSharp.Samples.Logging.CustomBackend.CircuitBreaker
         public static void Break()
         {
             Closed = false;
+            Broken?.Invoke(null, EventArgs.Empty);
         }
+
+      public static event EventHandler Broken;
     }
 }
