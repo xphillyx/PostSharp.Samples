@@ -18,7 +18,7 @@ namespace PostSharp.Samples.Logging.CustomBackend.CircuitBreaker
   {
     private static int testMethodCounter;
 
-    private static async Task Main(string[] args)
+    private static void Main(string[] args)
     {
       // Test that LoggingCircuitBreaker works
       TestMethodThrowingException();
