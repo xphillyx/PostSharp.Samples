@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using PostSharp.Aspects;
+﻿using PostSharp.Aspects;
 using PostSharp.Aspects.Advices;
 using PostSharp.Serialization;
 
@@ -9,24 +7,21 @@ namespace PostSharp.Samples.Logging.CustomBackend.CircuitBreaker
   [PSerializable]
   public class LoggingCircuitBreakerAttribute : MethodLevelAspect
   {
-    [OnMethodEntryAdvice, SelfPointcut]
+    [OnMethodEntryAdvice]
+    [SelfPointcut]
     public void OnEntry([FlowBehavior] out FlowBehavior flowBehavior)
     {
       if (!LoggingCircuitBreaker.Closed)
-      {
         flowBehavior = FlowBehavior.Return;
-      }
       else
-      {
         flowBehavior = FlowBehavior.Default;
-      }
     }
 
-    [OnMethodExceptionAdvice, SelfPointcut]
-    public void OnException()
+    [OnMethodExceptionAdvice(Master = nameof(OnEntry))]
+    public void OnException([FlowBehavior] out FlowBehavior flowBehavior)
     {
       LoggingCircuitBreaker.Break();
+      flowBehavior = FlowBehavior.Return;
     }
-    
   }
 }

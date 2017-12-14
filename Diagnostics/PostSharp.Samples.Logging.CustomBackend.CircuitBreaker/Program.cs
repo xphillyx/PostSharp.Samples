@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using NLog;
 using NLog.Config;
@@ -9,15 +8,28 @@ using PostSharp.Patterns.Diagnostics.Backends;
 using PostSharp.Samples.Logging.BusinessLogic;
 using LogLevel = NLog.LogLevel;
 
+// Apply logging to the whole assembly.
+[assembly: Log]
+
 namespace PostSharp.Samples.Logging.CustomBackend.CircuitBreaker
 {
-
-
   [Log(AttributeExclude = true)]
-  class Program
+  internal class Program
   {
-    static async Task Main(string[] args)
+    private static int testMethodCounter;
+
+    private static async Task Main(string[] args)
     {
+      // Test that LoggingCircuitBreaker works
+      TestMethodThrowingException();
+      TestMethodThrowingException();
+      if (testMethodCounter != 1)
+      {
+        Console.Error.WriteLine("LoggingCircuitBreaker aspect does not work.");
+        return;
+      }
+      LoggingCircuitBreaker.Reset();
+
       // Configure NLog.
       var nlogConfig = new LoggingConfiguration();
 
@@ -25,7 +37,7 @@ namespace PostSharp.Samples.Logging.CustomBackend.CircuitBreaker
       {
         FileName = "nlog.log",
         KeepFileOpen = true,
-        ConcurrentWrites = false,
+        ConcurrentWrites = false
       };
 
       nlogConfig.AddTarget(fileTarget);
@@ -46,15 +58,17 @@ namespace PostSharp.Samples.Logging.CustomBackend.CircuitBreaker
 
       // Simulate an error.
       LoggingCircuitBreaker.Break();
-      Console.WriteLine("*** ERROR ***");
+      Console.WriteLine("*** ERROR ***   There should be no log lines below.");
 
       // Simulate some business logic.
       QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
-
-
-
     }
 
-
+    [LoggingCircuitBreaker]
+    private static DateTime TestMethodThrowingException()
+    {
+      testMethodCounter++;
+      throw new Exception();
+    }
   }
 }

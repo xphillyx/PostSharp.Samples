@@ -33,6 +33,7 @@ or you can download them on [GitHub](https://www.github.com/postsharp/PostSharp.
 | [PostSharp.Samples.Logging.Loupe](Diagnostics/PostSharp.Samples.Logging.Loupe/)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *Loupe*.   | 
 | [PostSharp.Samples.Logging.CommonLogging](Diagnostics/PostSharp.Samples.Logging.CommonLogging/)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *Common.Logging*.   | 
 | [PostSharp.Samples.Logging.CustomBackend.ServiceStack](Diagnostics/PostSharp.Samples.Logging.CustomBackend.ServiceStack/)  | Demonstrates how to implement a PostSharp Logging adapter for your custom logging framework.   | 
+| [PostSharp.Samples.Logging.CustomBackend.CircuitBreaker](Diagnostics/PostSharp.Samples.Logging.CustomBackend.CircuitBreaker/) | Shows how to swallow all exceptions that occur in the logging component and turn off logging when it happens. |
 | [PostSharp.Samples.Logging.Audit](Diagnostics/PostSharp.Samples.Audit/)  | Shows how to append an audit record to a database when a method is invoked.   |
 | [PostSharp.Samples.Logging.Audit.Extended](Diagnostics/PostSharp.Samples.Audit.Extended/)  | Shows how to add custom pieces of information to the audit record.   | 
 | **XAML**                 
