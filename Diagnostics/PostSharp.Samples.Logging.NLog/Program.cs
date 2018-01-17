@@ -33,12 +33,13 @@ namespace PostSharp.Samples.Logging.NLog
       nlogConfig.AddTarget(consoleTarget);
       nlogConfig.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, consoleTarget));
 
-      LogManager.Configuration = nlogConfig;
-      LogManager.EnableLogging();
 
 
       // Configure PostSharp Logging to use NLog.
-      LoggingServices.DefaultBackend = new NLogLoggingBackend();
+      LoggingServices.DefaultBackend = new NLogLoggingBackend(new LogFactory(nlogConfig));
+
+      LogManager.EnableLogging();
+
 
 
       // Simulate some business logic.

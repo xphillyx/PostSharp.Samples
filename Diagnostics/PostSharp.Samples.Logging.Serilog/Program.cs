@@ -14,14 +14,14 @@ namespace PostSharp.Samples.Logging.Serilog
     private static void Main(string[] args)
     {
       // Configure Serilog.
-      Log.Logger = new LoggerConfiguration()
+      var logger = new LoggerConfiguration()
         .MinimumLevel.Debug()
         .WriteTo.File("serilog.log")
         .WriteTo.ColoredConsole()
         .CreateLogger();
 
       // Configure PostSharp Logging to use Serilog
-      LoggingServices.DefaultBackend = new SerilogLoggingBackend();
+      LoggingServices.DefaultBackend = new SerilogLoggingBackend(logger);
 
       // Simulate some business logic.
       QueueProcessor.ProcessQueue(@".\Private$\SyncRequestQueue");
