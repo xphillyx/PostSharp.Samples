@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.CustomLogging", "Framework\PostSharp.Samples.CustomLogging\PostSharp.Samples.CustomLogging.csproj", "{C943DF92-512E-4488-83C0-96DD10CA9854}"
 EndProject
@@ -87,9 +87,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.CustomBackend.CircuitBreaker", "Diagnostics\PostSharp.Samples.Logging.CustomBackend.CircuitBreaker\PostSharp.Samples.Logging.CustomBackend.CircuitBreaker.csproj", "{DFC41F77-ED84-44D2-8388-6333EB256F4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.Etw.CustomSource", "Diagnostics\PostSharp.Samples.Logging.Etw.CustomSource\PostSharp.Samples.Logging.Etw.CustomSource.csproj", "{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{49e1beb2-613f-4326-a3aa-2984ab1a0931}*SharedItemsImports = 4
+		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{637cb8f6-4f80-4d14-b1a6-2095a2a743c9}*SharedItemsImports = 4
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{640c57c0-5220-416f-9152-3d5a98b0d71a}*SharedItemsImports = 4
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{80d82101-021a-4611-8dac-5deaedc00d8f}*SharedItemsImports = 4
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{8cc6b1da-28c5-4b03-b048-6e03c56b8bcc}*SharedItemsImports = 13
@@ -234,6 +237,10 @@ Global
 		{DFC41F77-ED84-44D2-8388-6333EB256F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFC41F77-ED84-44D2-8388-6333EB256F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFC41F77-ED84-44D2-8388-6333EB256F4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -272,6 +279,7 @@ Global
 		{90A7F2AD-E82B-4285-9D3D-070E95D2F0BA} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
 		{CD5F3675-C0BC-4FE4-8FAE-0CF0A66FD644} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
 		{DFC41F77-ED84-44D2-8388-6333EB256F4E} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
+		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E95A232-DBEE-4E84-9574-757745FEE89B}

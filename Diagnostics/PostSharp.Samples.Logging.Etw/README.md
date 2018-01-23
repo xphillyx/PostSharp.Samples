@@ -16,7 +16,7 @@ To view the log produced by this example, you need to attach a log collector:
 
 1. Download PerfView from https://www.microsoft.com/en-us/download/details.aspx?id=28567.
 
-2. Execute: perfview.exe collect -OnlyProviders *PostSharp-Patterns-Diagnostics
+2. Execute: perfview.exe collect -OnlyProviders:*PostSharp-Patterns-Diagnostics
 
 3. Execute this program.
 

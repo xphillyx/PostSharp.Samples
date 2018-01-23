@@ -27,6 +27,7 @@ or you can download them on [GitHub](https://www.github.com/postsharp/PostSharp.
 | [PostSharp.Samples.Logging.Customization](Diagnostics/PostSharp.Samples.Logging.Customization/)     | Shows how to customize PostSharp Logging.                                                   | 
 | [PostSharp.Samples.Logging.Console](Diagnostics/PostSharp.Samples.Logging.Console/)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to the *system console*.  | 
 | [PostSharp.Samples.Logging.Etw](Diagnostics/PostSharp.Samples.Logging.Etw/)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *ETW*.               | 
+| [PostSharp.Samples.Logging.Etw.CustomSource](Diagnostics/PostSharp.Samples.Logging.Etw.CustomSource/)                 | Demonstrates how use PostSharp Logging with a custom *ETW* source (instead of the predefined one).               | 
 | [PostSharp.Samples.Logging.Log4Net](Diagnostics/PostSharp.Samples.Logging.Log4Net/)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *log4net*.   | 
 | [PostSharp.Samples.Logging.NLog](Diagnostics/PostSharp.Samples.Logging.NLog/)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *NLog*.   | 
 | [PostSharp.Samples.Logging.Serilog](Diagnostics/PostSharp.Samples.Logging.Serilog/)                 | Demonstrates how to configure PostSharp Logging so that it directs its output to *Serilog*.   | 
