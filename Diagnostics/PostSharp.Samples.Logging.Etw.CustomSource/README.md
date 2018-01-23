@@ -4,8 +4,9 @@ The custom log source is implemented in the `MyEventSource` class. This class mu
 
 * Inherit the `PostSharpEventSource` class 
 * Be annotated with the `EventSource` and `Guid` custom attributes.
-* Contain a set of predefined methods with arbitrary name but with predefined signature and with an `Event` custom attribute
-  with the exact predefined value of the `eventId` parameter. These methods exist for the sole purpose of defining the
+* Contain a set of predefined methods annotated with an `Event` custom attribute. You can change the method name or
+  any parameter of the `Event` custom attribute, but you can change nor the `eventId` parameter and nor the
+  signature of the method for this specific event. These methods exist for the sole purpose of defining the
   event metadata. They are never invoked directly.
 
 
