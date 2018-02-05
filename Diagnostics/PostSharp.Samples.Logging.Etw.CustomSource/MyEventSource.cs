@@ -169,5 +169,13 @@ namespace PostSharp.Samples.Logging.Etw.CustomSource
       throw new InvalidOperationException(invalidOperationExceptionMessage);
     }
 
+    // We need to repeat this, otherwise the ETW framework for .NET will ignore the class.
+    public new static class Tasks
+    {
+      public const EventTask Method = PostSharpEventSource.Tasks.Method;
+      public const EventTask CustomActivity = PostSharpEventSource.Tasks.CustomActivity;
+      public const EventTask Message = PostSharpEventSource.Tasks.Message;
+    }
+
   }
 }
