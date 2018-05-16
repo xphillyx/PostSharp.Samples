@@ -3,6 +3,7 @@ using PostSharp.Patterns.Diagnostics.Backends.Audit;
 using PostSharp.Patterns.Diagnostics.Contexts;
 using PostSharp.Patterns.Diagnostics.RecordBuilders;
 using PostSharp.Patterns.Formatters;
+using PostSharp.Reflection;
 
 namespace PostSharp.Samples.Audit.Extended
 {
@@ -19,9 +20,7 @@ namespace PostSharp.Samples.Audit.Extended
       return new ExtendedAuditRecord(context.Source.SourceType, memberInfo.MemberName, recordInfo.RecordKind);
     }
 
-    public override void SetParameter<T>(int index, string parameterName, ParameterDirection direction, string typeName,
-      T value,
-      IFormatter<T> formatter)
+    public override void SetParameter<T>(int index, string parameterName, ParameterDirection direction, string typeName,  T value, IFormatter<T> formatter)
     {
       base.SetParameter(index, parameterName, direction, typeName, value, formatter);
 

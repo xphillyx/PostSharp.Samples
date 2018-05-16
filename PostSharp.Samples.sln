@@ -85,8 +85,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.CommonLogging", "Diagnostics\PostSharp.Samples.Logging.CommonLogging\PostSharp.Samples.Logging.CommonLogging.csproj", "{CD5F3675-C0BC-4FE4-8FAE-0CF0A66FD644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.CustomBackend.CircuitBreaker", "Diagnostics\PostSharp.Samples.Logging.CustomBackend.CircuitBreaker\PostSharp.Samples.Logging.CustomBackend.CircuitBreaker.csproj", "{DFC41F77-ED84-44D2-8388-6333EB256F4E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSharp.Samples.Logging.Etw.CustomSource", "Diagnostics\PostSharp.Samples.Logging.Etw.CustomSource\PostSharp.Samples.Logging.Etw.CustomSource.csproj", "{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}"
 EndProject
 Global
@@ -101,7 +99,6 @@ Global
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{a640cf21-ce2f-4fde-bd6a-f148a421e0ff}*SharedItemsImports = 4
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{cc3f424b-e1be-4555-a77e-52fa4b14bda0}*SharedItemsImports = 4
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{cd5f3675-c0bc-4fe4-8fae-0cf0a66fd644}*SharedItemsImports = 4
-		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{dfc41f77-ed84-44d2-8388-6333eb256f4e}*SharedItemsImports = 4
 		Diagnostics\PostSharp.Samples.Logging.BusinessLogic\PostSharp.Samples.Logging.BusinessLogic.projitems*{fb71f9b1-4a53-4397-a26c-23294423da4d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -233,10 +230,6 @@ Global
 		{CD5F3675-C0BC-4FE4-8FAE-0CF0A66FD644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD5F3675-C0BC-4FE4-8FAE-0CF0A66FD644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD5F3675-C0BC-4FE4-8FAE-0CF0A66FD644}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFC41F77-ED84-44D2-8388-6333EB256F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFC41F77-ED84-44D2-8388-6333EB256F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFC41F77-ED84-44D2-8388-6333EB256F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFC41F77-ED84-44D2-8388-6333EB256F4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -278,7 +271,6 @@ Global
 		{4AA8652E-00D6-46F0-A176-2CA5BFFDDA58} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
 		{90A7F2AD-E82B-4285-9D3D-070E95D2F0BA} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
 		{CD5F3675-C0BC-4FE4-8FAE-0CF0A66FD644} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
-		{DFC41F77-ED84-44D2-8388-6333EB256F4E} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
 		{637CB8F6-4F80-4D14-B1A6-2095A2A743C9} = {B1F3FAC0-64CB-4CFC-994C-DF56801FC743}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
