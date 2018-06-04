@@ -20,16 +20,16 @@ namespace PostSharp.Samples.Audit.Extended
       return new ExtendedAuditRecord(context.Source.SourceType, memberInfo.MemberName, recordInfo.RecordKind);
     }
 
-    public override void SetParameter<T>(int index, string parameterName, ParameterDirection direction, string typeName,  T value, IFormatter<T> formatter)
+    public override void SetParameter<T>(
+      int index, string parameterName, ParameterKind parameterKind, string typeName, T value, IFormatter<T> formatter)
     {
-      base.SetParameter(index, parameterName, direction, typeName, value, formatter);
+      base.SetParameter(index, parameterName, parameterKind, typeName, value, formatter);
 
       // When the parameter is a business object, add it to the list of correlated business objects.      
       var businessObject = value as BusinessObject;
 
       if (businessObject != null)
         ((ExtendedAuditRecord) CurrentRecord).RelatedBusinessObjects.Add(businessObject);
-
     }
   }
 }

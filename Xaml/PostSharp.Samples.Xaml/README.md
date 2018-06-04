@@ -13,7 +13,7 @@ The user expects to see changes immediately after they make a modification to th
 
 You probably heard `INotifyPropertyChanged` interface and its extensive use in architectural patterns such as MVVM. You may even have implemented this interface
 for several classes. It is pain. Sure, C# 6.0 relieved us of mentioning properties via literal string by instroducing `nameof` and similar features. 
-But still, it remains a pain. There are few libraries that does a lot for you, but they don't completely relieve you from boilerplate code.
+But still, it remains a pain. There are few libraries that do a lot for you, but they don't completely relieve you from boilerplate code.
 
 That's why we built the `[NotifyPropertyChanged]` aspect. It implements data binding automatically, without pollution from boilerplate code.
  Your business logic remains clean. 
@@ -26,7 +26,7 @@ aspect will raise change notifications for all properties without manual code, e
 Undo/Redo
 ---------
 
-When the user does something wrong, they expect a quick way to fix it. 
+When users do something wrong, they expect a quick way to fix it. 
 The more advanced ones will press `Ctrl+Z`, others will look for an undo button. If there is none, they will blame it to the application
 developer, because they deeply expect undo/redo in all applications.
 

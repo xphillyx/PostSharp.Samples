@@ -24,15 +24,15 @@ namespace PostSharp.Samples.Logging
       {
       }
 
-      public override void SetParameter<T>(int index, string parameterName, ParameterDirection direction, string typeName, T value, IFormatter<T> formatter)
+      public override void SetParameter<T>(
+        int index, string parameterName, ParameterKind parameterKind, string typeName, T value, IFormatter<T> formatter)
       {
         StringBuilder.Append('[');
-        StringBuilder.Append(direction.ToString());
+        StringBuilder.Append(parameterKind.ToString());
         StringBuilder.Append(']', ' ');
 
-        base.SetParameter(index, parameterName, direction, typeName, value, formatter);
+        base.SetParameter(index, parameterName, parameterKind, typeName, value, formatter);
       }
-
     }
   }
 }

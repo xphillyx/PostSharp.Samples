@@ -24,7 +24,7 @@ namespace PostSharp.Samples.Threading.ThreadDispatching
     private void DoStuff()
     {
       var random = new Random();
-      for (var i = 0; i < 100; i++)
+      for (var i = 0; i <= 100; i++)
       {
         for (var j = 0; j < 1000000; j++)
           Math.Sin(random.NextDouble());

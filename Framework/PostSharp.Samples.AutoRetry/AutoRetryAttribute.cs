@@ -70,7 +70,7 @@ namespace PostSharp.Samples.AutoRetry
             // Yes, we can retry. Write some message and wait a bit.
 
             Console.WriteLine(
-              "Method failed with exception {0}. Sleeping {1} s and retrying. This was our {2}th attempt.",
+              "Method failed with exception {0}. Sleeping {1} s and retrying. This was our attempt #{2}.",
               e.GetType().Namespace, Delay, i + 1);
 
             Thread.Sleep(TimeSpan.FromSeconds(Delay));
@@ -105,7 +105,7 @@ namespace PostSharp.Samples.AutoRetry
             // Yes, we can retry. Write some message and wait a bit.
 
             Console.WriteLine(
-              "Method failed with exception {0}. Sleeping {1} s and retrying. This was our {2}th attempt.",
+              "Method failed with exception {0}. Sleeping {1} s and retrying. This was our attempt #{2}.",
               e.GetType().Namespace, Delay, i + 1);
 
             await Task.Delay(TimeSpan.FromSeconds(Delay));

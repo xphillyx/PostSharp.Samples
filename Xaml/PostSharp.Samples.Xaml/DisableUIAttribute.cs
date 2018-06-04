@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using PostSharp.Aspects;
 using PostSharp.Aspects.Dependencies;
+using PostSharp.Patterns.Model;
 using PostSharp.Patterns.Threading;
 using PostSharp.Serialization;
 
@@ -10,6 +11,7 @@ namespace PostSharp.Samples.Xaml
 {
   [PSerializable]
   [AspectTypeDependency(AspectDependencyAction.Require, AspectDependencyPosition.After, typeof(BackgroundAttribute))]
+  [AspectTypeDependency(AspectDependencyAction.Require, AspectDependencyPosition.After, typeof(NotifyPropertyChangedAttribute))]
   [LinesOfCodeAvoided(4)]
   public sealed class DisableUIAttribute : OnMethodBoundaryAspect
   {
