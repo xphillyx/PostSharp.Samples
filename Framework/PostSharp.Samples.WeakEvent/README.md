@@ -6,19 +6,21 @@ Therefore, the weak event does not prevent the listener objects to be garbage co
 Event handlers are often source of memory leaks in .NET. The reason is that the delegates registered as event handlers store a strong reference to the listener objects. 
 The event source indirectly holds a strong reference to all listener objects.
 
-Implementing the weak event pattern requires cooperation of the event source and the listener object. If the exposing object only stores weak references to the delegates, 
-the delegates are immediately collected even while the consumer object is still alive. To prevent immediate garbage collection of delegates, 
-the consumer must hold strong references to all delegates passed to the weak events.
+In the weak event pattern, the event source does not hold a strong reference to the event listener. Instead, it stores a WeakReference
+to the delegate. However, it is still necessary to ensure that there is at least one strong reference to the delegate, otherwise
+it would get collected immediately upon the next GC cycle. In this example, we use a WeakConditionalTable to establish a strong reference
+between the target of the delegate and the delegate itself. This makes sure that the delegate is alive until the delegate target instance
+is alive.
 
-The pattern is implemented by the following artefacts:
+Note that this approach does not work with some anonymous methods or lambda expressions because they are compiled as
+closure classes. Nothing keeps alive the closure class instance itself. This case is not covered by this example.
 
-* The `[WeakEvent]` aspect can be applied to any event. The `[WeakEvent]` aspect is based on `EventInterceptionAspect` and implements the `IInstanceScopedAspect` interface to store instance-scoped data.
-* The `[WeakEventClient]` aspect can be applied to any consumer of a weak event. The `[WeakEventClient]` aspect automatically implements the `IWeakEventClient` interface. The `[WeakEventClient]` aspect demonstrates the following features: `InstanceLevelAspect`, `IntroduceInterface`.
-* The `WeakEventValidation` constraint is attached to the `WeakEvent` aspect. It validates, at build time, that clients of weak events are enhanced with the `[WeakEventClient]` aspect or manually implement the `IWeakEventClient` interface.
-  Additionally to this build-time validation, the `[WeakEvent]` aspect throws an exception if the consumer class does not have the `[WeakEventClient]` aspect or does not manually implement the `IWeakEventClient` interface. 
+The `[WeakEvent]` aspect is based on `EventInterceptionAspect` class. It implements the `IInstanceScopedAspect`
+interface because the aspect needs to store the list of handlers for each instance of the event.
 
-To allow an event to store strong references when the client does not implement the `IWeakEventClient` interface, use the code `[WeakEvent(AllowStrongReferences=true)]`.
 
 ## Limitations
 
 This example has not been sufficiently tested for production use.
+This example assumes that the delegate target instance is kept alive, therefore it does not work with anonymous methods
+and lambda expressions that use a closure class.
