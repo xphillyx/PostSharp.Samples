@@ -39,7 +39,7 @@ namespace ClientExample
             try
             {
 
-                string url = $"http://localhost:5000/api/values/{item.Id}";
+                string url = $"http://localhost:5005/api/values/{item.Id}";
                 StringContent stringContent = item.Value == null ? null : new StringContent( "\"" + item.Value + "\"", Encoding.UTF8, "application/json" );
                 HttpResponseMessage response;
 

@@ -1,24 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" >
+﻿<Project>
 
-  <!--
-  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-  -->
-  
+ <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
+
+
   <ItemGroup>
+  <!--
     <PackageReference Include="PostSharp.Patterns.Diagnostics" Version="6.1.5-preview" />
     <PackageReference Include="PostSharp.Patterns.Diagnostics.Serilog" Version="6.1.5-preview" />
+    -->
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.3.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Http" Version="5.0.0" />
   </ItemGroup>
 
-  <!--
   
   <PropertyGroup>
       <PostSharpBuild>Debug</PostSharpBuild>
@@ -41,5 +42,5 @@
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <Import Project="C:\src\PostSharp\Build\bin\PostSharp.targets" />
-  -->
+
 </Project>

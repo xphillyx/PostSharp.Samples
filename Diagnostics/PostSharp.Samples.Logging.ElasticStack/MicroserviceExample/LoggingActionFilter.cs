@@ -7,26 +7,25 @@ using PostSharp.Patterns.Diagnostics;
 
 namespace MicroserviceExample
 {
-    [Log(AttributeExclude = true)]
-    public class LoggingActionFilter :  IAsyncActionFilter
+    [Log( AttributeExclude = true )]
+    public class LoggingActionFilter : IAsyncActionFilter
     {
-        static readonly Random random = new Random(0); // Pseudo-random to make demos more predictable.
+        static readonly Random random = new Random( 0 ); // Pseudo-random to make demos more predictable.
         static readonly Logger logger = Logger.GetLogger();
         public static LoggingContextConfiguration DetailedLoggingConfiguration;
 
-        private static readonly ILoggingProperty<string> parentOperationIdProperty;
-
-        static LoggingActionFilter()
-        {
-            parentOperationIdProperty = logger.GetOrCreateProperty<string>( "ParentOperationId" );
-        }
-
         public async Task OnActionExecutionAsync( ActionExecutingContext context, ActionExecutionDelegate next )
         {
-
-            if ( MustLog() )
+            bool mustLog;
+            lock ( random )
             {
-                FluentLogger fluentLogger;
+                mustLog = random.NextDouble() > 0.5;
+            }
+
+
+            if ( mustLog )
+            {
+                ConfiguredLogger configuredLogger;
 
 
                 // Read the Request-Id header so we can assign it to the activity.
@@ -34,17 +33,17 @@ namespace MicroserviceExample
 
                 if ( !string.IsNullOrEmpty( parentOperationId ) )
                 {
-                    fluentLogger = logger.WithProperty( parentOperationIdProperty, parentOperationId );
+                    configuredLogger = logger.WithProperty( "ParentOperationId", parentOperationId );
                 }
                 else
                 {
-                    fluentLogger = logger;
+                    configuredLogger = logger;
                 }
 
-               // Enable logging.
+                // Enable logging.
                 using ( LoggingServices.DefaultBackend.WithContextConfiguration( DetailedLoggingConfiguration ) )
                 {
-                    LogActivity activity = fluentLogger.OpenAsyncActivity( "Processing {Verb} {Path}", context.HttpContext.Request.Method, context.HttpContext.Request.Path );
+                    LogActivity activity = configuredLogger.OpenActivity( "Processing {Verb} {Path}", context.HttpContext.Request.Method, context.HttpContext.Request.Path );
                     try
                     {
                         Task task = next();
@@ -54,11 +53,11 @@ namespace MicroserviceExample
                         {
                             if ( typedTask.Result.Exception != null )
                             {
-                                activity.SetException(typedTask.Result.Exception );
+                                activity.SetException( typedTask.Result.Exception );
                             }
                             else
                             {
-                                activity.SetSuccess("Returning {Result}", typedTask.Result.Result );
+                                activity.SetSuccess( "Returning {Result}", typedTask.Result.Result );
                             }
                         }
                         else
@@ -66,7 +65,7 @@ namespace MicroserviceExample
                             activity.SetSuccess();
                         }
 
-                        
+
                     }
                     catch ( Exception e )
                     {
@@ -85,14 +84,6 @@ namespace MicroserviceExample
                 await next();
             }
 
-        }
-
-        private static bool MustLog()
-        {
-            lock ( random )
-            {
-                return random.NextDouble() > 0.5;
-            }
         }
     }
 }

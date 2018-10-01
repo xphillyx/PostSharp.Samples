@@ -15,18 +15,12 @@ namespace ClientExample
     [PSerializable]
     internal class InstrumentOutgoingRequestsAspect : MethodInterceptionAspect
     {
-        private static readonly ILoggingProperty<string> operationIdProperty;
         private static readonly Logger logger = Logger.GetLogger( LoggingRoles.Tracing, typeof( HttpClient ) );
 
-        static InstrumentOutgoingRequestsAspect()
-        {
-            operationIdProperty = logger.GetOrCreateProperty<string>( "OperationId" );
-        }
+       
 
         public override async Task OnInvokeAsync( MethodInterceptionArgs args )
         {
-
-
             HttpClient http = (HttpClient) args.Instance;
 
             string operationId = Guid.NewGuid().ToString();
@@ -36,13 +30,15 @@ namespace ClientExample
 
             string verb = Trim( args.Method.Name, "Async" );
 
-            using ( LogActivity activity = logger.WithProperty(operationIdProperty, operationId).OpenAsyncActivity( "{Verb} {Url}", verb, args.Arguments[0] ) )
+            using ( LogActivity activity = logger.WithProperty("OperationId", operationId)
+                                                 .OpenActivity( "{Verb} {Url}", verb, args.Arguments[0] ) )
             {
                 try
                 {
                     Task t = base.OnInvokeAsync( args );
 
-                    // We need to call Suspend/Resume because we're calling LogActivity from an aspect and aspects are not automatically enhanced.
+                    // We need to call Suspend/Resume because we're calling LogActivity from an aspect and 
+                    // aspects are not automatically enhanced.
                     // In other code, this is done automatically.
                     if ( !t.IsCompleted )
                     {

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using PostSharp.Patterns.Diagnostics;
 using PostSharp.Patterns.Diagnostics.Backends.Serilog;
 using PostSharp.Patterns.Diagnostics.RecordBuilders;
-using PostSharp.Patterns.Formatters;
 using Serilog;
 using Serilog.Sinks.Http.BatchFormatters;
 
@@ -21,7 +20,6 @@ namespace ClientExample
         {
             Serilog.Core.Logger logger = new LoggerConfiguration()
                 .Enrich.WithProperty( "Application", "ClientExample" )
-                .Enrich.FromLogContext()
                 .MinimumLevel.Debug()
                 .WriteTo.Async( a => a.DurableHttp( requestUri: "http://localhost:31311", batchFormatter: new ArrayBatchFormatter(), batchPostingLimit: 5 ) )
                 .WriteTo.Console( outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Indent:l}{Message:l}{NewLine}{Exception}" )
@@ -39,18 +37,6 @@ namespace ClientExample
             }
 
             Console.WriteLine( "Done!" );
-        }
-
-    }
-
-    internal class ExceptionFormatter : Formatter<Exception>
-    {
-        public override void Write( UnsafeStringBuilder stringBuilder, Exception value ) {
-
-            stringBuilder.Append( value.GetType().Name );
-            stringBuilder.Append( ": " );
-            stringBuilder.Append( value.Message );
-
         }
 
     }
