@@ -13,7 +13,7 @@
 
 ## Credits
 
-This example is forked from https://github.com/FantasticFiasco/serilog-sinks-http-sample-elastic-stack. All credits for integrating Elastic Stack with Serilog goes to the original author.
+This example is forked from https://github.com/FantasticFiasco/serilog-sinks-http-sample-elastic-stack. All credits for integrating Elastic Stack with Serilog go to the original authors.
 
 The `elastic-stack` directory is a clone of [docker-elk](https://github.com/deviantony/docker-elk) with minor modifications done by FantasticFiasco. Credit to [deviantony](https://github.com/deviantony) for publishing the Elastic Stack boilerplate.
 
@@ -23,7 +23,15 @@ The `elastic-stack` directory is a clone of [docker-elk](https://github.com/devi
 is fantastic at instrumenting your project and feeding Serilog with plently structured log events.
 
 This repository provides a sandbox where developers can explore the life of a log event starting with its birth in PostSharp and Serilog, its transport over the network to Logstash, its fields being indexed by Elasticsearch and finally its legacy being recorded as a historical event in Kibana.
+
 This example contains two applications that run together, so we can explore the correlation of requests coming from both apps.
+
+Correlation is implemented by two artefacts:
+
+* On client-side,  `InstrumentOutgoingRequestsAspect`, a PostSharp aspect, adds a header to `HttpClient`.
+
+* On server-side, `LoggingActionFilter`, an ASP.NET Action Filter, reads the header and adds it as a logging property.
+
 
 ## What you will end up with
 
