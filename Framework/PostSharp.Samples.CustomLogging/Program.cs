@@ -14,7 +14,8 @@ using PostSharp.Samples.CustomLogging.Aspects;
 // Add logging to System.Math to show we can add logging to anything.
 
 [assembly:
-  LogMethod(AttributePriority = 2, AttributeTargetAssemblies = "mscorlib", AttributeTargetTypes = "System.Math")]
+  LogMethod(AttributePriority = 2, AttributeTargetAssemblies = "mscorlib", 
+    AttributeTargetTypes = "System.Math")]
 
 namespace PostSharp.Samples.CustomLogging
 {

@@ -11,6 +11,9 @@ namespace PostSharp.Samples.NormalizeString
         [NormalizeString]
         static string myField;
 
+        [NormalizeString]
+        StringBuilder stringBuilder;
+
         static void Main( string[] args )
         {
 

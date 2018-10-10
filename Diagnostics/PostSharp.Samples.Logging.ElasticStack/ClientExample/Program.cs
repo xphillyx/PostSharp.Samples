@@ -20,6 +20,7 @@ namespace ClientExample
         {
             Serilog.Core.Logger logger = new LoggerConfiguration()
                 .Enrich.WithProperty( "Application", "ClientExample" )
+                .Enrich.FromLogContext()
                 .MinimumLevel.Debug()
                 .WriteTo.Async( a => a.DurableHttp( requestUri: "http://localhost:31311", batchFormatter: new ArrayBatchFormatter(), batchPostingLimit: 5 ) )
                 .WriteTo.Console( outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Indent:l}{Message:l}{NewLine}{Exception}" )
