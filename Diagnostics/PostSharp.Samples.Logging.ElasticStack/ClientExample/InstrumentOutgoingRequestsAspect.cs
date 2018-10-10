@@ -5,6 +5,7 @@ using ClientExample;
 using PostSharp.Aspects;
 using PostSharp.Patterns.Diagnostics;
 using PostSharp.Serialization;
+using Serilog.Context;
 
 [assembly: InstrumentOutgoingRequestsAspect( AttributeTargetAssemblies = "System.Net.Http", 
     AttributeTargetTypes = "System.Net.Http.HttpClient", 
@@ -30,8 +31,8 @@ namespace ClientExample
 
             string verb = Trim( args.Method.Name, "Async" );
 
-            using ( LogActivity activity = logger.WithProperty("OperationId", operationId)
-                                                 .OpenActivity( "{Verb} {Url}", verb, args.Arguments[0] ) )
+            using ( LogContext.PushProperty( "OperationId", operationId ) )
+            using ( LogActivity activity = logger.OpenActivity( "{Verb} {Url}", verb, args.Arguments[0] ) )
             {
                 try
                 {

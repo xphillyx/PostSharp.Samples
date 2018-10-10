@@ -29,15 +29,12 @@ namespace MicroserviceExample
             // Configure PostSharp.
             SerilogLoggingBackend backend = new SerilogLoggingBackend( logger );
             backend.Options.IncludeExceptionDetails = true;
-            backend.Options.SemanticParametersTreatedSemantically |= SemanticParameterKind.MemberName | SemanticParameterKind.CustomParameterValue;
+            backend.Options.SemanticParametersTreatedSemantically |= SemanticParameterKind.MemberName;
             LoggingServices.DefaultBackend = backend;
             LoggingServices.Formatters.Register( typeof( ActionResult<> ), typeof( ActionResultFormatter<> ) );
             LoggingServices.Formatters.Register( new ActionResultFormatter() );
             LoggingServices.Formatters.Register( new ObjectResultFormatter() );
 
-            // Set the default verbosity to Warning but create a detailed configuration.
-            backend.DefaultContextConfiguration.Verbosity.SetMinimalLevel( LogLevel.Warning );
-            LoggingActionFilter.DetailedLoggingConfiguration = backend.CreateContextConfiguration( new LoggingVerbosityConfiguration( backend ) );
 
 
             // Execute the web app.
