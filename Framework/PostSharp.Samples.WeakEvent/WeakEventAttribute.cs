@@ -124,7 +124,7 @@ namespace PostSharp.Samples.WeakEvent
 
         handlers =
           handlers.RemoveAll(
-            o => ReferenceEquals(((WeakReference) o).Target, handler));
+            o => ((WeakReference)o).Target?.Equals(handler) ?? false);
 
         return handlers.IsEmpty;
       }
