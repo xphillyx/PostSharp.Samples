@@ -14,7 +14,7 @@ namespace PostSharp.Samples.Authorization.Framework
   ///   It could be used to implementation for instance parametric permissions.
   /// </summary>
   [Serializable]
-  [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Parameter, AllowMultiple = true)]
   public abstract class RequiresPermissionBaseAttribute : Attribute, IPermissionFactory, IAspectProvider
   {
     /// <summary>
